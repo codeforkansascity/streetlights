@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/codeforkansascity/streetlights.png?label=ready&title=Ready)](http://waffle.io/codeforkansascity/streetlights)
+
 # Lights, Cameras, Action!
 Streetlights are at the front lines of the smart city. 
 They offer a public place to hang cameras, sensors, wireless antennas and more. 
