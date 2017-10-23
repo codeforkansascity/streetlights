@@ -22,4 +22,9 @@ Code for KC Slack Channel     #streetlights
 
 ## Specs
 
-Model of the data: 
+### Mock data: http://mockaroo.com/schemas/8312
+
+### Model of the data: 
+
+
+![](https://github.com/codeforkansascity/streetlights/blob/master/docs/model.PNG)
