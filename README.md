@@ -19,3 +19,7 @@ We want to make information about how are streetlights are used more transparent
 * API developers
 
 Code for KC Slack Channel     #streetlights
+
+## Specs
+
+Model of the data: 
