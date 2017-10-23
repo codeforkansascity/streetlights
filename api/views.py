@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.utils import timezone
 from django.utils.html import strip_tags
-import os, requests, json, datetime
+import os, json, datetime
 from django.core.serializers import serialize
 
 from .models import Pole
