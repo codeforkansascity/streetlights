@@ -24,6 +24,8 @@ Code for KC Slack Channel     #streetlights
 
 ### Software specs (WIP): https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/
 
+### Mocks: https://projects.invisionapp.com/share/EWDS5MP67#/screens
+
 ### Mock data: http://mockaroo.com/schemas/8312
 
 ### Model of the data: 
