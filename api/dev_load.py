@@ -10,4 +10,4 @@ def load_mock():
     print(models)
     for pole in poles:
         pass
-    print("Records made to database...")
+    print("Records made to db (database)...")
