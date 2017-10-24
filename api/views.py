@@ -6,9 +6,15 @@ import os, json, datetime
 from django.core.serializers import serialize
 
 from .models import Pole
+from . import dev_load
 # Create your views here.
 def index(request):
     return render(request, 'api/index.html')
+
 def data(request):
     query_data = Pole.objects.values()
     return JsonResponse([entry for entry in query_data], safe=False)
+
+def load_file(request):
+    dev_load.load_mock()
+    return JsonResponse({"success": "Yes"})
