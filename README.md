@@ -51,12 +51,6 @@ Code for KC Slack Channel     #streetlights
 
 ### Software specs (WIP): https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/
 
-### Mocks: https://projects.invisionapp.com/share/EWDS5MP67#/screens
+### API + Page overview: https://docs.google.com/document/d/1Y1CgEFZq40h0XCeSScAThCtDzAtUiTGrG8--hQZPMXI/
 
-### Mock data: http://mockaroo.com/schemas/8312
-
-### Model of the data: 
-
-
-![](https://github.com/codeforkansascity/streetlights/blob/master/docs/model.PNG)
-
+### Mock data: http://mockaroo.com/schemas/83128
