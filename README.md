@@ -14,6 +14,7 @@ Cities so far that have agreed to share data are **KCMO**, **Lee’s Summit**, a
 **Mid-America Regional Council (MARC)** is a regional data intermediary who is cooperating in the project as well.
  
 **Roadmap/Approach**
+
 **Data discovery:**
 We are working with cities and other streetlight owners to understand first what data they currently collect, how it is stored, and what is available to share.
 **Data integration:**
