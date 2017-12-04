@@ -21,9 +21,11 @@ Cities so far that have agreed to share data are **KCMO**, **Lee’s Summit**, a
 **Data discovery:**
 
 We are working with cities and other streetlight owners to understand first what data they currently collect, how it is stored, and what is available to share.
+
 **Data integration:**
 
 We are building a back-end database to store data from multiple sources, preserve privacy and security where necessary, and develop a database maintenance approach.
+
 **Data visualization:**
 
 We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike.
@@ -72,8 +74,8 @@ What we need to do still:
 5. Back End: We need a back end developer to look at it and agree to write in our language
 
 **Other Project Info**
-[Early project documentation](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit) (user stories, architectural overview, wire frames)
-[Wireframes in Invision](https://projects.invisionapp.com/share/EWDS5MP67#/screens) 
-Mock data: http://mockaroo.com/schemas/8312
+- [Early project documentation](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit) (user stories, architectural overview, wire frames)
+- [Wireframes in Invision](https://projects.invisionapp.com/share/EWDS5MP67#/screens) 
+- Mock data: http://mockaroo.com/schemas/8312
 
 
