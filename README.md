@@ -7,11 +7,11 @@ This project is intended to make information about how streetlights across the g
 Smart streetlights are at the front lines of the smart city; the switch from traditional high pressure sodium street lights to LEDs is a proven cost saver for cities that can help to finance smart infrastructure. During this switch, the new light poles become part of the Internet of Things: valuable real estate for hanging cameras, sensors, wireless antennas and more. Streetlights also sit in a public right-of-way, a space that often comes with some precedent of public-private collaboration, meaning that private sector companies and entrepreneurs developing smart city applications can deploy technology on existing infrastructure.
 
 **Stakeholders**
-The direct stakeholder of the Streetlights project is KC Digital Drive, though all participating cities will become stakeholders. Eventually local government, entrepreneurs, researchers, private technology companies and engaged citizens will become direct stakeholders as well.
+The direct stakeholder of the Streetlights project is **KC Digital Drive**, though all participating cities will become stakeholders. Eventually local government, entrepreneurs, researchers, private technology companies and engaged citizens will become direct stakeholders as well.
 
-Cities so far that have agreed to share data are KCMO, Lee’s Summit, and Gladstone. KCP&L has also shared data on polls they own.
+Cities so far that have agreed to share data are **KCMO**, **Lee’s Summit**, and **Gladstone**. **KCP&L** has also shared data on polls they own.
 
-Mid-America Regional Council (MARC) is a regional data intermediary who is cooperating in the project as well.
+**Mid-America Regional Council (MARC)** is a regional data intermediary who is cooperating in the project as well.
  
 **Roadmap/Approach**
 **Data discovery:**
@@ -22,13 +22,13 @@ We are building a back-end database to store data from multiple sources, preserv
 We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike.
 
 **Team**
-Katherine Hambrick - project lead with KC Digital Drive, manages team day-to-day
-Aaron Deacon - project champion with KC Digital Drive, helps set vision and use case
-Noah Rhee - lead developer, front and back end
-Jon Antel - GIS lead, data cleaning
-Vanessa Huston - GIS expert, data cleaning
-Anwar Jones - front end developer, data cleaning 
-Christian Martin - research, all around project assistant
+- Katherine Hambrick - project lead with KC Digital Drive, manages team day-to-day
+- Aaron Deacon - project champion with KC Digital Drive, helps set vision and use case
+- Noah Rhee - lead developer, front and back end
+- Jon Antel - GIS lead, data cleaning
+- Vanessa Huston - GIS expert, data cleaning
+- Anwar Jones - front end developer, data cleaning 
+- Christian Martin - research, all around project assistant
 
 **How to Contribute / Call to Action**
 
