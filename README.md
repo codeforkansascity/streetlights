@@ -19,10 +19,13 @@ Cities so far that have agreed to share data are **KCMO**, **Lee’s Summit**, a
 **Roadmap/Approach**
 
 **Data discovery:**
+
 We are working with cities and other streetlight owners to understand first what data they currently collect, how it is stored, and what is available to share.
 **Data integration:**
+
 We are building a back-end database to store data from multiple sources, preserve privacy and security where necessary, and develop a database maintenance approach.
 **Data visualization:**
+
 We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike.
 
 **Team**
