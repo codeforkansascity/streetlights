@@ -8,6 +8,10 @@ This project is intended to make information about how streetlights across the g
 
 Smart streetlights are at the front lines of the smart city; the switch from traditional high pressure sodium street lights to LEDs is a proven cost saver for cities that can help to finance smart infrastructure. During this switch, the new light poles become part of the Internet of Things: valuable real estate for hanging cameras, sensors, wireless antennas and more. Streetlights also sit in a public right-of-way, a space that often comes with some precedent of public-private collaboration, meaning that private sector companies and entrepreneurs developing smart city applications can deploy technology on existing infrastructure.
 
+**Problem Statement**
+But the data about streetlights right now is not easily accessible on a regional scale, to any of these parties: government, nonprofit, private or resident. Cities don’t know how to value this asset, how to choose which tech goes on which pole or how to negotiate with the private sector. The private sector doesn’t know which poles are available or how best to pilot and deploy their new tools. Additionally, most citizens are unaware of the negotiations underway about this critical public infrastructure.
+
+
 **Stakeholders**
 
 The direct stakeholder of the Streetlights project is **Code for KC/KC Digital Drive**, though all participating cities will become stakeholders. Eventually local government, entrepreneurs, researchers, private technology companies and engaged citizens will become direct stakeholders as well.
