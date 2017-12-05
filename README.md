@@ -22,17 +22,17 @@ Cities so far that have agreed to share data are **KCMO**, **Lee’s Summit**, a
  
 **Roadmap/Approach**
 
-**Data discovery:**
+**Data discovery:** (IN PROGRESS)
 
-We are working with cities and other streetlight owners to understand first what data they currently collect, how it is stored, and what is available to share.
+We are working with cities and other streetlight owners to understand first what data they currently collect, how it is stored, and what is available to share. We have collected data in csv form from Lees Summit, KCMO and KCP&L and still asking other cities for data.
 
-**Data integration:**
+**Data integration:** (IN PROGRESS)
 
-We are building a back-end database to store data from multiple sources, preserve privacy and security where necessary, and develop a database maintenance approach.
+We are building a back-end database to store data from multiple city data, preserve privacy and security where necessary, and develop a database maintenance process. We are in progress of creating a master csv file for this data.
 
-**Data visualization:**
+**Data visualization:** (IN PLANNING)
 
-We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike.
+We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike. We are still in progress of deciding which language to use and wireframing our project.
 
 **Team**
 - Katherine Hambrick - project lead with KC Digital Drive, manages team day-to-day
@@ -47,12 +47,12 @@ We are creating a front-end portal to make these data useful to cities, partners
 
 We are looking for:
 
-- MEAN stack developers to work on the API (right now populating from Google spreadsheet)
-- Database experts to help determine alternatives to Google spreadsheet
-- Javascript developers
-- GIS specialists who can read shape files 
-- UX and designers as we start to build a front end for different user groups
-- Reporters/analysts to work on how to draw meaning from the data and add additional datasets
+- MEAN stack developers to work on the API (right now populating from Google spreadsheet) **visualization**
+- Database experts to help determine alternatives to Google spreadsheet **integration**
+- Javascript developers **visualizaiton**
+- GIS specialists who can read shape files **visualization**
+- UX and designers as we start to build a front end for different user groups **visualization**
+- Reporters/analysts to work on how to draw meaning from the data and add additional datasets **discovery**
 
 The Streetlights project meets every Monday for Hack Nights at Think Big Partners from 6-8 pm.
 
