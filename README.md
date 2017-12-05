@@ -93,7 +93,6 @@ What we need to do still:
 
 **Other Project Info**
 - [Early project documentation](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit) (user stories, architectural overview, wire frames)
-- [Wireframes in Invision](https://projects.invisionapp.com/share/EWDS5MP67#/screens) 
 - Mock data: http://mockaroo.com/schemas/8312
 
 ---
