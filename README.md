@@ -56,6 +56,8 @@ We are creating a front-end portal to make these data useful to cities, partners
 - Vanessa Huston - GIS expert, data cleaning
 - Anwar Jones - front end developer, data cleaning 
 - Christian Martin - research, all around project assistant
+- Anya Pechenina - data analyst
+- Michael Botswick - full stack developer / Project Management
 
 **How to Contribute / Call to Action**
 
