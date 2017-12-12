@@ -1,4 +1,4 @@
-<a href="http://waffle.io/codeforkansascity/streetlights" target="_blank"><img border="0" alt="Waffle" src="https://badge.waffle.io/codeforkansascity/streetlights.png?label=ready&title=Ready"></a>
+<a href="http://waffle.io/codeforkansascity/streetlights" target="blank"><img border="0" alt="Waffle" src="https://badge.waffle.io/codeforkansascity/streetlights.png?label=ready&title=Ready"></a>
 
 ## TODO:
 **ETL Process**
