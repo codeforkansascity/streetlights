@@ -1,19 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/codeforkansascity/streetlights.png?label=ready&title=Ready)](http://waffle.io/codeforkansascity/streetlights)
 
-## TODO:
-**ETL Process**
-* Northing & Easting conversion
-**Database (Mongo)**
-* Setup methods to enable CRUD operations
-* Create data types for all the data
-**API (ExpressJS)**
-* Retrieve data from the database
-* Filter data based on parameters
-* Serve filtered data to the front-end via JSON
-**Front-End (Angular)**
-* Display data as a table/spreadsheet (including filtering options)
-* Display data on a map (including filtering options). May use cluster approach
-
 ## Streetlight Data
 
 This project is intended to make information about how streetlights across the greater Kansas City metro area are used more transparent and accessible.The Streetlight Data project is an effort to create an aggregated database and map of streetlights and information about how they are used.
@@ -96,3 +82,17 @@ What we need to do still:
 **Other Project Info**
 - [Early project documentation](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit) (user stories, architectural overview, wire frames)
 - Mock data: http://mockaroo.com/schemas/8312
+
+## TODO:
+**ETL Process**
+* Northing & Easting conversion
+**Database (Mongo)**
+* Setup methods to enable CRUD operations
+* Create data types for all the data
+**API (ExpressJS)**
+* Retrieve data from the database
+* Filter data based on parameters
+* Serve filtered data to the front-end via JSON
+**Front-End (Angular)**
+* Display data as a table/spreadsheet (including filtering options)
+* Display data on a map (including filtering options). May use cluster approach
