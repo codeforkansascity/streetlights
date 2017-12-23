@@ -1,0 +1,30 @@
+#main {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 10vw 30vw 10vw;
+    grid-gap: 1em;
+    margin: 0 auto;
+    max-width: 56em;
+    padding: 1em 0;
+}
+  
+header,
+footer {
+    grid-column: 1 / span 2;
+  }
+  
+header,
+main,
+aside,
+footer {
+    background: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+agm-map {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+}

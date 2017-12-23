@@ -1,0 +1,40 @@
+<div id="main">
+    <header>
+      Header
+    </header>
+    <aside>
+        <div id="sidebar-top">
+          <div id="map-controls">
+            <h3>Location</h3>
+            <div class="map-control-inputs">
+  
+            </div>
+            <h3>Attributes</h3>
+            <div class="map-control-inputs">
+              <div class="map-control-checkboxes"><h4>NEMA:</h4><input class="checkbox checkbox-lg" type="checkbox"></div>
+              <div class="map-control-checkboxes"><h4>Wireless:</h4><input class="checkbox checkbox-lg" type="checkbox"></div>
+              <div class="map-control-checkboxes"><h4>Fixture_mfg:</h4><input class="checkbox checkbox-lg" type="checkbox"></div>
+            </div>
+            <div class="map-control-inputs">
+                <input class="checkbox checkbox-sm" type="checkbox"><h5>Test #1</h5>
+                <input class="checkbox checkbox-sm" type="checkbox"><h5>Test #2</h5>
+                <input class="checkbox checkbox-sm" type="checkbox"><h5>Test #3</h5>
+            </div>
+          </div>
+        </div>
+        <div id="sidebar-bottom">
+  
+        </div>
+    </aside>
+    <main>
+      <!-- Map Component -->
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+    </main>
+    <footer>
+      Footer
+    </footer>
+  </div>
+
+

@@ -1,24 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>{{ title }}</h1>
 
-<div id="main">
-  <header>
-    Header
-  </header>
-  <aside>
-      Sidebar
-  </aside>
-  <main>
-    <!-- Map Component -->
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-    </agm-map>
-  </main>
-  <footer>
-    Footer
-  </footer>
-</div>
-
-
-
-
+<h1>Streetlight</h1>
+<router-outlet></router-outlet>
