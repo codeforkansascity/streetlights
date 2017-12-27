@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
+import { MapService } from '../map.service';
+import { Marker } from '../marker';
+
 
 @Component({
   selector: 'app-map-view',
@@ -14,10 +17,18 @@ export class MapViewComponent implements OnInit {
   zoom: number = 6;
   minZoom: number = 8;
   mapDraggable: boolean = false;
+  streetlightMarkers: Marker[];
 
-  constructor() { }
+  constructor(private mapService: MapService) {
+
+  }
 
   ngOnInit() {
+    this.getStreetlights();
+  }
+
+  getStreetlights(): void {
+    this.mapService.getStreetlights().subscribe(markers => this.streetlightMarkers = markers);
   }
 
 }
