@@ -24,7 +24,18 @@
   <main>
   <!-- Map Component -->
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    <agm-marker 
+      *ngFor="let m of streetlightMarkers"
+      [latitude]="m.lat"
+      [longitude]="m.lon"
+      [label]="m.label"
+      [markerDraggable]="m.draggable">
+      
+    <agm-info-window>
+      <strong>InfoWindow content</strong>
+    </agm-info-window>
+    
+  </agm-marker>
   </agm-map>
   </main>
 </div>
