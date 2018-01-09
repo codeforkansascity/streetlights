@@ -11,7 +11,6 @@ Smart streetlights are at the front lines of the smart city; the switch from tra
 **Problem Statement**
 But the data about streetlights right now is not easily accessible on a regional scale, to any of these parties: government, nonprofit, private or resident. Cities don’t know how to value this asset, how to choose which tech goes on which pole or how to negotiate with the private sector. The private sector doesn’t know which poles are available or how best to pilot and deploy their new tools. Additionally, most citizens are unaware of the negotiations underway about this critical public infrastructure.
 
-
 **Stakeholders**
 
 The direct stakeholder of the Streetlights project is **Code for KC/KC Digital Drive**, though all participating cities will become stakeholders. Eventually local government, entrepreneurs, researchers, private technology companies and engaged citizens will become direct stakeholders as well.
@@ -34,16 +33,6 @@ We are building a back-end database to store data from multiple city data, prese
 
 We are creating a front-end portal to make these data useful to cities, partners, planners, and residents alike. We are still in progress of deciding which language to use and wireframing our project.
 
-**Team**
-- Katherine Hambrick - project lead with KC Digital Drive, manages team day-to-day
-- Aaron Deacon - project champion with KC Digital Drive, helps set vision and use case
-- Noah Rhee - lead developer, front and back end
-- Jon Antel - GIS lead, data cleaning
-- Vanessa Huston - GIS expert, data cleaning
-- Anwar Jones - front end developer, data cleaning 
-- Christian Martin - research, all around project assistant
-- Anya Pechenina - data analyst
-- Michael Botswick - full stack developer / Project Management
 
 **How to Contribute / Call to Action**
 
