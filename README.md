@@ -4,6 +4,10 @@
 
 This project is intended to make information about how streetlights across the greater Kansas City metro area are used more transparent and accessible.The Streetlight Data project is an effort to create an aggregated database and map of streetlights and information about how they are used.
 
+Want to know about the use cases for our project? please read our [KCStreetlightAPI document](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit?usp=sharing) 
+
+Want to know what our latest needs are? Check out our [notes from Feb. 19, 2018.](https://docs.google.com/document/d/1up2qAlWqerh6wMdxR6atjr-TY1bofh97gTkNJaevrV8/edit?usp=sharing)
+
 **WHY COLLECT DATA ON STREETLIGHTS?**
 
 Smart streetlights are at the front lines of the smart city; the switch from traditional high pressure sodium street lights to LEDs is a proven cost saver for cities that can help to finance smart infrastructure. During this switch, the new light poles become part of the Internet of Things: valuable real estate for hanging cameras, sensors, wireless antennas and more. Streetlights also sit in a public right-of-way, a space that often comes with some precedent of public-private collaboration, meaning that private sector companies and entrepreneurs developing smart city applications can deploy technology on existing infrastructure.
