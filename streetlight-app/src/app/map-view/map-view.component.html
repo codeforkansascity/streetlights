@@ -1,0 +1,38 @@
+<!-- All components should include an <aside> and <main> element -->
+<div id="map-view-main">
+  <aside>
+    <div id="sidebar-top">
+      <div id="map-controls">
+        <h3>Location</h3>
+        <div class="map-search">
+          
+        </div>
+        <h3>Attributes</h3>
+        <div class="map-control-inputs">
+          <p>NEMA:</p><input #nema class="checkbox checkbox-lg" type="checkbox" ([ngModel])="nema"  (change)="filterStreetlights('nema', nema.checked)">
+          <p>Wireless:</p><input #wireless class="checkbox checkbox-lg" type="checkbox" ([ngModel])="wireless" (change)="filterStreetlights('wireless', wireless.checked)">
+          <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterStreetlights('fixture_mfg', fixtureMfg.value)">
+        </div>
+        <div class="map-control-inputs">
+            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #1</p>
+            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #2</p>
+            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #3</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <main>
+  <!-- Map Component -->
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
+    <agm-marker 
+      *ngFor="let m of streetlightMarkers"
+      [latitude]="m.lat"
+      [longitude]="m.lon"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      [visible]="m.visible">
+
+  </agm-marker>
+  </agm-map>
+  </main>
+</div>

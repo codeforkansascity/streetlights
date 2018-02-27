@@ -1,0 +1,58 @@
+[{
+  "id": "c896d259-d5a1-47e1-b1b0-14cf0d0a85da",
+  "lat": 38.9600403,
+  "lon": -94.535000,
+  "street": "Sundown"
+}, {
+  "id": "d628fef2-e67c-49d7-a4e6-5f38a4ac97f2",
+  "lat": 38.9600403,
+  "lon": -94.459800,
+  "street": "Logan",
+  "zip": "64105"
+}, {
+  "id": "c1f04dbb-9b8c-41fe-b8da-a068dad5cf69",
+  "lat": 39.240403,
+  "lon": -94.489800,
+  "street": "Kensington",
+  "zip": "64030"
+}, {
+  "id": "8b754d7c-b011-465f-81a9-32abb868de4b",
+  "lat": 38.952300,
+  "lon": -94.72004,
+  "street": "Anniversary"
+}, {
+  "id": "4e9dcc79-bfea-465c-ae14-a7031ec37bad",
+  "lat": 38.950403,
+  "lon": -94.78000,
+  "street": "Monterey",
+  "zip": "64118"
+}, {
+  "id": "16419078-630f-4574-87bf-d349fa661a9d",
+  "lat": 38.30403,
+  "lon": -94.50000,
+  "street": "Vermont",
+  "zip": "64147"
+}, {
+  "id": "5d2325b1-6308-49c9-a9f0-64b3c8849d98",
+  "lat": 38.921396,
+  "lon": -94.484197,
+  "street": "Warrior"
+}, {
+  "id": "3b0c570a-491c-41aa-9fbd-0c3b474c7760",
+  "lat": 38.421396,
+  "lon": -94.604197,
+  "street": "Roxbury",
+  "zip": "64148"
+}, {
+  "id": "c1cae885-9973-4fd2-b34c-0da5a0ca6a6b",
+  "lat": 38.791396,
+  "lon": -94.764197,
+  "street": "Lillian",
+  "zip": "64158"
+}, {
+  "id": "8f59f4cd-d9c9-4b85-9195-cae6b8b8efbc",
+  "lat": 38.791396,
+  "lon": -94.764197,
+  "street": "Kipling",
+  "zip": "64171"
+}]

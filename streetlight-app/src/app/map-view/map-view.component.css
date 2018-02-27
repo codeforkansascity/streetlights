@@ -1,0 +1,38 @@
+p {
+    margin: 0;
+}
+
+#map-view-main {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 29vw;
+    grid-gap: 0 1em;
+    margin: 0 auto;
+    max-width: 75em;
+    padding: 1em 0;
+}
+  
+main,
+aside {
+    background: #eaeaea;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+ }
+
+ .map-control-inputs {
+     display: grid;
+     grid-template-columns: 75% 25%;
+     grid-template-rows: 2vw 2vw 2vw;
+     grid-gap: 0.5em;
+ }
+
+ .checkbox {
+     vertical-align: middle;
+ }
+
+ agm-map {
+     height: 95%;
+     width: 95%;
+     margin: 0 auto;
+ }
