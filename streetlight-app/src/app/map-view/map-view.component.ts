@@ -19,9 +19,15 @@ export class MapViewComponent implements OnInit {
   minZoom: number = 8;
   mapDraggable: boolean = false;
   streetlightMarkers: Marker[];
+  currentStreetlightMarkers: Marker[];
+  nema: boolean = false;;
+  wireless: boolean = false;;
+  fixture: string;
+  filter: Marker = new Marker();
 
   constructor(private mapService: MapService) {
     this.streetlightMarkers = [];
+    this.currentStreetlightMarkers = [];
   }
 
   ngOnInit() {
@@ -40,12 +46,55 @@ export class MapViewComponent implements OnInit {
           m.setZip(marker.zip ? marker.zip : '');
           inc += 1;
           m.setLabel(marker.street + '-' + inc);
+          m.setNema(marker.nema);
+          m.setWireless(marker.wireless);
+          m.setFixture(marker.fixture_mfg);
+          m.setVisible(true);
           this.streetlightMarkers.push(m);
-          // console.log(this.streetlightMarkers[-1]);
+          this.currentStreetlightMarkers.push(m);
+          
         });
+        console.log(this.currentStreetlightMarkers);
       });
-      // this.mapService.getStreetlights().subscribe( markers => this.streetlightMarkers = markers);
+      
     });
+  }
+
+  filterStreetlights(param: 'nema' | 'wireless' | 'fixture_mfg' | 'none', value?: string | boolean ) {
+    
+    this.streetlightMarkers.forEach((marker) => {
+      if (param === 'nema' && value) {
+        if(!marker.nema) { 
+          marker.setVisible(false); 
+        }
+        else { 
+          marker.setVisible(true)
+        };
+      } 
+  
+      if (param === 'wireless' && value) {
+        if(!marker.wireless) {
+          marker.setVisible(false);
+        } else {
+          marker.setVisible(true);
+        }
+      };
+  
+      if (param === 'fixture_mfg' && typeof value === 'string' && value.length > 0) {
+        if (marker.fixture_mfg !== value) {
+          marker.setVisible(false);
+        } else {
+          marker.setVisible(true);
+        }
+      }
+
+      if (param === 'none') {
+        marker.setVisible(true);
+      }
+    });
+    
+    
+
   }
 
 }

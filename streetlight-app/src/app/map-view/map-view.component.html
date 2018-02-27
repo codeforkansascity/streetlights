@@ -9,9 +9,9 @@
         </div>
         <h3>Attributes</h3>
         <div class="map-control-inputs">
-          <p>NEMA:</p><input class="checkbox checkbox-lg" type="checkbox">
-          <p>Wireless:</p><input class="checkbox checkbox-lg" type="checkbox">
-          <p>Fixture_mfg:</p><input class="checkbox checkbox-lg" type="checkbox">
+          <p>NEMA:</p><input #nema class="checkbox checkbox-lg" type="checkbox" ([ngModel])="nema"  (change)="filterStreetlights('nema', nema.checked)">
+          <p>Wireless:</p><input #wireless class="checkbox checkbox-lg" type="checkbox" ([ngModel])="wireless" (change)="filterStreetlights('wireless', wireless.checked)">
+          <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterStreetlights('fixture_mfg', fixtureMfg.value)">
         </div>
         <div class="map-control-inputs">
             <input class="checkbox checkbox-sm" type="checkbox"><p>Test #1</p>
@@ -29,12 +29,9 @@
       [latitude]="m.lat"
       [longitude]="m.lon"
       [label]="m.label"
-      [markerDraggable]="m.draggable">
-      
-    <agm-info-window>
-      <strong>InfoWindow content</strong>
-    </agm-info-window>
-    
+      [markerDraggable]="m.draggable"
+      [visible]="m.visible">
+
   </agm-marker>
   </agm-map>
   </main>
