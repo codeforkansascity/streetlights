@@ -88,7 +88,6 @@ export class MapViewComponent implements OnInit {
 
   /// filter properties that resolve to true
   filterBoolean(property: string, rule: boolean) {
-    console.log(rule);
     if (!rule) this.removeFilter(property)
     else {
       this.filters[property] = val => val;
@@ -102,6 +101,6 @@ export class MapViewComponent implements OnInit {
     this[property] = null;
     this.applyFilters();
   }
-}
+
 
 }
