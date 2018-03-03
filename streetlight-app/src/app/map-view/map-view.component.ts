@@ -3,6 +3,8 @@ import { AgmCoreModule } from '@agm/core';
 import { MapService } from '../map.service';
 import { Marker } from '../marker';
 import { Promise } from 'q';
+import { LogService } from '../shared/log.service';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -19,19 +21,20 @@ export class MapViewComponent implements OnInit {
   minZoom: number = 8;
   mapDraggable: boolean = false;
   streetlightMarkers: Marker[];
-  currentStreetlightMarkers: Marker[];
-  nema: boolean = false;;
-  wireless: boolean = false;;
-  fixture: string;
-  filter: Marker = new Marker();
+  filteredStreetlightMarkers: Marker[];
+  nema: boolean = false;
+  wireless: boolean = false;
+  fixtureMfg: string;
+  filters = {};
 
-  constructor(private mapService: MapService) {
+  constructor(private logger: LogService, private mapService: MapService) {
     this.streetlightMarkers = [];
-    this.currentStreetlightMarkers = [];
+    this.filteredStreetlightMarkers = [];
   }
 
   ngOnInit() {
     this.getStreetlights();
+    this.applyFilters();
   }
 
   getStreetlights() {
@@ -51,50 +54,54 @@ export class MapViewComponent implements OnInit {
           m.setFixture(marker.fixture_mfg);
           m.setVisible(true);
           this.streetlightMarkers.push(m);
-          this.currentStreetlightMarkers.push(m);
+          this.filteredStreetlightMarkers.push(m);
           
         });
-        console.log(this.currentStreetlightMarkers);
+        console.dir(this.streetlightMarkers);
       });
       
     });
   }
 
-  filterStreetlights(param: 'nema' | 'wireless' | 'fixture_mfg' | 'none', value?: string | boolean ) {
-    
-    this.streetlightMarkers.forEach((marker) => {
-      if (param === 'nema' && value) {
-        if(!marker.nema) { 
-          marker.setVisible(false); 
-        }
-        else { 
-          marker.setVisible(true)
-        };
-      } 
-  
-      if (param === 'wireless' && value) {
-        if(!marker.wireless) {
-          marker.setVisible(false);
-        } else {
-          marker.setVisible(true);
-        }
-      };
-  
-      if (param === 'fixture_mfg' && typeof value === 'string' && value.length > 0) {
-        if (marker.fixture_mfg !== value) {
-          marker.setVisible(false);
-        } else {
-          marker.setVisible(true);
-        }
-      }
+  private applyFilters() {
+    console.log(this.filters);
+    this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters) );
+  }
 
-      if (param === 'none') {
-        marker.setVisible(true);
-      }
-    });
-    
-    
+  /// filter property by equality to rule
+  filterExact(property: string, rule: any) {
+    if (rule === '' || !rule) {
+      this.removeFilter(property);
+      this.applyFilters();
+    } else {
+      this.filters[property] = val => val == rule
+      this.applyFilters();
+    }
 
   }
+
+  /// filter  numbers greater than rule
+  filterGreaterThan(property: string, rule: number) {
+    this.filters[property] = val => val > rule;
+    this.applyFilters();
+  }
+
+  /// filter properties that resolve to true
+  filterBoolean(property: string, rule: boolean) {
+    console.log(rule);
+    if (!rule) this.removeFilter(property)
+    else {
+      this.filters[property] = val => val;
+      this.applyFilters();
+    }
+  }
+
+  /// removes filter
+  removeFilter(property: string) {
+    delete this.filters[property]
+    this[property] = null;
+    this.applyFilters();
+  }
+}
 
 }
