@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 
+import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
 import { SpreadsheetViewComponent } from './spreadsheet-view/spreadsheet-view.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     )
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [ MapService ],
+  providers: [ LogService, MapService ],
   declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   exports: [ MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   bootstrap: [ AppComponent ]
