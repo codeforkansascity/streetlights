@@ -1,27 +1,57 @@
 #!/usr/bin/env python3
 import json
+from csv import DictReader
+from itertools import count
 
-from openpyxl import load_workbook
+from stutil import rename_keys
 
 
-def import_leawood():
-    wb = load_workbook('data/LS_Streetlights.xlsx')
-    data = [[j.value for j in i] for i in wb['LS_Stretlights']]
-    labels = data[0]
-    rows = [
-        {labels[i]: value for i, value in enumerate(row)}
-        for row in data[1:]
+value_limit = 1  # For debug
+
+attributes = [
+    'PoleID',
+    'Logitude',
+    'Latitude',
+    'LightbulbType',
+    'Wattage',
+    'Lumens',
+    'AttachedTech',
+    'LightAttributes',
+    'FiberWiFiEnabled',
+    'PoleType',
+    'PoleOwner',
+    'DataSource'
+]
+
+base_items = {}  # Disabled for debug
+# base_items = {attr: None for attr in attributes}
+
+
+def convert_data(data, key_map: dict, value_map: dict):
+    it = zip(data, range(1)) if value_limit > 0 else count()
+    return [
+        {
+            **base_items,
+            **rename_keys(row, key_map, value_map)
+        } for row, _ in it
     ]
-    return rows
+
+
+def load_csv(filename, key_map: dict = None, value_map: dict = None):
+    print('Loading csv {}...'.format(filename))
+    with open(filename) as csvfile:
+        return convert_data(DictReader(csvfile), key_map or {}, value_map or {})
 
 
 def main():
-    leawood = import_leawood()
-    formats = {
-        'leawood': leawood[0]
+    data = {
+        'kansas-city-mo-ks': load_csv('data/kansas-city-mo.csv'),
+        'kcpl-mo-ks': load_csv('data/kcpl-mo-ks.csv'),
+        'lee-summit-mo': load_csv('data/lee-summit-mo.csv')
     }
+
     # Display single examples for debugging
-    print(json.dumps(formats, indent=4))
+    print(json.dumps(data, indent=4))
 
 
 if __name__ == '__main__':
