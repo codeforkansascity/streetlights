@@ -16,4 +16,4 @@ var Streetlight = new mongoose.Schema({
     });
 
     //Return Streetlights
-    module.exports = restful.model('Streetlight', Streetlight);
+    module.exports = restful.model('Streetlight', Streetlight,"Streetlight");
