@@ -2,6 +2,8 @@
 
 ## Streetlight Data
 
+[![Join the chat at https://gitter.im/streetlights-kc/Lobby](https://badges.gitter.im/streetlights-kc/Lobby.svg)](https://gitter.im/streetlights-kc/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This project is intended to make information about how streetlights across the greater Kansas City metro area are used more transparent and accessible.The Streetlight Data project is an effort to create an aggregated database and map of streetlights and information about how they are used.
 
 Want to know about the use cases for our project? please read our [KCStreetlightAPI document](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit?usp=sharing) 
