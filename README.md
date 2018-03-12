@@ -58,6 +58,7 @@ Project communication on the #streetlights Slack channel
 If you are interested, reach out to Katherine Hambrick at khambrick@kcdigitaldrive.org or join our slack.
 
 **Developer Notes**
+In order to get StreetlightsApi program to work you need to add a file titled ".env" in the root of the application add a line in that file: "StreetlightsPW=<Password>". Inserting your Mongodb password. If you need a password contact the PM.
 
 What we need to do still:
 1. Translate data to be the same (schema?)
