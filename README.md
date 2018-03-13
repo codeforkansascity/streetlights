@@ -2,6 +2,8 @@
 
 ## Streetlight Data
 
+[![Join the chat at https://gitter.im/streetlights-kc/Lobby](https://badges.gitter.im/streetlights-kc/Lobby.svg)](https://gitter.im/streetlights-kc/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This project is intended to make information about how streetlights across the greater Kansas City metro area are used more transparent and accessible.The Streetlight Data project is an effort to create an aggregated database and map of streetlights and information about how they are used.
 
 Want to know about the use cases for our project? please read our [KCStreetlightAPI document](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit?usp=sharing) 
@@ -75,7 +77,7 @@ What we need to do still:
 **Other Project Info**
 - [Early project documentation](https://docs.google.com/document/d/1DvKDwWAW4RG9BuqUZm0R8CA9r9atJB-fcClTVaI1SME/edit) (user stories, architectural overview, wire frames)
 - Mock data: http://mockaroo.com/schemas/8312
-
+# Test
 ## TODO:
 **ETL Process**
 * Northing & Easting conversion
@@ -89,3 +91,6 @@ What we need to do still:
 **Front-End (Angular)**
 * Display data as a table/spreadsheet (including filtering options)
 * Display data on a map (including filtering options). May use cluster approach
+
+
+# Test   
