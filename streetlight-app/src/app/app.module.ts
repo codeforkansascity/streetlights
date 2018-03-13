@@ -1,11 +1,19 @@
+// Core
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ApplicationRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+
+// Angular Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+
+// Google Map Service
 import { AgmCoreModule } from '@agm/core';
 
+// Custom
 import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
 import { SpreadsheetViewComponent } from './spreadsheet-view/spreadsheet-view.component';
@@ -28,6 +36,10 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'
     }),

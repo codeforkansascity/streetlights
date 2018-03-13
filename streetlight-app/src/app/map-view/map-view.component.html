@@ -9,9 +9,13 @@
         </div>
         <h3>Attributes</h3>
         <div class="map-control-inputs">
-          <p>NEMA:</p><input #nema class="checkbox checkbox-lg" type="checkbox" (change)="filterBoolean('nema', nema.checked)">
-          <p>Wireless:</p><input #wireless class="checkbox checkbox-lg" type="checkbox" (change)="filterBoolean('wireless', wireless.checked)">
-          <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)">
+          <mat-checkbox #nema (change)="filterBoolean('nema', nema.checked)">NEMA</mat-checkbox>
+          <mat-checkbox #wireless (change)="filterBoolean('wireless', wireless.checked)">Wi-fi</mat-checkbox>
+          <mat-form-field>
+              <input matInput placeholder="Fixture Mfg" #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)">
+          </mat-form-field>
+          
+          <!-- <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)"> -->
         </div>
         <div class="map-control-inputs">
             <input class="checkbox checkbox-sm" type="checkbox"><p>Test #1</p>
