@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
+import { TableModule } from 'primeng/table';
+import { GMapModule } from 'primeng/gmap';
+import { CheckboxModule } from 'primeng/checkbox';
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
@@ -36,6 +39,9 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    TableModule,
+    GMapModule,
+    CheckboxModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
