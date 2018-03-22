@@ -1,0 +1,47 @@
+[
+    {
+        "poleId": "SGQ0036",
+        "logitude": null,
+        "longitude": "38.9128811",
+        "latitude": "-94.49075022",
+        "lightbulbType": "halogen",
+        "wattage": "150",
+        "lumens": "65",
+        "attachedTech": "false",
+        "poleOwner": "KCPL",
+        "dataSource": null,
+        "fiberWifiEnabled": "true",
+        "lightAttributes": null,
+        "poleType": "Wagner"
+    },
+    {
+        "poleId": "SGQ0037",
+        "logitude": null,
+        "longitude": "38.913000",
+        "latitude": "-94.4908100",
+        "lightbulbType": "halogen",
+        "wattage": "150",
+        "lumens": "65",
+        "attachedTech": "false",
+        "poleOwner": "KCPL",
+        "dataSource": null,
+        "fiberWifiEnabled": "true",
+        "lightAttributes": null,
+        "poleType": "Wagner"
+    },
+    {
+        "poleId": "SGQ0038",
+        "logitude": null,
+        "longitude": "38.914000",
+        "latitude": "-94.4918100",
+        "lightbulbType": "nitrogen",
+        "wattage": "150",
+        "lumens": "65",
+        "attachedTech": "false",
+        "poleOwner": "KCPL",
+        "dataSource": null,
+        "fiberWifiEnabled": "false",
+        "lightAttributes": null,
+        "poleType": "Franklin"
+    }
+]
