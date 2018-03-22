@@ -21,10 +21,7 @@ aside {
  }
 
  .map-control-inputs {
-     display: grid;
-     grid-template-columns: 75% 25%;
-     grid-template-rows: 2vw 2vw 2vw;
-     grid-gap: 0.5em;
+    padding: 16px;
  }
 
  .checkbox {

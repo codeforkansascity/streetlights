@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-import { MapService } from '../map.service';
-import { Marker } from '../marker';
+import { StreetlightService } from '../../services/streetlight.service';
+import { Marker } from '../models/marker';
 import { Promise } from 'q';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
+import { Streetlight } from '../models/streetlight';
 
 
 @Component({
@@ -14,20 +15,21 @@ import * as _ from 'lodash';
 })
 export class MapViewComponent implements OnInit {
 
-  title: string = 'Streetlights';
-  lat: number = 39.090265;
-  lng: number = -94.576062;
-  zoom: number = 6;
-  minZoom: number = 8;
-  mapDraggable: boolean = false;
+  title = 'Streetlights';
+  lat = 38.9128811;
+  lng = -94.49075022;
+  zoom = 6;
+  minZoom = 3;
+  maxZoom = 20;
+  mapDraggable = true;
   streetlightMarkers: Marker[];
   filteredStreetlightMarkers: Marker[];
-  nema: boolean = false;
-  wireless: boolean = false;
+  nema: boolean;
+  wireless: boolean;
   fixtureMfg: string;
   filters = {};
 
-  constructor(private logger: LogService, private mapService: MapService) {
+  constructor(private logger: LogService, private service: StreetlightService) {
     this.streetlightMarkers = [];
     this.filteredStreetlightMarkers = [];
   }
@@ -35,31 +37,38 @@ export class MapViewComponent implements OnInit {
   ngOnInit() {
     this.getStreetlights();
     this.applyFilters();
+    console.dir(this.streetlightMarkers);
+    console.dir(this.filteredStreetlightMarkers);
   }
 
   getStreetlights() {
+    // const streetlights = this.service.getStreetlightsJSON();
+    // streetlights.map( s => {
+    //   const m = new Marker();
+    //   m.setLng(parseFloat(s.longitude));
+    //   m.setLat(parseFloat(s.latitude));
+    //   m.setLabel(s.poleId);
+    //   m.setWireless(s.fiberWifiEnabled);
+    //   m.setFixture(s.poleType);
+    //   this.streetlightMarkers.push(m);
+    //   this.filteredStreetlightMarkers.push(m);
+    // });
     return Promise( (resolve, reject) => {
-      this.mapService.getStreetlights().subscribe( markers => {
-        let inc = 1;
-        markers.map( marker => {
-          let m = new Marker();
-          m.setLng(marker.lon);
-          m.setLat(marker.lat);
-          m.setStreet(marker.street);
-          m.setZip(marker.zip ? marker.zip : '');
-          inc += 1;
-          m.setLabel(marker.street + '-' + inc);
-          m.setNema(marker.nema);
-          m.setWireless(marker.wireless);
-          m.setFixture(marker.fixture_mfg);
+      this.service.getStreetlights().subscribe( streetlights => {
+        console.dir(streetlights);
+        streetlights.map( streetlight => {
+          const m = new Marker();
+          m.setLng(streetlight.lon);
+          m.setLat(streetlight.lat);
+          m.setLabel(streetlight.id);
+          m.setWireless(streetlight.wireless);
+          m.setFixture(streetlight.fixture_mfg);
           m.setVisible(true);
           this.streetlightMarkers.push(m);
           this.filteredStreetlightMarkers.push(m);
-          
         });
         console.dir(this.streetlightMarkers);
       });
-      
     });
   }
 
@@ -74,7 +83,7 @@ export class MapViewComponent implements OnInit {
       this.removeFilter(property);
       this.applyFilters();
     } else {
-      this.filters[property] = val => val == rule
+      this.filters[property] = val => val === rule;
       this.applyFilters();
     }
 
@@ -88,8 +97,10 @@ export class MapViewComponent implements OnInit {
 
   /// filter properties that resolve to true
   filterBoolean(property: string, rule: boolean) {
-    if (!rule) this.removeFilter(property)
-    else {
+    console.log(property, rule);
+    if (!rule) {
+      this.removeFilter(property);
+    } else {
       this.filters[property] = val => val;
       this.applyFilters();
     }

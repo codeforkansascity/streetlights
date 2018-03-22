@@ -21,7 +21,7 @@ import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
 import { SpreadsheetViewComponent } from './spreadsheet-view/spreadsheet-view.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { MapService } from './map.service';
+import { StreetlightService } from '../services/streetlight.service';
 
 
 const appRoutes: Routes = [
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
     )
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [ LogService, MapService ],
+  providers: [ LogService, StreetlightService ],
   declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   exports: [ MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   bootstrap: [ AppComponent ]

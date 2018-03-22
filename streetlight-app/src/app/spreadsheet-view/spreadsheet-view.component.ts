@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../map.service';
+import { StreetlightService } from '../../services/streetlight.service';
 
 @Component({
   selector: 'app-spreadsheet-view',
@@ -26,7 +26,7 @@ export class SpreadsheetViewComponent implements OnInit {
   wifiFilter: boolean;
 
 
-  constructor( private service: MapService ) { }
+  constructor( private service: StreetlightService ) { }
 
   ngOnInit() {
     const streetlightResults = this.service.getStreetlights();
