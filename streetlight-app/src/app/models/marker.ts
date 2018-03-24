@@ -2,12 +2,11 @@ export class Marker {
 
     lat: number;
     lon: number;
-    street: string;
-    zip: string;
     label: string;
     nema: boolean;
     wireless: boolean;
-    fixture_mfg: string;
+    poleOwner: string;
+    lightBulbType: string;
     draggable: boolean;
     visible: boolean;
 
@@ -23,14 +22,6 @@ export class Marker {
         this.lon = <number>lng;
     }
 
-    setStreet(street: string) {
-        this.street = street;
-    }
-
-    setZip(zip: string) {
-        this.zip = zip;
-    }
-
     setLabel(label: string) {
         this.label = label;
     }
@@ -43,8 +34,12 @@ export class Marker {
         this.wireless = state;
     }
 
-    setFixture(state: string) {
-        this.fixture_mfg = state;
+    setPoleOwner(value: string) {
+        this.poleOwner = value;
+    }
+
+    setLightBulbType(value: string) {
+        this.lightBulbType = value;
     }
 
     setVisible(state: boolean) {

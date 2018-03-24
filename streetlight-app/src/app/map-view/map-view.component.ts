@@ -24,9 +24,15 @@ export class MapViewComponent implements OnInit {
   mapDraggable = true;
   streetlightMarkers: Marker[];
   filteredStreetlightMarkers: Marker[];
-  nema: boolean;
   wireless: boolean;
-  fixtureMfg: string;
+  poleOwnerFilter: string;
+  lightBulbTypeOptions = [
+    { label: 'Halogen', value: 'Halogen' },
+    { label: 'Incandescent', value: 'Incandescent' },
+    { label: 'Florescent', value: 'Florescent'},
+  ];
+  selectedLightBulbType: string;
+
   filters = {};
 
   constructor(private logger: LogService, private service: StreetlightService) {
@@ -42,28 +48,19 @@ export class MapViewComponent implements OnInit {
   }
 
   getStreetlights() {
-    // const streetlights = this.service.getStreetlightsJSON();
-    // streetlights.map( s => {
-    //   const m = new Marker();
-    //   m.setLng(parseFloat(s.longitude));
-    //   m.setLat(parseFloat(s.latitude));
-    //   m.setLabel(s.poleId);
-    //   m.setWireless(s.fiberWifiEnabled);
-    //   m.setFixture(s.poleType);
-    //   this.streetlightMarkers.push(m);
-    //   this.filteredStreetlightMarkers.push(m);
-    // });
+
     return Promise( (resolve, reject) => {
       this.service.getStreetlights().subscribe( streetlights => {
         console.dir(streetlights);
         streetlights.map( streetlight => {
           const m = new Marker();
-          m.setLng(streetlight.lon);
-          m.setLat(streetlight.lat);
-          m.setLabel(streetlight.id);
-          m.setWireless(streetlight.wireless);
-          m.setFixture(streetlight.fixture_mfg);
-          m.setVisible(true);
+          m.setLng(streetlight.longitude);
+          m.setLat(streetlight.latitude);
+          m.setLabel(streetlight.poleId);
+          m.setWireless(streetlight.fiberWifiEnabled);
+          m.setPoleOwner(streetlight.poleOwner);
+          m.setLightBulbType(streetlight.lightbulbType);
+          // m.setVisible(true);
           this.streetlightMarkers.push(m);
           this.filteredStreetlightMarkers.push(m);
         });

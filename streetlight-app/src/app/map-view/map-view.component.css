@@ -24,12 +24,17 @@ aside {
     padding: 16px;
  }
 
- .checkbox {
+ /* .checkbox {
      vertical-align: middle;
- }
+ } */
 
  agm-map {
-     height: 95%;
-     width: 95%;
+     height: 60vh;
+     width: 100%;
      margin: 0 auto;
+ }
+
+
+ .map-view-filter-wrapper {
+     /* margin-bottom: 20px; */
  }

@@ -9,20 +9,20 @@
         </div>
         <h3>Attributes</h3>
         <div class="map-control-inputs" fxLayout="row">
-          <!-- <mat-checkbox #nema (change)="filterBoolean('nema', nema.checked)">NEMA</mat-checkbox> -->
-          <p-checkbox #nemaFilter label="NEMA" binary="true" [(ngModel)]="nema" (onChange)="filterBoolean('nema', nema)" fxFlex="50"></p-checkbox>
-          <!-- <mat-checkbox #wireless (change)="filterBoolean('wireless', wireless.checked)">Wi-fi</mat-checkbox> -->
-          <p-checkbox #wirelessFilter label="Wi-Fi" binary="true" [(ngModel)]="wireless" (onChange)="filterBoolean('wireless', wireless)" fxFlex="50"></p-checkbox>
-          <!-- <mat-form-field>
-              <input matInput placeholder="Fixture Mfg" #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)">
-          </mat-form-field> -->
-          <input type="text" #fixtureMfgFilter pInputText placeholder="Fixture Type" [(ngModel)]="fixtureMfg" (change)="filterExact('fixture_mfg',fixtureMfg)"/>
-          <!-- <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)"> -->
+          <div class="map-view-filter-wrapper" fxFill>
+            <!-- <p-checkbox #nemaFilter label="NEMA" binary="true" [(ngModel)]="nema" (onChange)="filterBoolean('nema', nema)" fxFill></p-checkbox> -->
+            <p-dropdown #lbTypeFilter [options]="lightBulbTypeOptions" [(ngModel)]="selectedLightBulbType" (onChange)="filterBoolean('lightBulbType', selectedLightBulbType)" fxFill></p-dropdown>
+          </div>
+          <div class="map-view-filter-wrapper" fxFill>
+            <p-checkbox #wirelessFilter label="Wi-Fi" binary="true" [(ngModel)]="wireless" (onChange)="filterBoolean('wireless', wireless)" fxFill></p-checkbox>
+          </div>
+          <div class="map-view-filter-wrapper" fxFill>
+            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFill/>
+          </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">
           <p-checkbox label="TBD" binary="true"></p-checkbox>
           <p-checkbox label="TBD" binary="true"></p-checkbox>
-
         </div>
       </div>
     </div>

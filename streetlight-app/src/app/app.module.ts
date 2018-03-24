@@ -12,6 +12,7 @@ import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/mat
 import { TableModule } from 'primeng/table';
 import { GMapModule } from 'primeng/gmap';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     TableModule,
     GMapModule,
     CheckboxModule,
+    DropdownModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
