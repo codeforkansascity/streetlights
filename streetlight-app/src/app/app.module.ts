@@ -8,11 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
 import { TableModule } from 'primeng/table';
 import { GMapModule } from 'primeng/gmap';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ButtonModule } from 'primeng/button';
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
@@ -26,10 +27,8 @@ import { StreetlightService } from '../services/streetlight.service';
 
 
 const appRoutes: Routes = [
-  { path: 'map-view', component: MapViewComponent },
-  { path: 'spreadsheet-view',      component: SpreadsheetViewComponent },
   { path: '',
-    redirectTo: 'map-view',
+    redirectTo: '',
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
@@ -37,6 +36,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
+    ButtonModule,
+    FlexLayoutModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -45,9 +46,6 @@ const appRoutes: Routes = [
     CheckboxModule,
     DropdownModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatInputModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'
     }),

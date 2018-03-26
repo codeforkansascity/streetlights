@@ -1,6 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Roboto');
+/* @import "../node_modules/font-awesome/css/font-awesome.min.css";
 @import "../node_modules/primeng/resources/themes/lightness/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
-@import "../node_modules/leaflet/dist/leaflet.css";
+@import "../node_modules/leaflet/dist/leaflet.css"; */
+
+:root {
+    --heading-font: 'Fira Sans Condensed', sans-serif;
+    --body-font: 'Roboto', sans-serif;
+    --color-primary-0: #FFA65C;	/* Main Primary color */
+    --color-primary-1: #D8D0C9;
+    --color-primary-2: #FFDABB;
+    --color-primary-3: #FF7808;
+    --color-primary-4: #FF7400;
+    --color-font-dark: #010101;
+}
+
+* {
+    font-family: var(--body-font);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--heading-font);
+    color: var(--color-font-dark);
+}

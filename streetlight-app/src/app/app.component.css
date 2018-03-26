@@ -1,8 +1,8 @@
 #main {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10vw 30vw 10vw;
-    grid-gap: 1em;
+    grid-template-rows: 10fr 10fr auto;
+    grid-gap: 5px; */
     /* margin: 0 auto;
     max-width: 80em; */
     /* padding: 1em 0; */
@@ -10,15 +10,22 @@
   
 header {
     background-color: #0f0314;
-  }
+}
   
-header,
-footer {
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
- } 
 
  content {
     /* background: #eaeaea; */
  }
+
+ #mode-shifter {
+     /* text-align: center; */
+     font-size: 2.5rem;
+     margin-top: 20px;
+     margin-bottom: 20px;
+     color: var(--color-primary-3);
+ }
+
+ /* .mode-shifter-icon {
+     margin: 16px;
+     font-size: 2rem;
+ } */

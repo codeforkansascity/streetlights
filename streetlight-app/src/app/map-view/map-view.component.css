@@ -1,40 +1,29 @@
-p {
-    margin: 0;
-}
+
 
 #map-view-main {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 29vw;
-    grid-gap: 0 1em;
-    margin: 0 auto;
-    max-width: 75em;
-    padding: 1em 0;
+    height: auto;
 }
   
 main,
 aside {
     background: #eaeaea;
-    display: flex;
     /* align-items: center; */
     /* justify-content: center; */
  }
 
- .map-control-inputs {
-    padding: 16px;
+ aside {
+     height: 60vh;
+     border-radius: 3px;
+     background-color: var(--color-primary-0);
  }
 
- /* .checkbox {
-     vertical-align: middle;
- } */
+ #sidebar-top {
+    padding: 16px 32px;
+ }
+
 
  agm-map {
      height: 60vh;
-     width: 100%;
-     margin: 0 auto;
- }
-
-
- .map-view-filter-wrapper {
-     /* margin-bottom: 20px; */
+     /* width: 100%; */
+     /* margin: 0 auto; */
  }

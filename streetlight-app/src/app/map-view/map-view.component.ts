@@ -110,5 +110,10 @@ export class MapViewComponent implements OnInit {
     this.applyFilters();
   }
 
+  clearFilters() {
+    this.filters = {};
+    this.applyFilters();
+  }
+
 
 }
