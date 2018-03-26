@@ -16,9 +16,9 @@ import { Streetlight } from '../models/streetlight';
 export class MapViewComponent implements OnInit {
 
   title = 'Streetlights';
-  lat = 38.9128811;
-  lng = -94.49075022;
-  zoom = 6;
+  lat = 39.106579;
+  lng = -94.622835;
+  zoom = 11;
   minZoom = 3;
   maxZoom = 20;
   mapDraggable = true;
@@ -27,6 +27,7 @@ export class MapViewComponent implements OnInit {
   wireless: boolean;
   poleOwnerFilter: string;
   lightBulbTypeOptions = [
+    { label: 'Select Type', value: null },
     { label: 'Halogen', value: 'Halogen' },
     { label: 'Incandescent', value: 'Incandescent' },
     { label: 'Florescent', value: 'Florescent'},
@@ -72,6 +73,7 @@ export class MapViewComponent implements OnInit {
   private applyFilters() {
     console.log(this.filters);
     this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters) );
+    console.log(this.filteredStreetlightMarkers);
   }
 
   /// filter property by equality to rule
@@ -105,7 +107,7 @@ export class MapViewComponent implements OnInit {
 
   /// removes filter
   removeFilter(property: string) {
-    delete this.filters[property]
+    delete this.filters[property];
     this[property] = null;
     this.applyFilters();
   }

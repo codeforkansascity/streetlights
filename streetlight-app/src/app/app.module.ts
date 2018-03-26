@@ -12,8 +12,10 @@ import { TableModule } from 'primeng/table';
 import { GMapModule } from 'primeng/gmap';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
@@ -40,6 +42,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     BrowserModule,
     HttpClientModule,
+    MultiSelectModule,
     FormsModule,
     TableModule,
     GMapModule,

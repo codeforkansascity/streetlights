@@ -3,27 +3,27 @@
   <aside fxFlex="40">
     <div id="sidebar-top" >
       <div id="map-controls">
-        <h3>Location</h3>
+        <h3 class="map-controls-header">Location</h3>
         <div class="map-search">
-            <input type="text" #mapSearchFilter pInputText placeholder="Search" fxFill/>
+            <input type="text" #mapSearchFilter pInputText placeholder="Search" fxFlex="50"/>
         </div>
-        <h3>Attributes</h3>
+        <h3 class="map-controls-header">Attributes</h3>
         <div class="map-control-inputs" fxLayout="column">
-          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <!-- <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Light Bulb Type</h4>
             <p-dropdown #lbTypeFilter [options]="lightBulbTypeOptions" [(ngModel)]="selectedLightBulbType" (onChange)="filterBoolean('lightBulbType', selectedLightBulbType)" fxFlex="70"></p-dropdown>
-          </div>
+          </div> -->
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Fiber Wireless</h4>
             <p-checkbox #wirelessFilter label="Wi-Fi" binary="true" [(ngModel)]="wireless" (onChange)="filterBoolean('wireless', wireless)" fxFlex="70"></p-checkbox>
           </div>
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
               <h4 fxFlex="30">Pole Owner</h4>
-            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFlex="70"/>
+            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFlex="50"/>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">
-            <p-button label="Clear Filters" (click)="clearFilters()" ></p-button>
+            <p-button id="clear-filters-btn" label="Clear Filters" (click)="clearFilters()" ></p-button>
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
-
+input {
+    height: 32px;
+}
 
 #map-view-main {
     height: auto;
@@ -19,6 +21,18 @@ aside {
 
  #sidebar-top {
     padding: 16px 32px;
+ }
+
+ .map-search {
+     margin-bottom: 32px; 
+ }
+
+ .map-search, .map-control-inputs {
+     padding-left: 16px;
+ }
+
+ #clear-filters-btn {
+     padding-top: 32px;
  }
 
 
