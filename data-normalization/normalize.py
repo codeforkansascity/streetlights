@@ -10,7 +10,7 @@ value_limit = 1  # For debug
 
 attributes = [
     'PoleID',
-    'Logitude',
+    'Longitude',
     'Latitude',
     'LightbulbType',
     'Wattage',
