@@ -85,7 +85,7 @@ def kcmo_convert(filepath, xtrapath):
                                                  ,x['SPECIAL_NO']
                                                  ))
     kcjoin=etl.addfield(kcjoin, 'AttachedTech', lambda x: bool(x['LightAttributes']))
-    kcjoin=etl.addfield(kcjoin, 'FiberWiFiEnable', lambda x: find_wifi(x['LightAttributes']
+    kcjoin=etl.addfield(kcjoin, 'FiberWiFiEnable', lambda x: find_wifi(*x['LightAttributes']
                                                                         ,x['SPECIAL_N2']
                                                                         ,x['SPECIAL_NO']
                                                                         ))
