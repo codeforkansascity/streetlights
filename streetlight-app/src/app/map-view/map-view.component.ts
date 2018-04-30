@@ -61,23 +61,20 @@ export class MapViewComponent implements OnInit {
           m.setWireless(streetlight.fiberWifiEnabled);
           m.setPoleOwner(streetlight.poleOwner);
           m.setLightBulbType(streetlight.lightbulbType);
-          // m.setVisible(true);
           this.streetlightMarkers.push(m);
           this.filteredStreetlightMarkers.push(m);
         });
-        console.dir(this.streetlightMarkers);
       });
     });
   }
 
   private applyFilters() {
-    console.log(this.filters);
     this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters) );
-    console.log(this.filteredStreetlightMarkers);
   }
 
   /// filter property by equality to rule
   filterExact(property: string, rule: any) {
+    console.log(property, rule);
     if (rule === '' || !rule) {
       this.removeFilter(property);
       this.applyFilters();
@@ -90,6 +87,7 @@ export class MapViewComponent implements OnInit {
 
   /// filter  numbers greater than rule
   filterGreaterThan(property: string, rule: number) {
+    console.log(property, rule);
     this.filters[property] = val => val > rule;
     this.applyFilters();
   }

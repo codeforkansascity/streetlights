@@ -10,7 +10,13 @@ export class SpreadsheetViewComponent implements OnInit {
 
   cols: any[];
   selectedColumns: any[];
-
+  lumenOptions = [
+    { label: '', value: null },
+    { label: '1000', value: 1000 },
+    { label: '1125', value: 1125 },
+    { label: '1300', value: 1300 },
+    { label: '1425', value: 1425 }
+  ];
   // Table data source
   streetlights = [];
 
@@ -23,6 +29,7 @@ export class SpreadsheetViewComponent implements OnInit {
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
       this.streetlights = value;
+      console.dir(this.streetlights);
     }, (error) => {
       console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
@@ -30,10 +37,9 @@ export class SpreadsheetViewComponent implements OnInit {
     // Set up table
     this.cols = [
       { field: 'poleId', header: 'Pole ID', filtermatchmode: 'contains' },
-      { field: 'logitude', header: 'Logitude', filtermatchmode: 'contains' },
       { field: 'latitude', header: 'Lat', filtermatchmode: 'equals' },
       { field: 'longitude', header: 'Long', filtermatchmode: 'equals' },
-      { field: 'lightBulbType', header: 'Bulb Type', filtermatchmode: 'contains' },
+      { field: 'lightbulbType', header: 'Bulb Type', filtermatchmode: 'contains' },
       { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals'},
       { field: 'lumens', header: 'Lumens', filtermatchmode: 'equals' },
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },

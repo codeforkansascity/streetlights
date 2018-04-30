@@ -1,21 +1,10 @@
-#main {
-    /* display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10fr 10fr auto;
-    grid-gap: 5px; */
-    /* margin: 0 auto;
-    max-width: 80em; */
-    /* padding: 1em 0; */
-}
+
+
   
 header {
     background-color: #0f0314;
 }
   
-
- content {
-    /* background: #eaeaea; */
- }
 
  #mode-shifter {
      /* text-align: center; */
@@ -24,8 +13,3 @@ header {
      margin-bottom: 20px;
      color: var(--color-primary-3);
  }
-
- /* .mode-shifter-icon {
-     margin: 16px;
-     font-size: 2rem;
- } */

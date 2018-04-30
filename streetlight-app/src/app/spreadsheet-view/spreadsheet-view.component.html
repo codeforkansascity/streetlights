@@ -1,11 +1,5 @@
 <div id="spreadsheet-main">
   <p-table #dt [columns]="cols" [value]="streetlights" [paginator]="true" [rows]="20">
-    <ng-template pTemplate="caption">
-        <div style="text-align:left">
-            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-                        selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
-        </div>
-    </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">{{col.header}}</th>
@@ -13,12 +7,11 @@
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
               <input *ngSwitchCase="'poleId'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <span *ngSwitchCase="'logitude'"></span>
-              <input *ngSwitchCase="'latitude'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <input *ngSwitchCase="'longitude'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+              <input *ngSwitchCase="'latitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+              <input *ngSwitchCase="'longitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'lightbulbType'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'wattage'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <p-dropdown *ngSwitchCase="'lumens'" [(ngModel)]="lumensFilter" (onChange)="dt.filter($event.target.value, col.field, col.filterMatchMode)"></p-dropdown>
+              <p-dropdown *ngSwitchCase="'lumens'" [options]="lumenOptions" (onChange)="dt.filter($event.value, col.field, col.filterMatchMode)"></p-dropdown>
               <input *ngSwitchCase="'attachedTech'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'poleOwner'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'dataSource'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
@@ -35,21 +28,6 @@
                 {{streetlight[col.field]}}
             </td>
         </tr>
-        <!-- <tr>
-            <td>{{streetlight.poleId}}</td>
-            <td>{{streetlight.logitude}}</td>
-            <td>{{streetlight.latitude}}</td>
-            <td>{{streetlight.longitude}}</td>
-            <td>{{streetlight.lightbulbType}}</td>
-            <td>{{streetlight.wattage}}</td>
-            <td>{{streetlight.lumens}}</td>
-            <td>{{streetlight.attachedTech}}</td>
-            <td>{{streetlight.poleOwner}}</td>
-            <td>{{streetlight.dataSource}}</td>
-            <td>{{streetlight.fiberWifiEnabled}}</td>
-            <td>{{streetlight.lightAttributes}}</td>
-            <td>{{streetlight.poleType}}</td>
-        </tr> -->
     </ng-template>
   </p-table>
 </div>
