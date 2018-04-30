@@ -32,16 +32,12 @@ def make_a_list(*args):
     """
     Takes any number of fields
     return list of attachements or other feature
-    or list ['nothing yet']
     """
     attached=[]
     for x in args:
         if x != None:
             attached.append(x)
-    if len(attached)==0:
-        return ['nothing yet']
-    else:
-        return attached
+    return attached
     
 def find_wifi(*args):
     """
@@ -88,7 +84,7 @@ def kcmo_convert(filepath, xtrapath):
                                                  ,x['SPECIAL_N2']
                                                  ,x['SPECIAL_NO']
                                                  ))
-    kcjoin=etl.addfield(kcjoin, 'AttachedTech', lambda x: False if x['LightAttributes'][0]=='nothing yet' else True)
+    kcjoin=etl.addfield(kcjoin, 'AttachedTech', lambda x: bool(x['LightAttributes']))
     kcjoin=etl.addfield(kcjoin, 'FiberWiFiEnable', lambda x: find_wifi(x['LightAttributes']
                                                                         ,x['SPECIAL_N2']
                                                                         ,x['SPECIAL_NO']
