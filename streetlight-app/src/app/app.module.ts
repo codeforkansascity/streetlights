@@ -26,6 +26,7 @@ import { MapViewComponent } from './map-view/map-view.component';
 import { SpreadsheetViewComponent } from './spreadsheet-view/spreadsheet-view.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { StreetlightService } from '../services/streetlight.service';
+import { LandingComponent } from './landing/landing.component';
 
 
 const appRoutes: Routes = [
@@ -59,7 +60,7 @@ const appRoutes: Routes = [
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [ LogService, StreetlightService ],
-  declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
+  declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent ],
   exports: [ MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   bootstrap: [ AppComponent ]
 })

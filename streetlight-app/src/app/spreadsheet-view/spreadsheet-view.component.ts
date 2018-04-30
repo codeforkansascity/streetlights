@@ -45,7 +45,7 @@ export class SpreadsheetViewComponent implements OnInit {
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },
       { field: 'poleOwner', header: 'Pole Owner', filtermatchmode: 'contains' },
       { field: 'dataSource', header: 'Data Source', filtermatchmode: 'contains' },
-      { field: 'fiberWifiEnabled', header: 'Wi-fi', filtermatchmode: 'contains' },
+      { field: 'fiberWifiEnabled', header: 'Wi-fi', filtermatchmode: 'equals' },
       { field: 'lightAttributes', header: 'Attributes', filtermatchmode: 'contains' },
       { field: 'poleType', header: 'Pole Type', filtermatchmode: 'contains' }
     ];

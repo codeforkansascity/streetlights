@@ -1,8 +1,7 @@
 
-
-  
 header {
-    background-color: #0f0314;
+    /* background-color: #0f0314; */
+    border-bottom: 1px solid var(--color-primary-4);
 }
   
 
