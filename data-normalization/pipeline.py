@@ -107,7 +107,7 @@ def lee_convert(filepath):
     kclee = etl.addfield(kclee, 'LightbulbType', lambda x: x['LAMPTYPE'])
     kclee = etl.addfield(kclee, 'Wattage', lambda x: x['WATTS'])
     kclee = etl.addfield(kclee, 'Lumens', lambda x: x['LUMENS'])
-    kclee = etl.addfield(kclee, 'AttachedTech', None)
+    kclee = etl.addfield(kclee, 'AttachedTech', False)
     kclee = etl.addfield(kclee, 'LightAttributes', lambda x: x['FIXTURETYP'])
     kclee = etl.addfield(kclee, 'FiberWiFiEnable', False)
     kclee = etl.addfield(kclee, 'PoleType', None)
