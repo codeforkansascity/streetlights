@@ -93,12 +93,40 @@ def kcmo_convert(filepath, xtrapath):
                      'FiberWiFiEnable', 'PoleType', 'PoleOwner', 'DataSource')
     etl.tocsv(kcjoin, 'data/kcmo_clean.csv')
 
+def lee_convert(filepath):
+    """
+    Takes the file path to a csv in the format used by Kansas City proper
+    converts to universal format 
+    outputs csv.
+    """
+    kclee = etl.fromcsv(filepath)
+
+    kclee = etl.addfield(kclee, 'PoleID', lambda x: 'KCLEE'+x['OBJECTID'])
+    kclee = etl.addfield(kclee, 'Longitude', lambda x: x['POINT_X'])
+    kclee = etl.addfield(kclee, 'Latitude', lambda x: x['POINT_Y'])
+    kclee = etl.addfield(kclee, 'LightbulbType', lambda x: x['LAMPTYPE'])
+    kclee = etl.addfield(kclee, 'Wattage', lambda x: x['WATTS'])
+    kclee = etl.addfield(kclee, 'Lumens', lambda x: x['LUMENS'])
+    kclee = etl.addfield(kclee, 'AttachedTech', None)
+    kclee = etl.addfield(kclee, 'LightAttributes', lambda x: x['FIXTURETYP'])
+    kclee = etl.addfield(kclee, 'FiberWiFiEnable', False)
+    kclee = etl.addfield(kclee, 'PoleType', None)
+    kclee = etl.addfield(kclee, 'PoleOwner', 'Lee Summit')
+    kclee = etl.addfield(kclee, 'DataSource', 'Lee Summit')
+    kclee = etl.cut(kclee, 'PoleID', 'Longitude', 'Latitude', 'LightbulbType',
+                     'Wattage', 'Lumens', 'AttachedTech', 'LightAttributes',
+                     'FiberWiFiEnable', 'PoleType', 'PoleOwner', 'DataSource')
+    etl.tocsv(kclee, 'data/kcleesummit_clean.csv')
+
+
 
 def main():
     # for testing
     filepath = 'data/kansas-city-mo.csv'
     xtrapath = 'data/kansas-city-mo-extra.xlsx'
+    filepath_lee = 'data/lee-summit-mo.csv'
     kcmo_convert(filepath, xtrapath)
+    lee_convert(filepath_lee)
     print('done')
 
 
