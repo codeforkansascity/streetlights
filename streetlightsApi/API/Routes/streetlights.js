@@ -8,7 +8,7 @@ var Streetlight = require('../models/Streetlight');
 //Routes
 router.get('/',(req, res,next)=>{
     Streetlight.find()
-    .select('_id dataset lat long attributes')
+    .select('_id poleId dataSource latitude longitude LightAttributes')
     .exec()
     .then(docs=>{
         var response = {
@@ -16,13 +16,14 @@ router.get('/',(req, res,next)=>{
             streetlights: docs.map(doc=>{
                 return{
                     _id:doc._id,
-                    dataset:doc.dataset,
-                    lat:doc.lat,
-                    long:doc.long,
-                    attributes:doc.attributes,
+                    poleId:doc.poleId,
+                    dataset:doc.dataSource,
+                    lat:doc.latitude,
+                    long:doc.longitude,
+                    lightAttributes:doc.lightAttributes,
                     request:{
                         type:"GET",
-                        url:"http://localhost:3000/streetlights/"+doc._id
+                        url:"http://localhost:3121/streetlights/"+doc._id
                     }
                 };
             })  
@@ -41,10 +42,10 @@ router.get('/',(req, res,next)=>{
 router.post('/',(req,res,next)=>{
     var streetlight = new Streetlight({
         _id: new mongoose.Types.ObjectId(),
-        dataset:req.body.dataset,
-        lat:req.body.lat,
-        long:req.body.long,
-        attributes:req.body.attributes
+        dataSource:req.body.dataset,
+        latitude:req.body.lat,
+        longitude:req.body.long,
+        lightAttributes:req.body.attributes
         
     });
     streetlight.save().then(result=>{
@@ -58,7 +59,7 @@ router.post('/',(req,res,next)=>{
             attributes: result.attributes,
             request:{
                 type:"GET",
-                url:"http://localhost:3000/streetlights/"+result._id
+                url:"http://localhost:3121/streetlights/"+result._id
 
             }
         }
