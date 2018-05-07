@@ -1,2 +1,3 @@
 /streetlightsAPI/nodemon.json
 node_modules/
+/streetlightsApi/.env
