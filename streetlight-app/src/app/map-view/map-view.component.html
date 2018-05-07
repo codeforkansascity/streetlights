@@ -1,38 +1,45 @@
 <!-- All components should include an <aside> and <main> element -->
-<div id="map-view-main">
-  <aside>
-    <div id="sidebar-top">
+<div id="map-view-main" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+  <aside fxFlex="40">
+    <div id="sidebar-top" >
       <div id="map-controls">
-        <h3>Location</h3>
+        <!-- <h3 class="map-controls-header">Location</h3>
         <div class="map-search">
-          
+            <input type="text" #mapSearchFilter pInputText placeholder="Search" fxFlex="50"/>
+        </div> -->
+        <h3 class="map-controls-header">Streetlight Attributes</h3>
+        <div class="map-control-inputs" fxLayout="column">
+          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+            <h4 fxFlex="30">Light Bulb Type</h4>
+            <p-dropdown #lbTypeFilter [options]="lightBulbTypeOptions" [(ngModel)]="selectedLightBulbType" (onChange)="filterExact('lightBulbType', selectedLightBulbType)" fxFlex="70"></p-dropdown>
+          </div>
+          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+            <h4 fxFlex="30">Fiber Wireless</h4>
+            <p-checkbox #wirelessFilter label="Wi-Fi" binary="true" [(ngModel)]="wireless" (onChange)="filterBoolean('wireless', wireless)" fxFlex="70"></p-checkbox>
+          </div>
+          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+              <h4 fxFlex="30">Pole Owner</h4>
+            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFlex="50"/>
+          </div>
         </div>
-        <h3>Attributes</h3>
-        <div class="map-control-inputs">
-          <p>NEMA:</p><input #nema class="checkbox checkbox-lg" type="checkbox" (change)="filterBoolean('nema', nema.checked)">
-          <p>Wireless:</p><input #wireless class="checkbox checkbox-lg" type="checkbox" (change)="filterBoolean('wireless', wireless.checked)">
-          <p>Fixture_mfg:</p><input #fixtureMfg type="text" (change)="filterExact('fixture_mfg',fixtureMfg.value)">
-        </div>
-        <div class="map-control-inputs">
-            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #1</p>
-            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #2</p>
-            <input class="checkbox checkbox-sm" type="checkbox"><p>Test #3</p>
+        <div class="map-control-inputs" fxLayout="column">
+            <p-button id="clear-filters-btn" label="Clear Filters" (click)="clearFilters()" ></p-button>
         </div>
       </div>
     </div>
   </aside>
-  <main>
+  <main fxFlex="60">
   <!-- Map Component -->
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
-    <agm-marker 
-      *ngFor="let m of filteredStreetlightMarkers"
-      [latitude]="m.lat"
-      [longitude]="m.lon"
-      [label]="m.label"
-      [markerDraggable]="m.draggable"
-      [visible]="m.visible">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
+      <agm-marker
+        *ngFor="let m of filteredStreetlightMarkers"
+        [latitude]="m.lat"
+        [longitude]="m.lon"
+        [label]="m.label"
+        [markerDraggable]="m.draggable"
+        [visible]="m.visible">
 
-  </agm-marker>
-  </agm-map>
+      </agm-marker>
+    </agm-map>
   </main>
 </div>

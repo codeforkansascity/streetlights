@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-import { MapService } from '../map.service';
-import { Marker } from '../marker';
+import { StreetlightService } from '../../services/streetlight.service';
+import { Marker } from '../models/marker';
 import { Promise } from 'q';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
+import { Streetlight } from '../models/streetlight';
 
 
 @Component({
@@ -14,20 +15,28 @@ import * as _ from 'lodash';
 })
 export class MapViewComponent implements OnInit {
 
-  title: string = 'Streetlights';
-  lat: number = 39.090265;
-  lng: number = -94.576062;
-  zoom: number = 6;
-  minZoom: number = 8;
-  mapDraggable: boolean = false;
+  title = 'Streetlights';
+  lat = 39.106579;
+  lng = -94.622835;
+  zoom = 11;
+  minZoom = 3;
+  maxZoom = 20;
+  mapDraggable = true;
   streetlightMarkers: Marker[];
   filteredStreetlightMarkers: Marker[];
-  nema: boolean = false;
-  wireless: boolean = false;
-  fixtureMfg: string;
+  wireless: boolean;
+  poleOwnerFilter: string;
+  lightBulbTypeOptions = [
+    { label: 'Select Type', value: null },
+    { label: 'Halogen', value: 'Halogen' },
+    { label: 'Incandescent', value: 'Incandescent' },
+    { label: 'Florescent', value: 'Florescent'},
+  ];
+  selectedLightBulbType: string;
+
   filters = {};
 
-  constructor(private logger: LogService, private mapService: MapService) {
+  constructor(private logger: LogService, private service: StreetlightService) {
     this.streetlightMarkers = [];
     this.filteredStreetlightMarkers = [];
   }
@@ -35,46 +44,42 @@ export class MapViewComponent implements OnInit {
   ngOnInit() {
     this.getStreetlights();
     this.applyFilters();
+    console.dir(this.streetlightMarkers);
+    console.dir(this.filteredStreetlightMarkers);
   }
 
   getStreetlights() {
+
     return Promise( (resolve, reject) => {
-      this.mapService.getStreetlights().subscribe( markers => {
-        let inc = 1;
-        markers.map( marker => {
-          let m = new Marker();
-          m.setLng(marker.lon);
-          m.setLat(marker.lat);
-          m.setStreet(marker.street);
-          m.setZip(marker.zip ? marker.zip : '');
-          inc += 1;
-          m.setLabel(marker.street + '-' + inc);
-          m.setNema(marker.nema);
-          m.setWireless(marker.wireless);
-          m.setFixture(marker.fixture_mfg);
-          m.setVisible(true);
+      this.service.getStreetlights().subscribe( streetlights => {
+        console.dir(streetlights);
+        streetlights.map( streetlight => {
+          const m = new Marker();
+          m.setLng(streetlight.longitude);
+          m.setLat(streetlight.latitude);
+          m.setLabel(streetlight.poleId);
+          m.setWireless(streetlight.fiberWifiEnabled);
+          m.setPoleOwner(streetlight.poleOwner);
+          m.setLightBulbType(streetlight.lightbulbType);
           this.streetlightMarkers.push(m);
           this.filteredStreetlightMarkers.push(m);
-          
         });
-        console.dir(this.streetlightMarkers);
       });
-      
     });
   }
 
   private applyFilters() {
-    console.log(this.filters);
     this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters) );
   }
 
   /// filter property by equality to rule
   filterExact(property: string, rule: any) {
+    console.log(property, rule);
     if (rule === '' || !rule) {
       this.removeFilter(property);
       this.applyFilters();
     } else {
-      this.filters[property] = val => val == rule
+      this.filters[property] = val => val === rule;
       this.applyFilters();
     }
 
@@ -82,14 +87,17 @@ export class MapViewComponent implements OnInit {
 
   /// filter  numbers greater than rule
   filterGreaterThan(property: string, rule: number) {
+    console.log(property, rule);
     this.filters[property] = val => val > rule;
     this.applyFilters();
   }
 
   /// filter properties that resolve to true
   filterBoolean(property: string, rule: boolean) {
-    if (!rule) this.removeFilter(property)
-    else {
+    console.log(property, rule);
+    if (!rule) {
+      this.removeFilter(property);
+    } else {
       this.filters[property] = val => val;
       this.applyFilters();
     }
@@ -97,8 +105,13 @@ export class MapViewComponent implements OnInit {
 
   /// removes filter
   removeFilter(property: string) {
-    delete this.filters[property]
+    delete this.filters[property];
     this[property] = null;
+    this.applyFilters();
+  }
+
+  clearFilters() {
+    this.filters = {};
     this.applyFilters();
   }
 

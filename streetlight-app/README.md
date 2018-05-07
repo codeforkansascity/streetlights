@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## App-specific help
+
+This app was designed to pull in data from an API serving up data on streetlights in a given region.  It can be customized to any region you wish, provided you have the streetlight data to display for that area.
+
+The app currently has a Map view and a Spreadsheet view.  The Map view displays a map of the region of interest with markers displaying streetlight positions and information about each streetlight display along with the marker.
+
+The instructiions above details how to create new components, directives and services for the app.
+
+To start the app, enter the command 'npm start' from the command-line in the application directory.

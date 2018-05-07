@@ -1,38 +1,43 @@
-p {
-    margin: 0;
+input {
+    height: 32px;
 }
 
 #map-view-main {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 29vw;
-    grid-gap: 0 1em;
-    margin: 0 auto;
-    max-width: 75em;
-    padding: 1em 0;
+    height: auto;
 }
   
 main,
 aside {
     background: #eaeaea;
-    display: flex;
     /* align-items: center; */
     /* justify-content: center; */
  }
 
- .map-control-inputs {
-     display: grid;
-     grid-template-columns: 75% 25%;
-     grid-template-rows: 2vw 2vw 2vw;
-     grid-gap: 0.5em;
+ aside {
+     height: 60vh;
+     border-radius: 3px;
+     background-color: var(--color-primary-0);
  }
 
- .checkbox {
-     vertical-align: middle;
+ #sidebar-top {
+    padding: 16px 32px;
  }
+
+ .map-search {
+     margin-bottom: 32px; 
+ }
+
+ .map-search, .map-control-inputs {
+     padding-left: 16px;
+ }
+
+ #clear-filters-btn {
+     padding-top: 32px;
+ }
+
 
  agm-map {
-     height: 95%;
-     width: 95%;
-     margin: 0 auto;
+     height: 60vh;
+     /* width: 100%; */
+     /* margin: 0 auto; */
  }
