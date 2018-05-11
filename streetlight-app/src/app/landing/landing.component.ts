@@ -27,7 +27,6 @@ export class LandingComponent implements OnInit {
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
       this.streetlights = value;
-      console.dir(this.streetlights);
     }, (error) => {
       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });

@@ -50,6 +50,7 @@ const appRoutes: Routes = [
     GMapModule,
     CheckboxModule,
     DropdownModule,
+    DataViewModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'

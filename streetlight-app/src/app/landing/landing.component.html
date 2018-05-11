@@ -1,7 +1,30 @@
 <div class="ui-g landing-main">
 
   <div id="list-section" class="ui-lg-6 ui-md-12">
-    
+    <p-dataView [value]="streetlights" [paginator]="true" [rows]="10">
+        <p-header>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </p-header>
+        <p-footer>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </p-footer>
+      <ng-template let-streetlight pTemplate="listItem">
+        <div>
+            <span>{{streetlight.poleId}}</span>
+            <span>{{streetlight.lightbulbType}}</span>
+            <span>{{streetlight.wattage}}</span>
+            <span>{{streetlight.lumens}}</span>
+        </div>
+      </ng-template>
+      <ng-template let-streetlight pTemplate="gridItem">
+        <div class="ui-g-12 ui-md-3">
+          <span>{{streetlight.poleId}}</span>
+          <span>{{streetlight.lightbulbType}}</span>
+          <span>{{streetlight.wattage}}</span>
+          <span>{{streetlight.lumens}}</span>
+        </div>
+      </ng-template>
+    </p-dataView>
   </div>
 
   <div id="details-section" class="ui-lg-6 ui-md-12">
