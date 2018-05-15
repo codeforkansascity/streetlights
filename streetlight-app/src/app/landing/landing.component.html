@@ -2,33 +2,45 @@
 
   <div id="list-section" class="ui-lg-6 ui-md-12">
     <p-dataView [value]="streetlights" [paginator]="true" [rows]="10">
-        <p-header>
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        <p-header fxLayoutAlign="center center">
+            <p-dataViewLayoutOptions [styleClass]="data-view-control-icons"></p-dataViewLayoutOptions>
         </p-header>
-        <p-footer>
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </p-footer>
       <ng-template let-streetlight pTemplate="listItem">
-        <div>
-            <span>{{streetlight.poleId}}</span>
-            <span>{{streetlight.lightbulbType}}</span>
-            <span>{{streetlight.wattage}}</span>
-            <span>{{streetlight.lumens}}</span>
+        <div class="list-item" fxLayoutAlign="start center" (click)="onDataViewItemClick(streetlight.poleId)">
+            <span class="list-item-id" fxFlex="15">{{streetlight.poleId}}</span>
+            <span fxFlex="35">{{streetlight.lightbulbType}}</span>
+            <span fxFlex="25">{{streetlight.wattage}} watts</span>
+            <span fxFlex="25">{{streetlight.lumens}} lumens</span>
         </div>
       </ng-template>
       <ng-template let-streetlight pTemplate="gridItem">
-        <div class="ui-g-12 ui-md-3">
-          <span>{{streetlight.poleId}}</span>
-          <span>{{streetlight.lightbulbType}}</span>
-          <span>{{streetlight.wattage}}</span>
-          <span>{{streetlight.lumens}}</span>
+        <div class="grid-item ui-g-12 ui-md-3">
+          <div class="grid-item-inner-wrapper">
+            <div>{{streetlight.poleId}}</div>
+            <div>{{streetlight.lightbulbType}}</div>
+            <div>{{streetlight.wattage}}</div>
+            <div>{{streetlight.lumens}}</div>
+          </div>
         </div>
       </ng-template>
     </p-dataView>
   </div>
 
-  <div id="details-section" class="ui-lg-6 ui-md-12">
+  <div id="details-section" class="ui-lg-5 ui-md-12">
+    <div class="detail-view">
+      <div class="detail-view-poleId"><span class="detail-view-label">Pole ID:</span>{{currentStreetlight.poleId}}</div>
+      <div class="detail-view-location"><span class="detail-view-label">Location:</span>{{currentStreetlight.longitude}}, {{currentStreetlight.latitude}}</div>
+      <div><span class="detail-view-label">Lightbulb Type:</span>{{currentStreetlight.lightbulbType}}</div>
+      <div><span class="detail-view-label">Wattage:</span>{{currentStreetlight.wattage}} watts</div>
+      <div><span class="detail-view-label">Attached Tech:</span>{{currentStreetlight.attachedTech}}</div>
+      <div><span class="detail-view-label">Pole Owner:</span>{{currentStreetlight.poleOwner}}</div>
+      <div><span class="detail-view-label">Data Source:</span>{{currentStreetlight.dataSource}}</div>
+      <div><span class="detail-view-label">Fiber Wi-fi:</span>{{currentStreetlight.fiberWifiEnabled}}</div>
+      <div><span class="detail-view-label">Light Attributes:</span>{{currentStreetlight.lightAttributes}}</div>
+      <div><span class="detail-view-label">Pole Type:</span>{{currentStreetlight.poleType}}</div>
+      <div><span class="detail-view-label">Lumens:</span>{{currentStreetlight.lumens}} lumens</div>
 
+    </div>
   </div>
 
 </div>
