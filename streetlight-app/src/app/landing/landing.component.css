@@ -2,8 +2,11 @@
     /* padding: 32px; */
 }
 
+p-dataview p-header input {
+    margin-right: 30vw;
+}
 
-.data-view-control-icons {
+p-dataViewLayoutOptions i.fa.fa-th-large.ui-button-icon-left {
     color: var(--color-primary-0);
 }   
 
@@ -14,25 +17,29 @@
 }
 
 .list-item-id, .detail-view-poleId {
-    font-weight: 700;
-    color: var(--color-primary-1);
+    color: var(--color-font-light);
+}
+
+.detail-view-poleId {
+    font-size: 1.5rem;
+    margin-bottom: 44px;
+    text-align: center;
 }
 
 .grid-item {
     height: 150px;
-    /* border: 1px solid var(--color-primary-4); */
-    
 }
 
 .grid-item-inner-wrapper {
-    background-color: var(--color-primary-2);
+    background-color: #fff;
     padding: 4px;
     text-align: center;
     border-radius: 3px;
 }
 
-.grid-item-inner-wrapper div {
-    margin: 8px 0;
+.detail-view-info {
+    margin: 16px 0;
+    text-align: left;
 }
 
 i {
@@ -41,13 +48,11 @@ i {
 
 .detail-view {
     padding: 32px;
-    font-size: 1.2rem;
-    background-color: var(--color-primary-4);
-    height: 70vh;
-}
-
-.detail-view div {
-    margin: 16px 0;
+    font-size: 1.0em;
+    background-color: var(--color-primary-1);
+    min-height: 60vh;
+    border-radius: 3px;
+    color: var(--color-font-light);
 }
 
 .detail-view-location {
@@ -55,5 +60,5 @@ i {
 }
 
 .detail-view-label {
-    margin: 30px;
+    margin-right: 30px;
 }
