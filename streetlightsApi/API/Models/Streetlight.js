@@ -2,7 +2,7 @@ var restful = require('node-restful');
 var mongoose = restful.mongoose;
 
 //Schema
-var AttachedTech = new mongoose.Schema({
+var lightAttributes = new mongoose.Schema({
     name:{type:String, lowercase:true, required:true},
     value: {type:String, lowercase:true, required:true}
 })
@@ -16,11 +16,12 @@ var Streetlight = new mongoose.Schema({
     lightbulbType:String,
     wattage:String,
     lumens:String,
-    lightAttributes:String,
+    lightAttributes:[String],
     fiberWiFiEnabled:Boolean,
-    attachedTech:[AttachedTech],
+    attachedTech:Boolean,
     poleType:String,
-    poleOwner:String})
+    poleOwner:String
+});
 
     //Return Streetlights
-    module.exports = restful.model('Streetlight', Streetlight, "streetlights");
+    module.exports = restful.model('streetlight', Streetlight, "streetlights");
