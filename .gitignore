@@ -1,4 +1,12 @@
 # Env Files
+<<<<<<< HEAD
 /streetlightsAPI/nodemon.json
 node_modules/
 /streetlightsApi/.env
+=======
+.env
+/streetlightsAPI/nodemon.json
+
+#Node Modules
+node_modules/
+>>>>>>> 5fbf4038683faaaad075c95f56df1359ca6bbb1e
