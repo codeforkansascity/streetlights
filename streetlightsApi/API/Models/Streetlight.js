@@ -12,7 +12,7 @@ var Streetlight = new mongoose.Schema({
     dataSource:{type:String, required:true},
     poleId:{type:String, required:false},
     latitude:{type:String, required:true},
-    longitude:{type:String, required:true},
+    Longitude:{type:String, required:true},
     lightbulbType:String,
     wattage:String,
     lumens:String,
@@ -24,4 +24,4 @@ var Streetlight = new mongoose.Schema({
 });
 
     //Return Streetlights
-    module.exports = restful.model('streetlight', Streetlight, "streetlights");
+    module.exports = restful.model('streetlight', Streetlight, 'streetlights');

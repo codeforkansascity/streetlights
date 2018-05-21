@@ -30,7 +30,7 @@ router.get('/',(req, res,next)=>{
                     poleOwner: doc.poleOwner,
                     request:{
                         type:"GET",
-                        url:"http://localhost:3121/streetlights/"+doc._id
+                        url:req.protocol+'://'+req.get('host')+req.originalUrl+doc._id
                     }
                 };
             })  
@@ -53,7 +53,7 @@ router.post('/',(req,res,next)=>{
         dataSource:req.body.dataSource,
         latitude:req.body.latitude,
         longitude:req.body.longitude,
-        lightAttributes:req.body.attributes,
+        lightAttributes:req.body.lightAttributes,
         attachedTech:req.body.attachedTech,
         fiberWiFiEnable: req.body.fiberWiFiEnable,
         poleType: req.body.poleType,
@@ -80,7 +80,7 @@ router.post('/',(req,res,next)=>{
             poleOwner: result.poleOwner,
             request:{
                 type:"GET",
-                url:"http://localhost:3121/streetlights/"+result._id
+                url:req.protocol+'://'+req.get('host')+req.originalUrl+result._id
 
             }
         }
@@ -106,7 +106,7 @@ router.get('/:streetlightId',(req, res, next)=>{
                 request:{
                     type:"GET",
                     description:"GET_ALL_PRODUCTS",
-                    url:'http://localhost:3000/streetlights'
+                    url:req.protocol+'://'+req.get('host')+req.baseUrl+'/'
                 }
             })
 
