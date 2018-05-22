@@ -10,7 +10,7 @@ var streetlightRoutes = require('./api/routes/streetlights');
 //MongoDB
 mongoose.connect('mongodb://awsServer:'+process.env.DB_PASSWORD+'@streetlights0-shard-00-00-xxxxk.mongodb.net:27017'+
 ',streetlights0-shard-00-01-xxxxk.mongodb.net:27017,streetlights0-shard-00-02-xxxxk.mongodb.net:27017/'+
-'streetlights?ssl=true&replicaSet=Streetlights0-shard-0&authSource=admin',{useMongoClient:true});
+'Streetlight?ssl=true&replicaSet=Streetlights0-shard-0&authSource=admin',{useMongoClient:true});
 //Middleware
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}));
