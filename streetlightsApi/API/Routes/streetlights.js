@@ -102,10 +102,10 @@ router.get('/:streetlightId',(req, res, next)=>{
         console.log(doc);
         if(doc){
             res.status(200).json({
-                product:doc,
+                streetlight:doc,
                 request:{
                     type:"GET",
-                    description:"GET_ALL_PRODUCTS",
+                    description:"GET_ALL_STREETLIGHTS",
                     url:req.protocol+'://'+req.get('host')+req.baseUrl+'/'
                 }
             })
