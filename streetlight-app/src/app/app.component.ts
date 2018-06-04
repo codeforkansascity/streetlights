@@ -6,13 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent implements OnInit {
-  mode: 'spreadsheet' | 'map';
+  mode: 'spreadsheet' | 'map' | 'landing';
 
   ngOnInit() {
-    this.mode = 'map';
+    this.mode = 'landing';
   }
 
-  onModeShiftClick(mode: 'spreadsheet' | 'map') {
+  onModeShiftClick(mode: 'spreadsheet' | 'map' | 'landing') {
     this.mode = mode;
   }
+
 }

@@ -7,8 +7,11 @@
       <i class="fa fa-map" aria-hidden="true" (click)="onModeShiftClick('map')"></i>
       <span>|</span>
       <i class="fa fa-table" aria-hidden="true" (click)="onModeShiftClick('spreadsheet')"></i>
+      <span>|</span>
+      <i class="fa fa-home" aria-hidden="true" (click)="onModeShiftClick('landing')"></i>
     </div>
     <app-spreadsheet-view *ngIf="mode == 'spreadsheet'"></app-spreadsheet-view>
     <app-map-view *ngIf="mode == 'map'"></app-map-view>
+    <app-landing-view *ngIf="mode == 'landing'"></app-landing-view>
   </content>
 </div>

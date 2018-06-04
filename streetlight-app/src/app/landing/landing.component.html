@@ -1,3 +1,46 @@
-<p>
-  landing works!
-</p>
+<div class="ui-g landing-main">
+
+  <div id="list-section" class="ui-lg-7 ui-lg-offset-1 ui-g-12">
+    <p-dataView #dataView [value]="streetlights" [paginator]="true" [rows]="10" filterBy="poleId">
+        <p-header fxLayoutAlign="center center">
+            <input type="search" pInputText placeholder="Search" (keyup)="dataView.filter($event.target.value)" fxFlex="25">
+            <p-dataViewLayoutOptions [styleClass]="data-view-control-icons"></p-dataViewLayoutOptions>
+        </p-header>
+      <ng-template let-streetlight pTemplate="listItem">
+        <div class="list-item" fxLayoutAlign="start center" (click)="onDataViewItemClick(streetlight.poleId)">
+            <span class="list-item-id" fxFlex="15">{{streetlight.poleId}}</span>
+            <span fxFlex="35">{{streetlight.lightbulbType}}</span>
+            <span fxFlex="25">{{streetlight.wattage}} watts</span>
+            <span fxFlex="25">{{streetlight.lumens}} lumens</span>
+        </div>
+      </ng-template>
+      <ng-template let-streetlight pTemplate="gridItem">
+        <div class="grid-item ui-g-12 ui-md-3">
+          <div class="grid-item-inner-wrapper">
+            <div>{{streetlight.poleId}}</div>
+            <div>{{streetlight.lightbulbType}}</div>
+            <div>{{streetlight.wattage}}</div>
+            <div>{{streetlight.lumens}}</div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+
+  <div id="details-section" class="ui-lg-3 ui-g-12">
+    <div class="detail-view">
+      <div class="detail-view-poleId">{{currentStreetlight.poleId}}</div>
+      <div class="detail-view-location"><span class="detail-view-label">Location:</span>{{currentStreetlight.longitude}}, {{currentStreetlight.latitude}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Lightbulb Type:</span>{{currentStreetlight.lightbulbType}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Wattage:</span>{{currentStreetlight.wattage}} watts</div>
+      <div class="detail-view-info"><span class="detail-view-label">Attached Tech:</span>{{currentStreetlight.attachedTech}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Pole Owner:</span>{{currentStreetlight.poleOwner}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Data Source:</span>{{currentStreetlight.dataSource}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Fiber Wi-fi:</span>{{currentStreetlight.fiberWifiEnabled}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Light Attributes:</span>{{currentStreetlight.lightAttributes}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Pole Type:</span>{{currentStreetlight.poleType}}</div>
+      <div class="detail-view-info"><span class="detail-view-label">Lumens:</span>{{currentStreetlight.lumens}} lumens</div>
+    </div>
+  </div>
+
+</div>

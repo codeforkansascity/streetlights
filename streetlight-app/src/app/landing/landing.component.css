@@ -1,0 +1,64 @@
+.landing-main {
+    /* padding: 32px; */
+}
+
+p-dataview p-header input {
+    margin-right: 30vw;
+}
+
+p-dataViewLayoutOptions i.fa.fa-th-large.ui-button-icon-left {
+    color: var(--color-primary-0);
+}   
+
+.list-item {
+    padding: 16px;
+    border-bottom: 1px solid #DDD;
+    font-size: 1.2rem;
+}
+
+.list-item-id, .detail-view-poleId {
+    color: var(--color-font-light);
+}
+
+.detail-view-poleId {
+    font-size: 1.5rem;
+    margin-bottom: 44px;
+    text-align: center;
+}
+
+.grid-item {
+    height: 150px;
+}
+
+.grid-item-inner-wrapper {
+    background-color: #fff;
+    padding: 4px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.detail-view-info {
+    margin: 16px 0;
+    text-align: left;
+}
+
+i {
+    color: var(--color-primary-1);
+}
+
+.detail-view {
+    padding: 32px;
+    font-size: 1.0em;
+    background-color: var(--color-primary-1);
+    min-height: 60vh;
+    border-radius: 3px;
+    color: var(--color-font-light);
+}
+
+.detail-view-location {
+    font-style: italic;
+}
+
+.detail-view-label {
+    margin-right: 30px;
+}

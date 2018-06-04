@@ -5,15 +5,16 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ApplicationRef } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-
-// Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// PrimeNg
 import { TableModule } from 'primeng/table';
 import { GMapModule } from 'primeng/gmap';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
+import { DataViewModule } from 'primeng/dataview';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     GMapModule,
     CheckboxModule,
     DropdownModule,
+    DataViewModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'

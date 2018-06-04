@@ -13,7 +13,12 @@
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
+<<<<<<< HEAD
     "mongoose": "^5.1.2",
+=======
+    "hoek": "^5.0.3",
+    "mongoose": "^5.0.0-rc0",
+>>>>>>> 4b2fedde8cc69f9c32147922bf172b9314033593
     "morgan": "^1.9.0",
     "node-restful": "^0.2.6"
   },
