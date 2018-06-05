@@ -3,15 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Streetlight } from '../app/models/streetlight';
+import {Streetlight, StreetlightData} from '../app/models/streetlight';
 import * as data from '../app/streetlights.json';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class StreetlightService {
 
-  private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';  //Uses Mockaroo API, change to our own API once ready
+  private mapsUrl = 'http://streetlight.codeforkc.org:3121/streetlights';
 
-  constructor( private http: HttpClient ) { 
+  constructor( private http: HttpClient ) {
 
   }
 
@@ -19,7 +21,8 @@ export class StreetlightService {
    * Request streetlight data from API
    */
   getStreetlights(): Observable<Streetlight[]> {
-    return this.http.get<Streetlight[]>(this.mapsUrl)
+    return this.http.get<StreetlightData>(this.mapsUrl)
+      .map(streetlightData => streetlightData.streetlights)
       .pipe(
         catchError(this.handleError('getStreetlights', []))
       );
