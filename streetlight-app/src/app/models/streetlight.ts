@@ -12,3 +12,8 @@ export class Streetlight {
     lightAttributes: string;
     poleType: string;
 }
+
+export class StreetlightData {
+  count: number;
+  streetlights: Streetlight[];
+}
