@@ -9,9 +9,10 @@ import * as data from '../app/streetlights.json';
 @Injectable()
 export class StreetlightService {
 
-  private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';  //Uses Mockaroo API, change to our own API once ready
+  // private url = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';  // Uses Mockaroo API, change to our own API once ready
+  private url = 'http://ec2-52-206-33-109.compute-1.amazonaws.com:3121/streetlights/';
 
-  constructor( private http: HttpClient ) { 
+  constructor( private http: HttpClient ) {
 
   }
 
@@ -19,7 +20,7 @@ export class StreetlightService {
    * Request streetlight data from API
    */
   getStreetlights(): Observable<Streetlight[]> {
-    return this.http.get<Streetlight[]>(this.mapsUrl)
+    return this.http.get<Streetlight[]>(this.url)
       .pipe(
         catchError(this.handleError('getStreetlights', []))
       );
