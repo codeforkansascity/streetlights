@@ -1,7 +1,7 @@
 // Core
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ApplicationRef } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,8 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { GMapModule } from 'primeng/gmap';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SliderModule } from 'primeng/slider';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,6 +30,7 @@ import { SpreadsheetViewComponent } from './spreadsheet-view/spreadsheet-view.co
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { StreetlightService } from '../services/streetlight.service';
 import { LandingComponent } from './landing/landing.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 const appRoutes: Routes = [
@@ -44,11 +47,13 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     BrowserModule,
     HttpClientModule,
-    MultiSelectModule,
+    MultiSelectModule,\
+    SliderModule,
     FormsModule,
     TableModule,
     GMapModule,
     CheckboxModule,
+    TriStateCheckboxModule,
     DropdownModule,
     DataViewModule,
     BrowserAnimationsModule,
@@ -62,7 +67,7 @@ const appRoutes: Routes = [
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [ LogService, StreetlightService ],
-  declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent ],
+  declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe ],
   exports: [ MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
   bootstrap: [ AppComponent ]
 })

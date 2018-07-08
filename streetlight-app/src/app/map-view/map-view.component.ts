@@ -26,12 +26,14 @@ export class MapViewComponent implements OnInit {
   filteredStreetlightMarkers: Marker[];
   wireless: boolean;
   poleOwnerFilter: string;
-  lightBulbTypeOptions = [
-    { label: 'Select Type', value: null },
-    { label: 'Halogen', value: 'Halogen' },
-    { label: 'Incandescent', value: 'Incandescent' },
-    { label: 'Florescent', value: 'Florescent'},
-  ];
+  poleIdFilter: string;
+  lightAttributeFilter = [];
+  wattage: number;
+  attachedTech: boolean;
+  latitudeMaxFilter: number;
+  latitudeMinFilter: number;
+  longitudeMaxFilter: number;
+  longitudeMinFilter: number;
   selectedLightBulbType: string;
 
   filters = {};
@@ -60,6 +62,10 @@ export class MapViewComponent implements OnInit {
           m.setLabel(streetlight.poleId);
           m.setWireless(streetlight.fiberWifiEnabled);
           m.setPoleOwner(streetlight.poleOwner);
+          m.setPoleType(streetlight.poleType);
+          m.setAttachedTech(streetlight.attachedTech);
+          m.setLumens(streetlight.lumens);
+          m.setWattage(streetlight.wattage);
           m.setLightBulbType(streetlight.lightbulbType);
           this.streetlightMarkers.push(m);
           this.filteredStreetlightMarkers.push(m);
@@ -69,7 +75,9 @@ export class MapViewComponent implements OnInit {
   }
 
   private applyFilters() {
-    this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters) );
+    console.dir(this.filters);
+    this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters));
+    console.dir(this.filteredStreetlightMarkers);
   }
 
   /// filter property by equality to rule
@@ -79,7 +87,7 @@ export class MapViewComponent implements OnInit {
       this.removeFilter(property);
       this.applyFilters();
     } else {
-      this.filters[property] = val => val === rule;
+      this.filters[property] = val => val == rule;
       this.applyFilters();
     }
 

@@ -6,19 +6,13 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'poleId'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+              <input *ngSwitchCase="'poleID'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'latitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
               <input *ngSwitchCase="'longitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <input *ngSwitchCase="'lightbulbType'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <input *ngSwitchCase="'wattage'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <p-dropdown *ngSwitchCase="'lumens'" [options]="lumenOptions" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-              <input *ngSwitchCase="'attachedTech'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+              <p-slider *ngSwitchCase="'wattage'" [min]="0" [max]="400" (onChange)="onWattageChange($event.value, dt)"></p-slider>
+              <p-triStateCheckbox  *ngSwitchCase="'attachedTech'" binary="true" (onChange)="onAttachedTechChange($event, dt)"></p-triStateCheckbox >
               <input *ngSwitchCase="'poleOwner'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <input *ngSwitchCase="'dataSource'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <!-- <input *ngSwitchCase="'fiberWifiEnabled'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"> -->
-              <p-checkbox *ngSwitchCase="'fiberWifiEnabled'" binary="true" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-checkbox>
               <input *ngSwitchCase="'lightAttributes'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <input *ngSwitchCase="'poleType'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
             </th>
         </tr>
     </ng-template>

@@ -17,8 +17,11 @@ export class SpreadsheetViewComponent implements OnInit {
     { label: '1300', value: 1300 },
     { label: '1425', value: 1425 }
   ];
+  wattageTimeout: any;
+  currentWattage: number;
   // Table data source
   streetlights = [];
+
 
 
   constructor( private service: StreetlightService ) { }
@@ -29,27 +32,42 @@ export class SpreadsheetViewComponent implements OnInit {
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
       this.streetlights = value;
-      console.dir(this.streetlights);
     }, (error) => {
       console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
 
     // Set up table
     this.cols = [
-      { field: 'poleId', header: 'Pole ID', filtermatchmode: 'contains' },
+      { field: 'poleID', header: 'Pole ID', filtermatchmode: 'contains' },
       { field: 'latitude', header: 'Lat', filtermatchmode: 'equals' },
       { field: 'longitude', header: 'Long', filtermatchmode: 'equals' },
-      { field: 'lightbulbType', header: 'Bulb Type', filtermatchmode: 'contains' },
       { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals'},
-      { field: 'lumens', header: 'Lumens', filtermatchmode: 'equals' },
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },
       { field: 'poleOwner', header: 'Pole Owner', filtermatchmode: 'contains' },
-      { field: 'dataSource', header: 'Data Source', filtermatchmode: 'contains' },
-      { field: 'fiberWifiEnabled', header: 'Wi-fi', filtermatchmode: 'equals' },
       { field: 'lightAttributes', header: 'Attributes', filtermatchmode: 'contains' },
-      { field: 'poleType', header: 'Pole Type', filtermatchmode: 'contains' }
     ];
     this.selectedColumns = this.cols;
+  }
+
+  onWattageChange(event, dt) {
+    this.currentWattage = event;
+    if (this.wattageTimeout) {
+      clearTimeout(this.wattageTimeout);
+    }
+
+    this.wattageTimeout = setTimeout(() => {
+      dt.filter(event, 'wattage', 'gt');
+    }, 250);
+  }
+
+  onAttachedTechChange(event, dt) {
+    console.log(event.value);
+    if (event.value !== null) {
+      dt.filter(event.value, 'attachedTech', 'equals');
+    } else {
+      dt.filter(null, 'attachedTech', null);
+    }
+
   }
 
 }
