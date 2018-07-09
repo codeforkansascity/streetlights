@@ -17,7 +17,7 @@ p-dataViewLayoutOptions i.fa.fa-th-large.ui-button-icon-left {
 }
 
 .list-item-id, .detail-view-poleId {
-    color: var(--color-font-light);
+    color: var(--color-font-dark);
 }
 
 .detail-view-poleId {
@@ -51,6 +51,7 @@ i {
     font-size: 1.0em;
     background-color: var(--color-primary-1);
     min-height: 60vh;
+    height: 90%;
     border-radius: 3px;
     color: var(--color-font-light);
 }

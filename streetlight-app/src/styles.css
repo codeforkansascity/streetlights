@@ -35,3 +35,13 @@ h1, h2, h3, h4, h5 {
 .ui-table .ui-table-tbody > tr:hover {
     background: var(--color-primary-2);
 }
+
+.ui-table .ui-table-thead > tr > th,
+.ui-table .ui-table-tbody > tr > td,
+.ui-table .ui-table-tfoot > tr > td {
+    padding: .25em .75em;
+}
+
+.ui-widget-header a {
+    color: var(--color-font-dark);
+}

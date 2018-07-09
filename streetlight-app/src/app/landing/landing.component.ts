@@ -41,6 +41,7 @@ export class LandingComponent implements OnInit {
     // Collect Streetlight data through API call
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
+      console.dir(value);
       this.streetlights = value;
       this.currentStreetlight = this.streetlights[0];
     }, (error) => {
@@ -53,7 +54,7 @@ export class LandingComponent implements OnInit {
   onDataViewItemClick(poleId: string) {
     console.dir(poleId);
     this.currentStreetlight = this.streetlights.find(value =>
-      value.poleId === poleId);
+      value.poleID === poleId);
   }
 
 }
