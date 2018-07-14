@@ -9,14 +9,6 @@
         </div> -->
         <h3 class="map-controls-header">Streetlight Attributes</h3>
         <div class="map-control-inputs" fxLayout="column">
-          <!-- <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <h4 fxFlex="30">Light Bulb Type</h4>
-            <p-dropdown #lbTypeFilter [options]="lightBulbTypeOptions" [(ngModel)]="selectedLightBulbType" (onChange)="filterExact('lightBulbType', selectedLightBulbType)" fxFlex="70"></p-dropdown>
-          </div>
-          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <h4 fxFlex="30">Fiber Wireless</h4>
-            <p-checkbox #wirelessFilter label="Wi-Fi" binary="true" [(ngModel)]="wireless" (onChange)="filterBoolean('wireless', wireless)" fxFlex="70"></p-checkbox>
-          </div> -->
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Pole ID</h4>
             <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="filterExact('poleID', poleIdFilter)" fxFlex="50"/>
@@ -24,10 +16,6 @@
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Pole Owner</h4>
             <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFlex="50"/>
-          </div>
-          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <h4 fxFlex="30">Lumens</h4>
-            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="lumensFilter" (change)="filterExact('lumens', lumensFilter)" fxFlex="50"/>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">

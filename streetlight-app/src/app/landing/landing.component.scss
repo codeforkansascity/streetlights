@@ -2,13 +2,7 @@
     /* padding: 32px; */
 }
 
-p-dataview p-header input {
-    margin-right: 30vw;
-}
 
-p-dataViewLayoutOptions i.fa.fa-th-large.ui-button-icon-left {
-    color: var(--color-primary-0);
-}   
 
 .list-item {
     padding: 16px;
@@ -62,4 +56,17 @@ i {
 
 .detail-view-label {
     margin-right: 30px;
+}
+
+// DataView (PrimeNg)
+p-dataview p-header input {
+    margin-right: 30vw;
+}
+
+p-dataview {
+    ::ng-deep{
+        p-dataViewLayoutOptions .ui-selectbutton a i {
+            color: var(--color-primary-0);
+        }   
+    }
 }

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
 import * as data from '../app/streetlights.json';
-import 'rxjs/add/operator/map';
+
 
 
 @Injectable()
@@ -22,8 +21,8 @@ export class StreetlightService {
    * Request streetlight data from API
    */
   getStreetlights(): Observable<Streetlight[]> {
-    return this.http.get<StreetlightData>(this.mapsUrl)
-      .map(streetlightData => streetlightData.streetlights)
+    return this.http.get<StreetlightData>(this.mapsUrl).pipe(
+      map(streetlightData => streetlightData.streetlights))
       .pipe(
         catchError(this.handleError('getStreetlights', []))
       );

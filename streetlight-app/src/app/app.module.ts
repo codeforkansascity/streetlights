@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     BrowserModule,
     HttpClientModule,
-    MultiSelectModule,\
+    MultiSelectModule,
     SliderModule,
     FormsModule,
     TableModule,

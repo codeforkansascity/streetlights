@@ -5,7 +5,7 @@ import { Streetlight } from '../models/streetlight';
 @Component({
   selector: 'app-landing-view',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
 
