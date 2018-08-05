@@ -11,11 +11,11 @@
         <div class="map-control-inputs" fxLayout="column">
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Pole ID</h4>
-            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="filterExact('poleID', poleIdFilter)" fxFlex="50"/>
+            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="filterContains('poleID', poleIdFilter)" fxFlex="50"/>
           </div>
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
             <h4 fxFlex="30">Pole Owner</h4>
-            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterExact('poleOwner', poleOwnerFilter)" fxFlex="50"/>
+            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterContains('poleOwner', poleOwnerFilter)" fxFlex="50"/>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">

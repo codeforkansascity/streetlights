@@ -3,15 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable ,  of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
-import * as data from '../app/streetlights.json';
+// import * as data from '../app/streetlights.json';
 
 
 
 @Injectable()
 export class StreetlightService {
 
-  private mapsUrl = 'http://streetlight.codeforkc.org:3121/streetlights';
-  // private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
+  // private mapsUrl = 'http://streetlight.codeforkc.org:3121/streetlights';
+  private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
 
   constructor( private http: HttpClient ) {
 
@@ -28,10 +28,10 @@ export class StreetlightService {
       );
   }
 
-  getStreetlightsJSON(): any[] {
-    const result = <any>data;
-    return result;
-  }
+  // getStreetlightsJSON(): any[] {
+  //   const result = <any>data;
+  //   return result;
+  // }
 
 /**
  * Handle Http operation that failed.

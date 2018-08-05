@@ -93,6 +93,18 @@ export class MapViewComponent implements OnInit {
 
   }
 
+  filterContains(property: string, rule: any) {
+    if (rule === undefined || rule === null || (typeof rule === 'string' && rule.trim() === '')) {
+      return true;
+    }
+
+    if (this.filters[property] === undefined || this.filters[property] === null) {
+      return false;
+    }
+
+    return this.filters[property].toString().toLowerCase().indexOf(rule.toLowerCase()) !== -1;
+  }
+
   /// filter  numbers greater than rule
   filterGreaterThan(property: string, rule: number) {
     console.log(property, rule);
