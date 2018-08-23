@@ -6,6 +6,18 @@ import { Promise } from 'q';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
 import { Streetlight } from '../models/streetlight';
+import { FilterPipe } from '../pipes/filter.pipe';
+
+interface FilterEntry {
+  prop: string;
+  val: any;
+}
+
+interface Filter {
+  [key: string]: any;
+}
+
+
 
 
 @Component({
@@ -14,6 +26,9 @@ import { Streetlight } from '../models/streetlight';
   styleUrls: ['./map-view.component.scss']
 })
 export class MapViewComponent implements OnInit {
+
+  wattageOptions = [];
+
 
   title = 'Streetlights';
   lat = 39.106579;
@@ -28,43 +43,53 @@ export class MapViewComponent implements OnInit {
   poleOwnerFilter: string;
   poleIdFilter: string;
   lightAttributeFilter = [];
-  wattage: number;
-  attachedTech: boolean;
+  wattageFilter: number;
+  attachedTechFilter: boolean;
   latitudeMaxFilter: number;
   latitudeMinFilter: number;
   longitudeMaxFilter: number;
   longitudeMinFilter: number;
   selectedLightBulbType: string;
+  searchText: string;
 
   filters = {};
 
   constructor(private logger: LogService, private service: StreetlightService) {
     this.streetlightMarkers = [];
     this.filteredStreetlightMarkers = [];
+
+    // Set up dropdown listings
+    this.wattageOptions = [
+      { label: 'Wattage', value: null },
+      { label: '100', value: 100 },
+      { label: '150', value: 150 },
+      { label: '175', value: 175 },
+      { label: '250', value: 250 },
+      { label: '400', value: 400 },
+    ];
   }
 
   ngOnInit() {
     this.getStreetlights();
-    this.applyFilters();
-    console.dir(this.streetlightMarkers);
-    console.dir(this.filteredStreetlightMarkers);
+    this.clearFilters();
   }
 
+  /* Methods */
+  
+  // Populate the streetlight map marker data
   getStreetlights() {
 
     return Promise( (resolve, reject) => {
       this.service.getStreetlights().subscribe( streetlights => {
-        console.dir(streetlights);
         streetlights.map( streetlight => {
           const m = new Marker();
+          m.setPoleId(streetlight.poleId);
           m.setLng(streetlight.longitude);
           m.setLat(streetlight.latitude);
           m.setLabel(streetlight.poleId);
           m.setWireless(streetlight.fiberWifiEnabled);
           m.setPoleOwner(streetlight.poleOwner);
-          m.setPoleType(streetlight.poleType);
           m.setAttachedTech(streetlight.attachedTech);
-          m.setLumens(streetlight.lumens);
           m.setWattage(streetlight.wattage);
           m.setLightBulbType(streetlight.lightbulbType);
           this.streetlightMarkers.push(m);
@@ -74,66 +99,52 @@ export class MapViewComponent implements OnInit {
     });
   }
 
-  private applyFilters() {
-    console.dir(this.filters);
-    this.filteredStreetlightMarkers = _.filter(this.streetlightMarkers, _.conforms(this.filters));
-    console.dir(this.filteredStreetlightMarkers);
-  }
+  // Predicate function for filter
+  filter(): any[] {
+    let filteredMarkers = [];
 
-  /// filter property by equality to rule
-  filterExact(property: string, rule: any) {
-    console.log(property, rule);
-    if (rule === '' || !rule) {
-      this.removeFilter(property);
-      this.applyFilters();
+    if (this.poleIdFilter !== null ) {
+      filteredMarkers = this.streetlightMarkers.filter((m) => m.poleId.indexOf(this.poleIdFilter) > -1);
     } else {
-      this.filters[property] = val => val == rule;
-      this.applyFilters();
+      filteredMarkers = this.streetlightMarkers;
     }
 
+    let subSetMarkers = [];
+    // Applies any filters that have been set if any
+    if (Object.keys(this.filters).length > 0) {
+      console.dir(this.filters);
+      subSetMarkers = _.filter(filteredMarkers, this.filters);
+      filteredMarkers = subSetMarkers;
+    }
+    return filteredMarkers;
   }
 
-  filterContains(property: string, rule: any) {
-    if (rule === undefined || rule === null || (typeof rule === 'string' && rule.trim() === '')) {
-      return true;
+  // Apply the current filters to visible streetlights
+  applyFilters(prop: string, value: any): void {
+    this.updateFilters(prop, value);
+    this.filteredStreetlightMarkers = this.filter();
+  }
+
+  // Add or remove property/value keys from filter
+  updateFilters(prop: string, value: any) {
+    if (prop) {
+      this.filters[prop] = value;
     }
 
-    if (this.filters[property] === undefined || this.filters[property] === null) {
-      return false;
-    }
-
-    return this.filters[property].toString().toLowerCase().indexOf(rule.toLowerCase()) !== -1;
-  }
-
-  /// filter  numbers greater than rule
-  filterGreaterThan(property: string, rule: number) {
-    console.log(property, rule);
-    this.filters[property] = val => val > rule;
-    this.applyFilters();
-  }
-
-  /// filter properties that resolve to true
-  filterBoolean(property: string, rule: boolean) {
-    console.log(property, rule);
-    if (!rule) {
-      this.removeFilter(property);
-    } else {
-      this.filters[property] = val => val;
-      this.applyFilters();
+    if (value === null) {
+      delete this.filters[prop];
     }
   }
 
-  /// removes filter
-  removeFilter(property: string) {
-    delete this.filters[property];
-    this[property] = null;
-    this.applyFilters();
-  }
+  // Clear filter
+  clearFilters(): void {
+    this.filteredStreetlightMarkers = this.streetlightMarkers;
+    this.poleIdFilter = null;
+    this.poleOwnerFilter = null;
+    this.attachedTechFilter = null;
+    this.wattageFilter = null;
 
-  clearFilters() {
     this.filters = {};
-    this.applyFilters();
   }
-
 
 }

@@ -10,12 +10,16 @@
         <h3 class="map-controls-header">Streetlight Attributes</h3>
         <div class="map-control-inputs" fxLayout="column">
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <h4 fxFlex="30">Pole ID</h4>
-            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="filterContains('poleID', poleIdFilter)" fxFlex="50"/>
+            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="applyFilters()" fxFlex="50"/>
           </div>
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <h4 fxFlex="30">Pole Owner</h4>
-            <input type="text" #pOwnFilter pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="filterContains('poleOwner', poleOwnerFilter)" fxFlex="50"/>
+            <input type="text" pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="applyFilters('poleOwner', poleOwnerFilter )" fxFlex="50"/>
+          </div>
+          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+            <p-triStateCheckbox [(ngModel)]="attachedTechFilter" label="Attached Tech" (onChange)="applyFilters('attachedTech', attachedTechFilter)"></p-triStateCheckbox>
+          </div>
+          <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+            <p-dropdown  [(ngModel)]="wattageFilter" [options]="wattageOptions" (onChange)="applyFilters('wattage', wattageFilter)"></p-dropdown>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">

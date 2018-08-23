@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable ,  of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
-// import * as data from '../app/streetlights.json';
-
+import * as data from './data.json';
 
 
 @Injectable()
@@ -12,6 +11,7 @@ export class StreetlightService {
 
   // private mapsUrl = 'http://streetlight.codeforkc.org:3121/streetlights';
   private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
+  // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';
 
   constructor( private http: HttpClient ) {
 
@@ -20,18 +20,15 @@ export class StreetlightService {
   /**
    * Request streetlight data from API
    */
-  getStreetlights(): Observable<Streetlight[]> {
-    return this.http.get<StreetlightData>(this.mapsUrl).pipe(
-      map(streetlightData => streetlightData.streetlights))
-      .pipe(
-        catchError(this.handleError('getStreetlights', []))
-      );
+  getStreetlights(): Observable<any[]> {
+    return this.http.get<any>(this.mapsUrl).pipe(
+      // map(streetlightData => streetlightData.streetlights))
+      map(data => data));
+      // .pipe(
+      //   catchError(this.handleError('getStreetlights', []))
+      // );
   }
 
-  // getStreetlightsJSON(): any[] {
-  //   const result = <any>data;
-  //   return result;
-  // }
 
 /**
  * Handle Http operation that failed.

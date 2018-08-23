@@ -1,5 +1,6 @@
 export class Marker {
 
+    poleId: string;
     attachedTech: string;
     draggable: boolean;
     fiberWifiEnabled: boolean;
@@ -16,6 +17,10 @@ export class Marker {
 
     constructor() {
         this.draggable = false;
+    }
+
+    setPoleId(id: string) {
+        this.poleId = id;
     }
 
     setLat(lat: number) {
