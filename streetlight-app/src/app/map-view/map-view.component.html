@@ -1,12 +1,8 @@
 <!-- All components should include an <aside> and <main> element -->
 <div id="map-view-main" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-  <aside fxFlex="40">
+  <aside fxFlex="30%">
     <div id="sidebar-top" >
       <div id="map-controls">
-        <!-- <h3 class="map-controls-header">Location</h3>
-        <div class="map-search">
-            <input type="text" #mapSearchFilter pInputText placeholder="Search" fxFlex="50"/>
-        </div> -->
         <h3 class="map-controls-header">Streetlight Attributes</h3>
         <div class="map-control-inputs" fxLayout="column">
           <div class="map-view-filter-wrapper" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
@@ -28,7 +24,7 @@
       </div>
     </div>
   </aside>
-  <main fxFlex="60">
+  <main fxFlex="auto">
   <!-- Map Component -->
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
       <agm-marker
