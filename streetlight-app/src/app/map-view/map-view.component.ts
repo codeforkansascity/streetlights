@@ -28,7 +28,7 @@ interface Filter {
 export class MapViewComponent implements OnInit {
 
   wattageOptions = [];
-
+  poleOwnerOptions = [];
 
   title = 'Streetlights';
   lat = 39.106579;
@@ -44,7 +44,7 @@ export class MapViewComponent implements OnInit {
   poleIdFilter: string;
   lightAttributeFilter = [];
   wattageFilter: number;
-  attachedTechFilter: boolean;
+  attachedTechFilter: any;
   latitudeMaxFilter: number;
   latitudeMinFilter: number;
   longitudeMaxFilter: number;
@@ -66,6 +66,14 @@ export class MapViewComponent implements OnInit {
       { label: '175', value: 175 },
       { label: '250', value: 250 },
       { label: '400', value: 400 },
+    ];
+
+    this.poleOwnerOptions = [
+      { label: 'Pole Owner', value: null },
+      { label: 'Lees Summit', value: 'Lees Summit'},
+      { label: 'MODL', value: 'MODL'},
+      { label: 'KCPL', value: 'KCPL'},
+      { label: 'VeVoo', value: 'VeVoo'}
     ];
   }
 
@@ -120,8 +128,10 @@ export class MapViewComponent implements OnInit {
   }
 
   // Apply the current filters to visible streetlights
-  applyFilters(prop: string, value: any): void {
+  applyFilters(prop?: string, value?: any): void {
+
     this.updateFilters(prop, value);
+
     this.filteredStreetlightMarkers = this.filter();
   }
 

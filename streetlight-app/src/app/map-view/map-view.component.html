@@ -9,13 +9,14 @@
             <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="applyFilters()"/>
           </div>
           <div class="map-view-filter-wrapper">
-            <input type="text" pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="applyFilters('poleOwner', poleOwnerFilter )"/>
+            <!-- <input type="text" pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="applyFilters('poleOwner', poleOwnerFilter )"/> -->
+            <p-dropdown [(ngModel)]="poleOwnerFilter" [options]="poleOwnerOptions" (onChange)="applyFilters('poleOwner', poleOwnerFilter)"></p-dropdown>
           </div>
           <div class="map-view-filter-wrapper">
             <p-triStateCheckbox [(ngModel)]="attachedTechFilter" label="Attached Tech" (onChange)="applyFilters('attachedTech', attachedTechFilter)"></p-triStateCheckbox>
           </div>
           <div class="map-view-filter-wrapper">
-            <p-dropdown  [(ngModel)]="wattageFilter" [options]="wattageOptions" (onChange)="applyFilters('wattage', wattageFilter)"></p-dropdown>
+            <p-dropdown [(ngModel)]="wattageFilter" [options]="wattageOptions" (onChange)="applyFilters('wattage', wattageFilter)"></p-dropdown>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">
