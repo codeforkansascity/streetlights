@@ -51,11 +51,11 @@ We are looking for:
 - UX and designers as we start to build a front end for different user groups **visualization**
 - Reporters/analysts to work on how to draw meaning from the data and add additional datasets **discovery**
 
-The Streetlights project meets every Monday for Hack Nights at Think Big Partners from 6-8 pm.
+The Streetlights project meets every Monday for Hack Nights at Plexpod Crossroads from 6-8 pm.
 
 Team uses Waffle.io for project management
 Project communication on the #streetlights Slack channel
-If you are interested, reach out to Katherine Hambrick at khambrick@kcdigitaldrive.org or join our slack.
+If you are interested, reach out to Katherine Hambrick at adeacon@kcdigitaldrive.org or join our slack.
 
 **Developer Notes**
 
