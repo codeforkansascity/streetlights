@@ -1,0 +1,3 @@
+openpyxl
+## install from github as an egg. For somereason pip isn't installing the right version
+-e git://github.com/cgwhitehead/petl.git#egg=petl
