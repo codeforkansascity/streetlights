@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { Marker } from '../models/marker';
-import { Promise } from 'q';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
 import { Streetlight } from '../models/streetlight';
@@ -87,9 +86,9 @@ export class MapViewComponent implements OnInit {
   // Populate the streetlight map marker data
   getStreetlights() {
 
-    return Promise( (resolve, reject) => {
-      this.service.getStreetlights().subscribe( streetlights => {
-        streetlights.map( streetlight => {
+    return new Promise((resolve, reject) => {
+      this.service.getStreetlights().subscribe(streetlights => {
+        streetlights.map(streetlight => {
           const m = new Marker();
           m.setPoleId(streetlight.poleId);
           m.setLng(streetlight.longitude);

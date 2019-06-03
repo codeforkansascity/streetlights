@@ -22,7 +22,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
-
 // Custom
 import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
