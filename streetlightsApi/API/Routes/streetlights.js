@@ -8,7 +8,7 @@ var Streetlight = require('../models/Streetlight');
 //Routes
 router.get('/',(req, res,next)=>{
     Streetlight.find()
-    .select('_id poleId dataSource latitude longitude LightAttributes')
+    .select('_id poleID dataSource latitude longitude LightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
     .exec()
     .then(docs=>{
         var response = {
@@ -17,13 +17,19 @@ router.get('/',(req, res,next)=>{
                 return{
                     _id:doc._id,
                     poleId:doc.poleId,
-                    dataset:doc.dataSource,
-                    lat:doc.latitude,
-                    long:doc.longitude,
+                    dataSource:doc.dataSource,
+                    latitude:doc.latitude,
+                    longitude:doc.longitude,
                     lightAttributes:doc.lightAttributes,
+                    wattage: doc.wattage,
+                    lumens: doc.lumens,
+                    attachedTech:doc.attachedTech,
+                    fiberWiFiEnabled: doc.fiberWiFiEnabled,
+                    poletype: doc.poletype,
+                    poleOwner: doc.poleOwner,
                     request:{
                         type:"GET",
-                        url:"http://localhost:3121/streetlights/"+doc._id
+                        url:req.protocol+'://'+req.get('host')+req.originalUrl+doc._id
                     }
                 };
             })  
@@ -42,10 +48,18 @@ router.get('/',(req, res,next)=>{
 router.post('/',(req,res,next)=>{
     var streetlight = new Streetlight({
         _id: new mongoose.Types.ObjectId(),
-        dataSource:req.body.dataset,
-        latitude:req.body.lat,
-        longitude:req.body.long,
-        lightAttributes:req.body.attributes
+        poleId: req.body.poleId,
+        dataSource:req.body.dataSource,
+        latitude:req.body.latitude,
+        longitude:req.body.longitude,
+        lightAttributes:req.body.lightAttributes,
+        attachedTech: req.body.attachedTech,
+        fiberWiFiEnabled: req.body.fiberWiFiEnabled,
+        poletype: req.body.poletype,
+        poleOwner: req.body.poleOwner,
+        lightBulbType: req.body.lightBulbType,
+        wattage: req.body.wattage,
+        lumens: req.body.lumens
         
     });
     streetlight.save().then(result=>{
@@ -53,13 +67,19 @@ router.post('/',(req,res,next)=>{
         res.status(201).json({
         createdStreetlight: {
             _id:result._id,
-            dataset:result.dataset,
-            lat: result.lat,
-            long: result.long,
-            attributes: result.attributes,
+            dataSource:result.dataSource,
+            latitude: result.latitude,
+            long: result.longitude,
+            lightAttributes: result.lightAttributes,
+            wattage: result.wattage,
+            lumens: result.lumens,
+            attachedTech: result.attachedTech,
+            fiberWiFiEnabled: result.fiberWiFiEnabled,
+            poletype: result.poletype,
+            poleOwner: result.poleOwner,
             request:{
                 type:"GET",
-                url:"http://localhost:3121/streetlights/"+result._id
+                url:req.protocol+'://'+req.get('host')+req.originalUrl+result._id
 
             }
         }
@@ -75,7 +95,7 @@ router.post('/',(req,res,next)=>{
 router.get('/:streetlightId',(req, res, next)=>{
     var id = req.params.streetlightId;
     Streetlight.findById(id)
-    .select('_id dataset lat long attributes')
+    .select('_id dataSource latitude longitude attachedTech lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poleType poleOwner')
     .exec()
     .then(doc=>{
         console.log(doc);
@@ -85,7 +105,7 @@ router.get('/:streetlightId',(req, res, next)=>{
                 request:{
                     type:"GET",
                     description:"GET_ALL_PRODUCTS",
-                    url:'http://localhost:3000/streetlights'
+                    url:req.protocol+'://'+req.get('host')+req.baseUrl+'/'
                 }
             })
 

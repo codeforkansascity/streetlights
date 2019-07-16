@@ -16,9 +16,9 @@ var Streetlight = new mongoose.Schema({
     lightbulbType:String,
     wattage:String,
     lumens:String,
-    lightAttributes:String,
+    lightAttributes:[String],
     fiberWiFiEnabled:Boolean,
-    attachedTech:[AttachedTech],
+    attachedTech:Boolean,
     poleType:String,
     poleOwner:String})
 
