@@ -3,11 +3,14 @@ var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+require('dotenv').config();
 
 
 var streetlightRoutes = require('./api/routes/streetlights');
 //MongoDB
-mongoose.connect('mongodb://awsServer:4mTAPxl06xO1jw1P@streetlights0-shard-00-00-xxxxk.mongodb.net:27017,streetlights0-shard-00-01-xxxxk.mongodb.net:27017,streetlights0-shard-00-02-xxxxk.mongodb.net:27017/test?ssl=true&replicaSet=Streetlights0-shard-0&authSource=admin&retryWrites=true&w=majority');
+var db = mongoose.connect(`mongodb+srv://${process.env.mongoUser}:${process.env.mongoPW}@cluster0-uvgfm.mongodb.net/streetlightsData?retryWrites=true&w=majority`).catch((error)=>{
+    console.log(error);
+});
 
 //Middleware
 app.use(morgan('dev'));

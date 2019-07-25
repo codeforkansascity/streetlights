@@ -20,7 +20,7 @@ var Streetlight = new mongoose.Schema({
     fiberWiFiEnabled:Boolean,
     attachedTech:Boolean,
     poleType:String,
-    poleOwner:String})
+    poleOwner:String},{collection:'kansasCityData'})
 
     //Return Streetlights
-    module.exports = restful.model('Streetlight', Streetlight, "streetlights");
+    module.exports = restful.model('kansasCityData', Streetlight);
