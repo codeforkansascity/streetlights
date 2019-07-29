@@ -7,7 +7,8 @@ var Streetlight = require('../models/Streetlight');
 
 //Routes
 router.get('/',(req, res,next)=>{
-    Streetlight.find({"dataSource":"Kansas City"})
+    var ds = req.params.dataSourceVar;
+    Streetlight.find()
     .select('_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
     .exec()
     .then(docs=>{
@@ -29,7 +30,7 @@ router.get('/',(req, res,next)=>{
                     poleOwner: doc.poleOwner,
                     request:{
                         type:"GET",
-                        url:req.protocol+'://'+req.get('host')+req.originalUrl+doc._id
+                        url:req.protocol+'://'+req.get('host')+req.originalUrl+"/"+doc._id
                     }
                 };
             })  
