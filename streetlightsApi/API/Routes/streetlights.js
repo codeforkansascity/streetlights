@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 //Models
-var Streetlight = require('../models/Streetlight');
+var Streetlight = require('../Models/Streetlight');
 
 //Routes
 router.get('/',(req, res,next)=>{

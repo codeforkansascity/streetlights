@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 require('dotenv').config();
 
 
-var streetlightRoutes = require('./api/routes/streetlights');
+var streetlightRoutes = require('./api/Routes/streetlights');
 //MongoDB
 var db = mongoose.connect(`mongodb+srv://${process.env.mongoUser}:${process.env.mongoPW}@cluster0-uvgfm.mongodb.net/streetlightsData?retryWrites=true&w=majority`).catch((error)=>{
     console.log(error);
