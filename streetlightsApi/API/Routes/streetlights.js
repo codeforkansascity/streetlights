@@ -7,7 +7,7 @@ var Streetlight = require('../Models/Streetlight');
 
 //Routes
 router.get('/',(req, res,next)=>{
-    Streetlight.find({"dataSource":"Kansas City"})
+    Streetlight.find({})
     .select('_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
     .exec()
     .then(docs=>{
@@ -16,7 +16,7 @@ router.get('/',(req, res,next)=>{
             streetlights: docs.map(doc=>{
                 return{
                     _id:doc._id,
-                    poleId:doc.poleId,
+                    poleID:doc.poleID,
                     dataSource:doc.dataSource,
                     latitude:doc.latitude,
                     longitude:doc.longitude,
@@ -48,7 +48,7 @@ router.get('/',(req, res,next)=>{
 router.post('/',(req,res,next)=>{
     var streetlight = new Streetlight({
         _id: new mongoose.Types.ObjectId(),
-        poleId: req.body.poleId,
+        poleID: req.body.poleId,
         dataSource:req.body.dataSource,
         latitude:req.body.latitude,
         longitude:req.body.longitude,
@@ -67,6 +67,7 @@ router.post('/',(req,res,next)=>{
         res.status(201).json({
         createdStreetlight: {
             _id:result._id,
+            poleID:result.poleID,
             dataSource:result.dataSource,
             latitude: result.latitude,
             long: result.longitude,

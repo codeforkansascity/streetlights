@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { Streetlight } from '../models/streetlight';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-landing-view',
@@ -49,7 +50,16 @@ export class LandingComponent implements OnInit {
     });
 
   }
-
+// getStreetlights() : Observable<Streetlight[]>{
+//   const streetlightResults = this.service.getStreetlights();
+//     streetlightResults.subscribe((value:{}) => {
+//       console.log(value);
+//       this.streetlights = value;
+//       this.currentStreetlight = this.streetlights[0];
+//     }, (error) => {
+//       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
+//     });
+// }
 
   onDataViewItemClick(poleId: string) {
     console.dir(poleId);
