@@ -52,7 +52,7 @@ export class SpreadsheetViewComponent implements OnInit {
     // Collect Streetlight data through API call
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
-      this.streetlights = value;
+      this.streetlights = value.streetlights;
     }, (error) => {
       console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
@@ -60,7 +60,7 @@ export class SpreadsheetViewComponent implements OnInit {
     // Set up table
     this.cols = [
       { field: 'poleID', header: 'Pole ID', filtermatchmode: 'contains' },
-      { field: 'latitude', header: 'Lat', filtermatchmode: 'equals' },
+      { field: 'Latitude', header: 'Lat', filtermatchmode: 'equals' },
       { field: 'longitude', header: 'Long', filtermatchmode: 'equals' },
       { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals'},
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },

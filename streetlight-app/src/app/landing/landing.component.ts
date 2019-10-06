@@ -21,9 +21,9 @@ export class LandingComponent implements OnInit {
   // Data source
   streetlights = [];
   currentStreetlight: Streetlight = {
-    poleId: null,
+    poleID: null,
     longitude: null,
-    latitude: null,
+    Latitude: null,
     lightbulbType: null,
     wattage: null,
     lumens: null,
@@ -42,8 +42,8 @@ export class LandingComponent implements OnInit {
     // Collect Streetlight data through API call
     const streetlightResults = this.service.getStreetlights();
     streetlightResults.subscribe((value) => {
-      console.dir(value);
-      this.streetlights = value;
+      //console.log(value['streetlights']);
+      this.streetlights = value.streetlights;
       this.currentStreetlight = this.streetlights[0];
     }, (error) => {
       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
@@ -62,7 +62,7 @@ export class LandingComponent implements OnInit {
 // }
 
   onDataViewItemClick(poleId: string) {
-    console.dir(poleId);
+    //console.dir(poleId);
     this.currentStreetlight = this.streetlights.find(value =>
       value.poleID === poleId);
   }

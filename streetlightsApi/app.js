@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -14,6 +15,7 @@ var db = mongoose.connect(`mongodb://${process.env.mongoUser}:${process.env.mong
 
 //Middleware
 app.use(morgan('dev'));
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use((res,req, next)=>{

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { StreetlightService } from '../../services/streetlight.service';
+import {map} from 'rxjs/operators/';
 import { Marker } from '../models/marker';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
@@ -78,6 +79,8 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
     this.getStreetlights();
+    console.log(this.streetlightMarkers)
+    console.log(this.filteredStreetlightMarkers)
     this.clearFilters();
   }
 
@@ -85,15 +88,13 @@ export class MapViewComponent implements OnInit {
   
   // Populate the streetlight map marker data
   getStreetlights() {
-
-    return new Promise((resolve, reject) => {
       this.service.getStreetlights().subscribe(streetlights => {
-        streetlights.map(streetlight => {
+        streetlights.streetlights.map(streetlight => {
           const m = new Marker();
-          m.setPoleId(streetlight.poleId);
+          m.setPoleId(streetlight.poleID);
           m.setLng(streetlight.longitude);
-          m.setLat(streetlight.latitude);
-          m.setLabel(streetlight.poleId);
+          m.setLat(streetlight.Latitude);
+          m.setLabel(streetlight.poleID);
           m.setWireless(streetlight.fiberWifiEnabled);
           m.setPoleOwner(streetlight.poleOwner);
           m.setAttachedTech(streetlight.attachedTech);
@@ -103,15 +104,14 @@ export class MapViewComponent implements OnInit {
           this.filteredStreetlightMarkers.push(m);
         });
       });
-    });
-  }
+    };
 
   // Predicate function for filter
-  filter(): any[] {
+  filter(): Marker[] {
     let filteredMarkers = [];
 
     if (this.poleIdFilter !== null ) {
-      filteredMarkers = this.streetlightMarkers.filter((m) => m.poleId.indexOf(this.poleIdFilter) > -1);
+      filteredMarkers = this.streetlightMarkers.filter((m) => m.poleID.indexOf(this.poleIdFilter) > -1);
     } else {
       filteredMarkers = this.streetlightMarkers;
     }

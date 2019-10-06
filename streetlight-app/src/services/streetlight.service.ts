@@ -11,13 +11,15 @@ const httpOptions = {
     'Content-Type':'application/json'
   })
 };
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 export class StreetlightService {
   
 
-   //private mapsUrl = 'http://localhost:5000/streetlights';
-  private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
+   private mapsUrl = 'http://localhost:5000/streetlights';
+  //private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
   // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';
 
   constructor( private http: HttpClient ) {
@@ -66,10 +68,8 @@ export class StreetlightService {
 /**
    * Request streetlight data from API
    */
-  getStreetlights(): Observable<any[]> {
-    return this.http.get<any>(this.mapsUrl).pipe(
-      // map(streetlightData => streetlightData.streetlights))
-      map(data => data));
+  getStreetlights(): Observable<StreetlightData> {
+    return this.http.get<StreetlightData>(this.mapsUrl)
       // .pipe(
       //   catchError(this.handleError('getStreetlights', []))
       // );

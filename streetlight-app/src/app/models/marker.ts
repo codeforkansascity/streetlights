@@ -1,6 +1,6 @@
 export class Marker {
 
-    poleId: string;
+    poleID: string;
     attachedTech: string;
     draggable: boolean;
     fiberWifiEnabled: boolean;
@@ -20,7 +20,7 @@ export class Marker {
     }
 
     setPoleId(id: string) {
-        this.poleId = id;
+        this.poleID = id;
     }
 
     setLat(lat: number) {
