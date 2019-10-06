@@ -23,7 +23,7 @@ export class LandingComponent implements OnInit {
   currentStreetlight: Streetlight = {
     poleID: null,
     longitude: null,
-    Latitude: null,
+    latitude: null,
     lightbulbType: null,
     wattage: null,
     lumens: null,

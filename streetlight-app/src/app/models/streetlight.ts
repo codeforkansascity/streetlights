@@ -1,7 +1,7 @@
 export class Streetlight {
     poleID: string;
     longitude: number;
-    Latitude: number;
+    latitude: number;
     lightbulbType: string;
     wattage: number;
     lumens: number;

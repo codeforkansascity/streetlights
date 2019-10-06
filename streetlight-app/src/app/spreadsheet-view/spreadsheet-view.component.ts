@@ -60,7 +60,7 @@ export class SpreadsheetViewComponent implements OnInit {
     // Set up table
     this.cols = [
       { field: 'poleID', header: 'Pole ID', filtermatchmode: 'contains' },
-      { field: 'Latitude', header: 'Lat', filtermatchmode: 'equals' },
+      { field: 'latitude', header: 'Lat', filtermatchmode: 'equals' },
       { field: 'longitude', header: 'Long', filtermatchmode: 'equals' },
       { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals'},
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },

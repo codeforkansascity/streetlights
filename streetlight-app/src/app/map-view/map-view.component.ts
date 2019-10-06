@@ -93,7 +93,7 @@ export class MapViewComponent implements OnInit {
           const m = new Marker();
           m.setPoleId(streetlight.poleID);
           m.setLng(streetlight.longitude);
-          m.setLat(streetlight.Latitude);
+          m.setLat(streetlight.latitude);
           m.setLabel(streetlight.poleID);
           m.setWireless(streetlight.fiberWifiEnabled);
           m.setPoleOwner(streetlight.poleOwner);

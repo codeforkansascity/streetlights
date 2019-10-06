@@ -8,7 +8,7 @@ var Streetlight = require('../Models/Streetlight');
 //Routes
 router.get('/',(req, res,next)=>{
     Streetlight.find({}).limit(100)
-    .select('_id poleID dataSource Latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
+    .select('_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
     .exec()
     .then(docs=>{
         var response = {
@@ -18,7 +18,7 @@ router.get('/',(req, res,next)=>{
                     _id:doc._id,
                     poleID:doc.poleID,
                     dataSource:doc.dataSource,
-                    Latitude:doc.Latitude,
+                    latitude:doc.latitude,
                     longitude:doc.longitude,
                     lightAttributes:doc.lightAttributes,
                     wattage: doc.wattage,
