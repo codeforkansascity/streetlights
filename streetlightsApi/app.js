@@ -29,7 +29,7 @@ app.use((res,req, next)=>{
 });
 
 //Routes
-app.use('/streetlights',streetlightRoutes);
+app.use('/api',streetlightRoutes);
 
 app.use((req, res, next)=>{
     var error = new Error('Not Found');

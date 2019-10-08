@@ -88,7 +88,7 @@ export class MapViewComponent implements OnInit {
   
   // Populate the streetlight map marker data
   getStreetlights() {
-      this.service.getStreetlights().subscribe(streetlights => {
+      this.service.getStreetlights('').subscribe(streetlights => {
         streetlights.streetlights.map(streetlight => {
           const m = new Marker();
           m.setPoleId(streetlight.poleID);

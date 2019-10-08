@@ -18,9 +18,10 @@ const httpOptions = {
 export class StreetlightService {
   
 
-   private mapsUrl = 'http://localhost:5000/streetlights';
+   private dataUrl = 'http://localhost:5000/api/streetlights';
   //private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
   // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';
+
 
   constructor( private http: HttpClient ) {
 
@@ -68,8 +69,10 @@ export class StreetlightService {
 /**
    * Request streetlight data from API
    */
-  getStreetlights(): Observable<StreetlightData> {
-    return this.http.get<StreetlightData>(this.mapsUrl)
+  getStreetlights(pageQuery: string): Observable<StreetlightData> {
+    pageQuery = pageQuery.trim()
+    
+    return this.http.get<StreetlightData>(`${this.dataUrl}?${pageQuery}`)
       // .pipe(
       //   catchError(this.handleError('getStreetlights', []))
       // );

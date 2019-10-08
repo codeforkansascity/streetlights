@@ -50,7 +50,7 @@ export class SpreadsheetViewComponent implements OnInit {
     ];
 
     // Collect Streetlight data through API call
-    const streetlightResults = this.service.getStreetlights();
+    const streetlightResults = this.service.getStreetlights('');
     streetlightResults.subscribe((value) => {
       this.streetlights = value.streetlights;
     }, (error) => {

@@ -6,9 +6,22 @@ var mongoose = require('mongoose');
 var Streetlight = require('../Models/Streetlight');
 
 //Routes
-router.get('/',(req, res,next)=>{
-    Streetlight.find({}).limit(100)
-    .select('_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner')
+router.get('/streetlights',(req, res,next)=>{
+    var pageNo = parseInt(req.query.pageNo)
+    var size = parseInt(req.query.size)
+    const query = {}
+    if (pageNo<0||pageNo===0){
+        response = {"error":true, "message":"Invalid page number, should start with 1"};
+        return res.json(response)
+    }
+    query.skip = size * (pageNo - 1)
+    query.limit = size
+
+    selectStatement= '_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner';
+    Streetlight.find()
+    .limit(query.limit)
+    .skip(query.skip)
+    .select(selectStatement)
     .exec()
     .then(docs=>{
         var response = {

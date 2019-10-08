@@ -40,7 +40,7 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
 
     // Collect Streetlight data through API call
-    const streetlightResults = this.service.getStreetlights();
+    const streetlightResults = this.service.getStreetlights('');
     streetlightResults.subscribe((value) => {
       //console.log(value['streetlights']);
       this.streetlights = value.streetlights;
