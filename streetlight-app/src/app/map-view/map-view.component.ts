@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { StreetlightService } from '../../services/streetlight.service';
-import {map} from 'rxjs/operators/';
+import {map} from 'rxjs/operators';
 import { Marker } from '../models/marker';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
@@ -76,8 +76,13 @@ export class MapViewComponent implements OnInit {
       { label: 'VeVoo', value: 'VeVoo'}
     ];
   }
+  pageNo: number;
+  size: number;
+
 
   ngOnInit() {
+    this.pageNo = 3
+    this.size  = 500
     this.getStreetlights();
     console.log(this.streetlightMarkers)
     console.log(this.filteredStreetlightMarkers)
@@ -88,8 +93,8 @@ export class MapViewComponent implements OnInit {
   
   // Populate the streetlight map marker data
   getStreetlights() {
-      this.service.getStreetlights('').subscribe(streetlights => {
-        streetlights.streetlights.map(streetlight => {
+      this.service.getStreetlights(this.pageNo, this.size).subscribe(streetlights => {
+        streetlights.map(streetlight => {
           const m = new Marker();
           m.setPoleId(streetlight.poleID);
           m.setLng(streetlight.longitude);

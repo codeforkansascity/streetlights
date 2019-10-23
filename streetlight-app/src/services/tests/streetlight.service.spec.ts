@@ -14,7 +14,7 @@ describe('StreetlightService', () => {
   }));
 
   it('should retrieve the list of streetlights', inject([StreetlightService], (service: StreetlightService) => {
-    const streetlights = service.getStreetlights();
+    const streetlights = service.getStreetlights('');
     // TODO
   }));
 });

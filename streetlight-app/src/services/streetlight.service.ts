@@ -69,13 +69,17 @@ export class StreetlightService {
 /**
    * Request streetlight data from API
    */
-  getStreetlights(pageQuery: string): Observable<StreetlightData> {
-    pageQuery = pageQuery.trim()
-    
-    return this.http.get<StreetlightData>(`${this.dataUrl}?${pageQuery}`)
+  getStreetlights(pageNum: number, size: number): Observable<Streetlight[]> {
+    var pageQuery = `pageNo=${pageNum}`
+    var sizeQuery = `size=${size}`
+    return this.http.get<Streetlight[]>(`${this.dataUrl}?${pageQuery}&${sizeQuery}`)
       // .pipe(
       //   catchError(this.handleError('getStreetlights', []))
       // );
+  }
+
+  getCount():Observable<number>{
+    return this.http.get<number>(`${this.dataUrl}/count`)
   }
 
 

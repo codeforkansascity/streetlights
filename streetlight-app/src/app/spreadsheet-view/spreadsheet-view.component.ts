@@ -27,6 +27,8 @@ export class SpreadsheetViewComponent implements OnInit {
   currentWattage: number;
   // Table data source
   streetlights = [];
+  pageNo: number;
+  size: number;
 
 
 
@@ -49,10 +51,12 @@ export class SpreadsheetViewComponent implements OnInit {
       { label: "Lee's Summit", value: 'Lee Summit'}
     ];
 
+
     // Collect Streetlight data through API call
-    const streetlightResults = this.service.getStreetlights('');
+  
+    const streetlightResults = this.service.getStreetlights(this.pageNo = 1, this.size = 500);
     streetlightResults.subscribe((value) => {
-      this.streetlights = value.streetlights;
+      this.streetlights = value;
     }, (error) => {
       console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });

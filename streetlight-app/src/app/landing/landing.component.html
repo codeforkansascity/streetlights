@@ -1,7 +1,12 @@
 <div class="ui-g landing-main">
 
   <div id="list-section" class="ui-lg-7 ui-lg-offset-1 ui-g-12">
-    <p-dataView #dataView [value]="streetlights" [paginator]="true" [rows]="10" filterBy="poleID,wattage,lumens">
+    <p-dataView [value]="streetlights" [paginator]="true" 
+                [rows]="100" filterBy="poleID,wattage,lumens" 
+                [lazy]="true"
+                (onLazyLoad)="loadData($event)"
+                 [totalRecords]="totalRecords"
+                >
         <p-header fxLayoutAlign="center center">
             <input type="search" pInputText placeholder="Search" (keyup)="dataView.filter($event.target.value)" fxFlex="25">
             <p-dataViewLayoutOptions></p-dataViewLayoutOptions>

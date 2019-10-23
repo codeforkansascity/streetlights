@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { Streetlight } from '../models/streetlight';
 import { Observable } from 'rxjs';
@@ -34,37 +34,50 @@ export class LandingComponent implements OnInit {
     lightAttributes: null,
     poleType: null
   };
+  state: object;
+  pageNo: number;
+  size: number;
+  rows: number;
+  totalRecords: number;
+  loading:boolean
 
-  constructor( private service: StreetlightService ) { }
+
+
+  constructor(private service: StreetlightService,
+              private _cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-
-    // Collect Streetlight data through API call
-    const streetlightResults = this.service.getStreetlights('');
+    this.loading = false
+    this.service.getCount().subscribe((value) => {
+      this.totalRecords = value
+    })
+    //Collect Streetlight data through API call
+    var streetlightResults = this.service.getStreetlights( 0, 100);
     streetlightResults.subscribe((value) => {
-      //console.log(value['streetlights']);
-      this.streetlights = value.streetlights;
+      this.streetlights = value['streetlights'];
       this.currentStreetlight = this.streetlights[0];
     }, (error) => {
       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
 
   }
-// getStreetlights() : Observable<Streetlight[]>{
-//   const streetlightResults = this.service.getStreetlights();
-//     streetlightResults.subscribe((value:{}) => {
-//       console.log(value);
-//       this.streetlights = value;
-//       this.currentStreetlight = this.streetlights[0];
-//     }, (error) => {
-//       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
-//     });
-// }
 
   onDataViewItemClick(poleId: string) {
-    //console.dir(poleId);
+    console.dir(poleId);
     this.currentStreetlight = this.streetlights.find(value =>
       value.poleID === poleId);
   }
+  loadData(event) {
 
+    console.log(event)
+    this.pageNo = event.first;
+    this.rows = event.rows;
+    this.loading = true;
+    this.service.getStreetlights(this.pageNo, this.rows).subscribe(data => {
+      this.streetlights = data['streetlights'];
+      this.loading = false;
+      this._cdr.detectChanges();
+      this.currentStreetlight=this.streetlights[0];
+    })
+  }
 }

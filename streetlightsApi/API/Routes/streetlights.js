@@ -7,25 +7,29 @@ var Streetlight = require('../Models/Streetlight');
 
 //Routes
 router.get('/streetlights',(req, res,next)=>{
+    var filter = {}
+    if (!req.query.filter==='undefined')
+        filter = `{${req.query.filter}}`;
     var pageNo = parseInt(req.query.pageNo)
     var size = parseInt(req.query.size)
     const query = {}
-    if (pageNo<0||pageNo===0){
+    if (pageNo<0){
         response = {"error":true, "message":"Invalid page number, should start with 1"};
         return res.json(response)
     }
-    query.skip = size * (pageNo - 1)
+    query.filter = filter
+    query.skip = pageNo
     query.limit = size
 
     selectStatement= '_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner';
-    Streetlight.find()
+    Streetlight.find(query.filter)
     .limit(query.limit)
     .skip(query.skip)
     .select(selectStatement)
     .exec()
     .then(docs=>{
         var response = {
-            count:docs.length,
+            //count:docs.length,
             streetlights: docs.map(doc=>{
                 return{
                     _id:doc._id,
@@ -42,7 +46,7 @@ router.get('/streetlights',(req, res,next)=>{
                     poleOwner: doc.poleOwner,
                     request:{
                         type:"GET",
-                        url:req.protocol+'://'+req.get('host')+req.originalUrl+"/"+doc._id
+                        url:req.protocol+'://'+req.get('host')+req.baseUrl+"/"+doc._id
                     }
                 };
             })  
@@ -56,7 +60,12 @@ router.get('/streetlights',(req, res,next)=>{
         })
     });
 });
-
+router.get('/streetlights/count',(req,res,next)=>{
+    Streetlight.countDocuments({},((err, count)=>{
+        var response = count
+        res.status(200).json(response)
+    }))    
+})
 
 router.post('/',(req,res,next)=>{
     var streetlight = new Streetlight({
