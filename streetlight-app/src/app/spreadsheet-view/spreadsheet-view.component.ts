@@ -29,12 +29,17 @@ export class SpreadsheetViewComponent implements OnInit {
   streetlights = [];
   pageNo: number;
   size: number;
+  rows: number;
+  totalRecords: number;
 
 
 
   constructor( private service: StreetlightService ) { }
 
   ngOnInit() {
+    this.service.getCount().subscribe((value) => {
+      this.totalRecords = value
+    })
 
     // Set up dropdown listings
     this.wattageOptions = [
@@ -54,9 +59,9 @@ export class SpreadsheetViewComponent implements OnInit {
 
     // Collect Streetlight data through API call
   
-    const streetlightResults = this.service.getStreetlights(this.pageNo = 1, this.size = 500);
+    const streetlightResults = this.service.getStreetlights(0,100);
     streetlightResults.subscribe((value) => {
-      this.streetlights = value;
+      this.streetlights = value['streetlights'];
     }, (error) => {
       console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
@@ -86,6 +91,14 @@ export class SpreadsheetViewComponent implements OnInit {
       dt.filter(null, 'attachedTech', null);
     }
 
+  }
+  loadStreetlightsLazy(event) {
+
+    this.pageNo = event.first;
+    this.rows = event.rows;
+    this.service.getStreetlights(this.pageNo, this.rows).subscribe(data => {
+      this.streetlights = data['streetlights'];
+    })
   }
 
 }

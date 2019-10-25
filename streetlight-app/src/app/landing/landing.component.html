@@ -5,8 +5,7 @@
                 [rows]="100" filterBy="poleID,wattage,lumens" 
                 [lazy]="true"
                 (onLazyLoad)="loadData($event)"
-                 [totalRecords]="totalRecords"
-                >
+                 [totalRecords]="totalRecords">
         <p-header fxLayoutAlign="center center">
             <input type="search" pInputText placeholder="Search" (keyup)="dataView.filter($event.target.value)" fxFlex="25">
             <p-dataViewLayoutOptions></p-dataViewLayoutOptions>

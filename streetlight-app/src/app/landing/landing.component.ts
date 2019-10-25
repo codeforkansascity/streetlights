@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { Streetlight } from '../models/streetlight';
 import { Observable } from 'rxjs';
+import {DataViewModule} from 'primeng/dataview'
 
 @Component({
   selector: 'app-landing-view',
