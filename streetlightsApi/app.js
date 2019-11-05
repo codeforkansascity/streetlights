@@ -9,7 +9,7 @@ require('dotenv').config();
 
 var streetlightRoutes = require('./API/Routes/streetlights');
 //MongoDB
-var db = mongoose.connect(`mongodb://${process.env.mongoUser}:${process.env.mongoPW}@52.206.33.109:27017/streetlights`,{useNewUrlParser:true}).catch((error)=>{
+var db = mongoose.connect(`mongodb://${process.env.mongoUser}:${process.env.mongoPW}@52.206.33.109:27017/streetlights`,{useNewUrlParser:true, useUnifiedTopology: true }).catch((error)=>{
     console.log(error);
 });
 

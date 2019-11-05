@@ -60,6 +60,59 @@ router.get('/streetlights',(req, res,next)=>{
         })
     });
 });
+
+router.get('/streetlights/markers',(req,res,next)=>{
+    var longLow =parseFloat(req.query.west);
+    var longHigh = parseFloat(req.query.east);
+    var latLow = parseFloat(req.query.south);
+    var latHigh= parseFloat(req.query.north);
+    //var filterObject = {'longitude':{"$gte":longLow,"$lte":longHigh}, 'latitude':{"$gte":latLow,"$lte":latHigh}}
+    //const query = Streetlight.find(filterObject);
+    //query.filter = filterObject;
+    selectStatement= '_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner';
+    Streetlight.find({
+        longitude:{
+            $gte:longLow,
+            $lte:longHigh},
+        latitude:
+            {$gte:latLow,
+            $lte:latHigh}})
+    .select(selectStatement)
+    .exec()
+    .then(docs=>{
+        var response = {
+            streetlights: docs.map(doc=>{
+                return{
+                    _id:doc._id,
+                    poleID:doc.poleID,
+                    dataSource:doc.dataSource,
+                    latitude:doc.latitude,
+                    longitude:doc.longitude,
+                    lightAttributes:doc.lightAttributes,
+                    wattage: doc.wattage,
+                    lumens: doc.lumens,
+                    attachedTech:doc.attachedTech,
+                    fiberWiFiEnabled: doc.fiberWiFiEnabled,
+                    poletype: doc.poletype,
+                    poleOwner: doc.poleOwner,
+                    request:{
+                        type:"GET",
+                        url:req.protocol+'://'+req.get('host')+req.baseUrl+"/"+doc._id
+                    }
+                };
+            })  
+        };
+        res.status(200).json(response)
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    });
+
+});
+
 router.get('/streetlights/count',(req,res,next)=>{
     Streetlight.countDocuments({},((err, count)=>{
         var response = count

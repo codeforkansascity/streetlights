@@ -22,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
+import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
 // Custom
 import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'
     }),
+    AgmJsMarkerClustererModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

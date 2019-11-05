@@ -1,42 +1,42 @@
 <!-- All components should include an <aside> and <main> element -->
 <div id="map-view-main" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
   <aside fxFlex="30%">
-    <div id="sidebar-top" >
+    <div id="sidebar-top">
       <div id="map-controls">
         <h3 class="map-controls-header">Streetlight Attributes</h3>
         <div class="map-control-inputs" fxLayout="column">
           <div class="map-view-filter-wrapper">
-            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="applyFilters()"/>
+            <input type="text" pInputText placeholder="Pole ID" [(ngModel)]="poleIdFilter" (change)="applyFilters()" />
           </div>
           <div class="map-view-filter-wrapper">
             <!-- <input type="text" pInputText placeholder="Pole Owner" [(ngModel)]="poleOwnerFilter" (change)="applyFilters('poleOwner', poleOwnerFilter )"/> -->
-            <p-dropdown [(ngModel)]="poleOwnerFilter" [options]="poleOwnerOptions" (onChange)="applyFilters('poleOwner', poleOwnerFilter)"></p-dropdown>
+            <p-dropdown [(ngModel)]="poleOwnerFilter" [options]="poleOwnerOptions"
+              (onChange)="applyFilters('poleOwner', poleOwnerFilter)"></p-dropdown>
           </div>
           <div class="map-view-filter-wrapper">
-            <p-triStateCheckbox [(ngModel)]="attachedTechFilter" label="Attached Tech" (onChange)="applyFilters('attachedTech', attachedTechFilter)"></p-triStateCheckbox>
+            <p-triStateCheckbox [(ngModel)]="attachedTechFilter" label="Attached Tech"
+              (onChange)="applyFilters('attachedTech', attachedTechFilter)"></p-triStateCheckbox>
           </div>
           <div class="map-view-filter-wrapper">
-            <p-dropdown [(ngModel)]="wattageFilter" [options]="wattageOptions" (onChange)="applyFilters('wattage', wattageFilter)"></p-dropdown>
+            <p-dropdown [(ngModel)]="wattageFilter" [options]="wattageOptions"
+              (onChange)="applyFilters('wattage', wattageFilter)"></p-dropdown>
           </div>
         </div>
         <div class="map-control-inputs" fxLayout="column">
-            <p-button id="clear-filters-btn" label="Clear Filters" (click)="clearFilters()" ></p-button>
+          <p-button id="clear-filters-btn" label="Clear Filters" (click)="clearFilters()"></p-button>
         </div>
       </div>
     </div>
   </aside>
   <main fxFlex="auto">
-  <!-- Map Component -->
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable">
-      <agm-marker
-        *ngFor="let m of filteredStreetlightMarkers"
-        [latitude]="m.lat"
-        [longitude]="m.lon"
-        [label]="m.label"
-        [markerDraggable]="m.draggable"
-        [visible]="m.visible">
-
-      </agm-marker>
+    <!-- Map Component -->
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable"
+      >
+      <agm-marker-cluster [imagePath]="'/assets/images/m'" [minimumClusterSize]= 5>
+        <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
+          [label]="m.label" [markerDraggable]="m.draggable" [visible]="m.visible">
+        </agm-marker>
+      </agm-marker-cluster>
     </agm-map>
   </main>
 </div>

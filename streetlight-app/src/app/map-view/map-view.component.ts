@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AgmCoreModule, AgmMap, LatLngBounds, LatLngBoundsLiteral, GoogleMapsAPIWrapper, MouseEvent, MarkerManager } from '@agm/core';
+import {AgmMarkerCluster} from '@agm/js-marker-clusterer';
 import { StreetlightService } from '../../services/streetlight.service';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Marker } from '../models/marker';
 import { LogService } from '../shared/log.service';
 import * as _ from 'lodash';
 import { Streetlight } from '../models/streetlight';
 import { FilterPipe } from '../pipes/filter.pipe';
+import { Observable } from 'rxjs';
 
 interface FilterEntry {
   prop: string;
@@ -18,21 +20,23 @@ interface Filter {
 }
 
 
-
+declare var google: any;
 
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.component.html',
-  styleUrls: ['./map-view.component.scss']
+  styleUrls: ['./map-view.component.scss'],
+  providers: [GoogleMapsAPIWrapper]
 })
+
 export class MapViewComponent implements OnInit {
 
   wattageOptions = [];
   poleOwnerOptions = [];
 
   title = 'Streetlights';
-  lat = 39.106579;
-  lng = -94.622835;
+  lat: number;
+  lng: number;
   zoom = 11;
   minZoom = 3;
   maxZoom = 20;
@@ -51,10 +55,11 @@ export class MapViewComponent implements OnInit {
   longitudeMinFilter: number;
   selectedLightBulbType: string;
   searchText: string;
-
+  @ViewChild('AgmMap') agmMap: AgmMap;
   filters = {};
 
-  constructor(private logger: LogService, private service: StreetlightService) {
+  constructor(private logger: LogService, private service: StreetlightService, private _mapsWrapper: GoogleMapsAPIWrapper) {
+    this._mapsWrapper = _mapsWrapper;
     this.streetlightMarkers = [];
     this.filteredStreetlightMarkers = [];
 
@@ -70,10 +75,10 @@ export class MapViewComponent implements OnInit {
 
     this.poleOwnerOptions = [
       { label: 'Pole Owner', value: null },
-      { label: 'Lees Summit', value: 'Lees Summit'},
-      { label: 'MODL', value: 'MODL'},
-      { label: 'KCPL', value: 'KCPL'},
-      { label: 'VeVoo', value: 'VeVoo'}
+      { label: 'Lees Summit', value: 'Lees Summit' },
+      { label: 'MODL', value: 'MODL' },
+      { label: 'KCPL', value: 'KCPL' },
+      { label: 'VeVoo', value: 'VeVoo' }
     ];
   }
   pageNo: number;
@@ -81,41 +86,53 @@ export class MapViewComponent implements OnInit {
 
 
   ngOnInit() {
-    this.pageNo = 3
-    this.size  = 500
-    this.getStreetlights();
-    console.log(this.streetlightMarkers)
-    console.log(this.filteredStreetlightMarkers)
+    this.pageNo = 1;
+    this.size = 500;
+
+    this.setCurrentLocation();   
     this.clearFilters();
+    this.getStreetlights();
   }
 
   /* Methods */
-  
+
   // Populate the streetlight map marker data
   getStreetlights() {
-      this.service.getStreetlights(this.pageNo, this.size).subscribe(streetlights => {
-        streetlights.map(streetlight => {
-          const m = new Marker();
-          m.setPoleId(streetlight.poleID);
-          m.setLng(streetlight.longitude);
-          m.setLat(streetlight.latitude);
-          m.setLabel(streetlight.poleID);
-          m.setWireless(streetlight.fiberWifiEnabled);
-          m.setPoleOwner(streetlight.poleOwner);
-          m.setAttachedTech(streetlight.attachedTech);
-          m.setWattage(streetlight.wattage);
-          m.setLightBulbType(streetlight.lightbulbType);
-          this.streetlightMarkers.push(m);
-          this.filteredStreetlightMarkers.push(m);
-        });
+    this.service.getStreetlights(this.pageNo, this.size).subscribe(streetlights => {
+      streetlights['streetlights'].map(streetlight => {
+        const m = new Marker();
+        m.setPoleId(streetlight.poleID);
+        m.setLng(streetlight.longitude);
+        m.setLat(streetlight.latitude);
+        m.setLabel(streetlight.poleID);
+        m.setWireless(streetlight.fiberWifiEnabled);
+        m.setPoleOwner(streetlight.poleOwner);
+        m.setAttachedTech(streetlight.attachedTech);
+        m.setWattage(streetlight.wattage);
+        m.setLightBulbType(streetlight.lightbulbType);
+        this.streetlightMarkers.push(m);
+        this.filteredStreetlightMarkers.push(m);
       });
-    };
+    });
+  };
+
+  // ngAfterViewInit() {
+  //   this.agmMap.mapReady.subscribe(map => {
+  //     const bounds: LatLngBounds = new google.maps.LatLngBounds();
+  //     for (const mm of this.streetlightMarkers) {
+  //       bounds.extend(new google.maps.LatLng(mm.lat, mm.lon));
+  //     }
+  //     map.fitBounds(bounds);
+  //   });
+  //   console.log(this.agmMap);
+
+  // }
 
   // Predicate function for filter
   filter(): Marker[] {
     let filteredMarkers = [];
 
-    if (this.poleIdFilter !== null ) {
+    if (this.poleIdFilter !== null) {
       filteredMarkers = this.streetlightMarkers.filter((m) => m.poleID.indexOf(this.poleIdFilter) > -1);
     } else {
       filteredMarkers = this.streetlightMarkers;
@@ -159,6 +176,43 @@ export class MapViewComponent implements OnInit {
     this.wattageFilter = null;
 
     this.filters = {};
+  }
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        console.log(position);
+        this.zoom = 15;
+      })
+    }
+  }
+  loadMarkersInBounds(bounds: LatLngBounds) {
+    var nE = bounds.getNorthEast();
+    var sW = bounds.getSouthWest();
+    var west = sW.lng();
+    var east = nE.lng();
+    var south = sW.lat();
+    var north = nE.lat();
+    setTimeout(()=>{this.getGeoMarkers(west,east,south,north)},5000);
+  }
+  getGeoMarkers(west:number,east: number, south:number, north:number){
+    this.service.getMapStreetlights(west, east, south, north).subscribe(streetlights => {
+      streetlights['streetlights'].map(streetlight => {
+        const m = new Marker();
+        m.setPoleId(streetlight.poleID);
+        m.setLng(streetlight.longitude);
+        m.setLat(streetlight.latitude);
+        m.setLabel(streetlight.poleID);
+        m.setWireless(streetlight.fiberWifiEnabled);
+        m.setPoleOwner(streetlight.poleOwner);
+        m.setAttachedTech(streetlight.attachedTech);
+        m.setWattage(streetlight.wattage);
+        m.setLightBulbType(streetlight.lightbulbType);
+        this.streetlightMarkers.push(m);
+        this.filteredStreetlightMarkers.push(m);
+      });
+    });
   }
 
 }

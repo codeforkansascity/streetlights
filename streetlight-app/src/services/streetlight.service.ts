@@ -4,6 +4,7 @@ import { Observable ,  of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
 import * as data from './data.json';
+import { ReturnStatement } from '@angular/compiler';
 
 
 const httpOptions = {
@@ -80,6 +81,11 @@ export class StreetlightService {
 
   getCount():Observable<number>{
     return this.http.get<number>(`${this.dataUrl}/count`)
+  }
+
+  getMapStreetlights(lowLong: number, hiLong:number,lowLat:number, hiLat:number): Observable<Streetlight[]>{
+    var query = `west=${lowLong}&east=${hiLong}&south=${lowLat}&north=${hiLat}`
+   return this.http.get<Streetlight[]>(`${this.dataUrl}/markers?${query}`)
   }
 
 
