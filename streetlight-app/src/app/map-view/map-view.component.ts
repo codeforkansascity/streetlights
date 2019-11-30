@@ -183,7 +183,7 @@ export class MapViewComponent implements OnInit {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         console.log(position);
-        this.zoom = 15;
+        //this.zoom = 15;
       })
     }
   }
@@ -216,3 +216,4 @@ export class MapViewComponent implements OnInit {
   }
 
 }
+

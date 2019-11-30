@@ -31,12 +31,14 @@
   <main fxFlex="auto">
     <!-- Map Component -->
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable"
-      >
-      <agm-marker-cluster [imagePath]="'/assets/images/m'" [minimumClusterSize]= 5>
+      (boundsChange)="loadMarkersInBounds($event)">
+      <agm-marker-cluster [imagePath]="'../assets/images/m'">
         <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
           [label]="m.label" [markerDraggable]="m.draggable" [visible]="m.visible">
+
         </agm-marker>
       </agm-marker-cluster>
+
     </agm-map>
   </main>
 </div>

@@ -36,6 +36,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 const appRoutes: Routes = [
   { path: '',
     redirectTo: '',
+    component:LandingComponent,
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
