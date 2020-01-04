@@ -69,7 +69,7 @@ router.get('/streetlights/markers',(req,res,next)=>{
     //var filterObject = {'longitude':{"$gte":longLow,"$lte":longHigh}, 'latitude':{"$gte":latLow,"$lte":latHigh}}
     //const query = Streetlight.find(filterObject);
     //query.filter = filterObject;
-    selectStatement= '_id poleID dataSource latitude longitude lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poletype poleOwner';
+    selectStatement= '_id poleID latitude longitude';
     Streetlight.find({
         longitude:{
             $gte:longLow,
@@ -85,16 +85,8 @@ router.get('/streetlights/markers',(req,res,next)=>{
                 return{
                     _id:doc._id,
                     poleID:doc.poleID,
-                    dataSource:doc.dataSource,
                     latitude:doc.latitude,
                     longitude:doc.longitude,
-                    lightAttributes:doc.lightAttributes,
-                    wattage: doc.wattage,
-                    lumens: doc.lumens,
-                    attachedTech:doc.attachedTech,
-                    fiberWiFiEnabled: doc.fiberWiFiEnabled,
-                    poletype: doc.poletype,
-                    poleOwner: doc.poleOwner,
                     request:{
                         type:"GET",
                         url:req.protocol+'://'+req.get('host')+req.baseUrl+"/"+doc._id

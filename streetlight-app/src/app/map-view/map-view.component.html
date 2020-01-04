@@ -30,9 +30,9 @@
   </aside>
   <main fxFlex="auto">
     <!-- Map Component -->
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable"
-      (boundsChange)="loadMarkersInBounds($event)">
-      <agm-marker-cluster [imagePath]="'../assets/images/m'">
+    <agm-map [latitude]="lat" #AgmMap [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable" (boundsChange)="loadMarkersInBounds($event)"
+      >
+      <agm-marker-cluster [imagePath]="'../assets/images/m'" [minimumClusterSize]=5>
         <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
           [label]="m.label" [markerDraggable]="m.draggable" [visible]="m.visible">
 
