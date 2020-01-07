@@ -160,6 +160,7 @@ router.post('/',(req,res,next)=>{
     });
    
 });
+
 router.get('/:streetlightId',(req, res, next)=>{
     var id = req.params.streetlightId;
     Streetlight.findById(id)
@@ -191,12 +192,7 @@ router.get('/:streetlightId',(req, res, next)=>{
         });
     });   
 });
-// router.patch('/:streetlightId',(req, res, next)=>{
-//     var id = req.params.streetlightId;
-//     res.status(200).json({
-//             message:"Updated product "+ id
-//         });
-// });
+
 router.delete('/:streetlightId',(req, res, next)=>{
    var id = req.params.streetlightId
     Streetlight.remove({_id:id})
@@ -209,4 +205,54 @@ router.delete('/:streetlightId',(req, res, next)=>{
         res.status(500).json({error:err});
     });
 });
+
+router.get('/streetlights/wattageOptions',(req,res,next)=>{
+    Streetlight.distinct('wattage')
+    .exec()
+    .then(wattagesArr=>{
+        // sort wattage array (number / letter combination values)
+        var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+        wattagesArr.sort(collator.compare);
+        // create json object from wattage array
+        var wattagesJson = {};
+        wattagesJson.wattageOptions = [];
+        wattagesJson.wattageOptions.push({'label': 'All', 'value': null});
+        console.log(wattagesJson);
+        for (var i = 0; i < wattagesArr.length; i++) {
+            wattagesJson.wattageOptions.push({'label': wattagesArr[i].toString(), 'value': wattagesArr[i].toString() });
+        }
+        res.status(200).json(wattagesJson);
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    });
+});
+
+router.get('/streetlights/poleOwnerOptions',(req,res,next)=>{
+    Streetlight.distinct('poleOwner')
+    .exec()
+    .then(poleOwnerArr=>{
+        poleOwnerArr.sort();
+        // create json object from wattage array
+        var poleOwnersJson = {};
+        poleOwnersJson.poleOwnerOptions = [];
+        poleOwnersJson.poleOwnerOptions.push({'label': 'All', 'value': null});
+        console.log(poleOwnersJson);
+        for (var i = 0; i < poleOwnerArr.length; i++) {
+            poleOwnersJson.poleOwnerOptions.push({'label': poleOwnerArr[i].toString(), 'value': poleOwnerArr[i].toString() });
+        }
+        res.status(200).json(poleOwnersJson);
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    });
+});
+
 module.exports = router;
+
