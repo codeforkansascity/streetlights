@@ -5,13 +5,13 @@ import { StreetlightService } from '../../services/streetlight.service';
 import { map } from 'rxjs/operators';
 import { Marker } from '../models/marker';
 import { LogService } from '../shared/log.service';
-import * as _ from 'lodash';
 import { Streetlight } from '../models/streetlight';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { Observable } from 'rxjs';
 import { GoogleMap } from '@agm/core/services/google-maps-types';
 import { v } from '@angular/core/src/render3';
 import value from '*.json';
+import {_} from 'underscore';
 
 interface FilterEntry {
   prop: string;
@@ -139,7 +139,7 @@ export class MapViewComponent implements OnInit {
     let filteredMarkers = [];
 
     if (this.poleIdFilter !== null) {
-      filteredMarkers = this.streetlightMarkers.filter((m) => m.poleID.indexOf(this.poleIdFilter) > -1);
+      filteredMarkers = this.filteredStreetlightMarkers.filter((m) => m.poleID.indexOf(this.poleIdFilter) > -1);
     } else {
       filteredMarkers = this.streetlightMarkers;
     }
@@ -148,7 +148,7 @@ export class MapViewComponent implements OnInit {
     // Applies any filters that have been set if any
     if (Object.keys(this.filters).length > 0) {
       console.dir(this.filters);
-      subSetMarkers = _.filter(filteredMarkers, this.filters);
+      subSetMarkers = _.where(filteredMarkers, this.filters);
       filteredMarkers = subSetMarkers;
     }
     return filteredMarkers;
@@ -161,14 +161,10 @@ export class MapViewComponent implements OnInit {
 
     this.filteredStreetlightMarkers = this.filter();
   }
-  getMapDetails(){
-   var map = this.agmMap;
-  }
-
-  // Add or remove property/value keys from filter
+   // Add or remove property/value keys from filter
   updateFilters(prop: string, value: any) {
-    if (prop) {
-      this.filters[prop] = value;
+    if (value!=null) {
+      this.filters[prop] = `${value}`;
     }
 
     if (value === null) {
@@ -220,10 +216,14 @@ export class MapViewComponent implements OnInit {
         m.setLightBulbType(streetlight.lightbulbType);
         if (this.streetlightMarkers.indexOf(m)===-1){
           this.streetlightMarkers.push(m);
-          this.filteredStreetlightMarkers.push(m);  
         }
       });
     });
+    this.filteredStreetlightMarkers = this.streetlightMarkers
+    this.applyFilters();
+
+
+    
   }
 
 }

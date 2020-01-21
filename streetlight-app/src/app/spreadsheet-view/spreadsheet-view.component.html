@@ -1,5 +1,5 @@
 <div id="spreadsheet-main">
-    <p-table #dt [columns]="cols" [value]="streetlights" [paginator]="true" [rows]="20" [lazy]=true (onLazyLoad)="loadStreetlightsLazy($event)" [totalRecords]="totalRecords" >
+    <p-table #dt [columns]="cols" [value]="streetlights" [paginator]="true" [rows]="20" [lazy]=false (onLazyLoad)="loadStreetlightsLazy($event)" [totalRecords]="totalRecords" >
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.field">
