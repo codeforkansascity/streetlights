@@ -22,6 +22,7 @@ export class LandingComponent implements OnInit {
   // Data source
   streetlights = [];
   currentStreetlight: Streetlight = {
+    _id: null,
     poleID: null,
     longitude: null,
     latitude: null,

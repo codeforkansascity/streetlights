@@ -201,20 +201,8 @@ router.get('/streetlights/:streetlightId',(req, res, next)=>{
     });   
 });
 
-router.delete('/:streetlightId',(req, res, next)=>{
-   var id = req.params.streetlightId
-    Streetlight.remove({_id:id})
-    .exec()
-    .then(result=>{
-        res.status(200).json(result);
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({error:err});
-    });
-});
 
-router.get('/streetlights/wattageOptions',(req,res,next)=>{
+router.get('/wattageOptions',(req,res,next)=>{
     Streetlight.distinct('wattage')
     .exec()
     .then(wattagesArr=>{
@@ -239,7 +227,7 @@ router.get('/streetlights/wattageOptions',(req,res,next)=>{
     });
 });
 
-router.get('/streetlights/poleOwnerOptions',(req,res,next)=>{
+router.get('/poleOwnerOptions',(req,res,next)=>{
     Streetlight.distinct('poleOwner')
     .exec()
     .then(poleOwnerArr=>{
@@ -261,6 +249,20 @@ router.get('/streetlights/poleOwnerOptions',(req,res,next)=>{
         })
     });
 });
+
+router.delete('/:streetlightId',(req, res, next)=>{
+    var id = req.params.streetlightId
+     Streetlight.remove({_id:id})
+     .exec()
+     .then(result=>{
+         res.status(200).json(result);
+     })
+     .catch(err=>{
+         console.log(err);
+         res.status(500).json({error:err});
+     });
+ });
+ 
 
 module.exports = router;
 

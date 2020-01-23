@@ -64,20 +64,20 @@ export class MapViewComponent implements OnInit {
 
     // Set up dropdown listings
     this.wattageOptions = [
-      { label: 'Wattage', value: null },
-      { label: '100', value: 100 },
-      { label: '150', value: 150 },
-      { label: '175', value: 175 },
-      { label: '250', value: 250 },
-      { label: '400', value: 400 },
+      // { label: 'Wattage', value: null },
+      // { label: '100', value: 100 },
+      // { label: '150', value: 150 },
+      // { label: '175', value: 175 },
+      // { label: '250', value: 250 },
+      // { label: '400', value: 400 },
     ];
 
     this.poleOwnerOptions = [
-      { label: 'Pole Owner', value: null },
-      { label: 'Lees Summit', value: 'Lees Summit' },
-      { label: 'MODL', value: 'MODL' },
-      { label: 'KCPL', value: 'KCPL' },
-      { label: 'VeVoo', value: 'VeVoo' }
+      // { label: 'Pole Owner', value: null },
+      // { label: 'Lees Summit', value: 'Lees Summit' },
+      // { label: 'MODL', value: 'MODL' },
+      // { label: 'KCPL', value: 'KCPL' },
+      // { label: 'VeVoo', value: 'VeVoo' }
     ];
   }
   pageNo: number;
@@ -87,7 +87,8 @@ export class MapViewComponent implements OnInit {
   ngOnInit() {
     this.pageNo = 1;
     this.size = 500;
-
+    this.service.getWattageOptions().subscribe(data=>{this.wattageOptions = data['wattageOptions']});
+    this.service.getPoleOwner().subscribe(data=>{this.poleOwnerOptions = data['poleOwnerOptions']})
     this.clearFilters();
     //this.getStreetlights();
     this.setCurrentLocation();
@@ -102,6 +103,7 @@ export class MapViewComponent implements OnInit {
     this.service.getStreetlights(this.pageNo, this.size).subscribe(streetlights => {
       streetlights['streetlights'].map(streetlight => {
         const m = new Marker();
+        m.set_id(streetlight._id);
         m.setPoleId(streetlight.poleID);
         m.setLng(streetlight.longitude);
         m.setLat(streetlight.latitude);
@@ -116,6 +118,9 @@ export class MapViewComponent implements OnInit {
       });
     });
   };
+  getStreetlight(){
+
+  }
 
   ngAfterViewInit() {
     //   this.agmMap.mapReady.subscribe(map => {
@@ -198,10 +203,12 @@ export class MapViewComponent implements OnInit {
     var north = nE.lat();
     this.agmMap.idle.subscribe(()=> this.getGeoMarkers(west, east, south, north))
   }
+
   getGeoMarkers(west: number, east: number, south: number, north: number) {
     this.service.getMapStreetlights(west, east, south, north).subscribe(streetlights => {
       streetlights['streetlights'].map(streetlight => {
         const m = new Marker();
+        m.set_id(streetlight._id);
         m.setPoleId(streetlight.poleID);
         m.setLng(streetlight.longitude);
         m.setLat(streetlight.latitude);

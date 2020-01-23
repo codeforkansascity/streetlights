@@ -1,4 +1,5 @@
 export class Streetlight {
+    _id:string;  
     poleID: string;
     longitude: number;
     latitude: number;

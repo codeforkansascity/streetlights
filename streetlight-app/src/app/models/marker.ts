@@ -1,5 +1,6 @@
 export class Marker {
 
+    _id:string;
     poleID: string;
     attachedTech: string;
     draggable: boolean;
@@ -17,6 +18,9 @@ export class Marker {
 
     constructor() {
         this.draggable = false;
+    }
+    set_id(_id:string){
+        this._id = _id;
     }
 
     setPoleId(id: string) {

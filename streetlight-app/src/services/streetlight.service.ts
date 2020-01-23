@@ -19,8 +19,9 @@ const httpOptions = {
 export class StreetlightService {
   
 
-  //private dataUrl = 'http://localhost:5000/api/streetlights';
-  private dataUrl = 'http://ec2-52-206-33-109.compute-1.amazonaws.com:5000/api/streetlights'
+  //private dataUrl = 'http://localhost:5000/api';
+  private dataUrl = 'http://ec2-52-206-33-109.compute-1.amazonaws.com:5000/api';
+  private streetlightsUrl = this.dataUrl + '/streetlights';
   //private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
   // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';
 
@@ -74,19 +75,29 @@ export class StreetlightService {
   getStreetlights(pageNum: number, size: number): Observable<Streetlight[]> {
     var pageQuery = `pageNo=${pageNum}`
     var sizeQuery = `size=${size}`
-    return this.http.get<Streetlight[]>(`${this.dataUrl}?${pageQuery}&${sizeQuery}`)
+    return this.http.get<Streetlight[]>(`${this.streetlightsUrl}?${pageQuery}&${sizeQuery}`)
       // .pipe(
       //   catchError(this.handleError('getStreetlights', []))
       // );
   }
+  getStreetlight(id:number):Observable <Streetlight>{
+    return this.http.get<Streetlight>(`${this.streetlightsUrl}/${id}`)
+  }
 
   getCount():Observable<number>{
-    return this.http.get<number>(`${this.dataUrl}/count`)
+    return this.http.get<number>(`${this.streetlightsUrl}/count`)
   }
 
   getMapStreetlights(lowLong: number, hiLong:number,lowLat:number, hiLat:number): Observable<Streetlight[]>{
     var query = `west=${lowLong}&east=${hiLong}&south=${lowLat}&north=${hiLat}`
-   return this.http.get<Streetlight[]>(`${this.dataUrl}/markers?${query}`)
+   return this.http.get<Streetlight[]>(`${this.streetlightsUrl}/markers?${query}`)
+  }
+
+  getWattageOptions(){
+    return this.http.get(this.dataUrl + '/wattageOptions')
+  }
+  getPoleOwner(){
+    return this.http.get(this.dataUrl+'/poleOwnerOptions')
   }
 
 
