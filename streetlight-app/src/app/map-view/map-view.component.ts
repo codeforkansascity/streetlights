@@ -22,9 +22,6 @@ interface Filter {
   [key: string]: any;
 }
 
-
-declare var google: any;
-
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.component.html',
@@ -220,10 +217,7 @@ export class MapViewComponent implements OnInit {
       });
     });
     this.filteredStreetlightMarkers = this.streetlightMarkers
-    this.applyFilters();
-
-
-    
+    this.applyFilters();    
   }
 
 }

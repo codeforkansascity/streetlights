@@ -169,7 +169,7 @@ router.post('/',(req,res,next)=>{
    
 });
 
-router.get('/:streetlightId',(req, res, next)=>{
+router.get('/streetlights/:streetlightId',(req, res, next)=>{
     var id = req.params.streetlightId;
     Streetlight.findById(id)
     .select('_id dataSource latitude longitude attachedTech lightAttributes wattage lightbulbType lumens fiberWiFiEnabled poleType poleOwner')
