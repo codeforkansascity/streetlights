@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, ElementRef } from '@angular/core';
-import { AgmCoreModule, AgmMap, LatLngBoundsLiteral, GoogleMapsAPIWrapper, MouseEvent, MarkerManager, LatLngBounds} from '@agm/core';
+import { AgmCoreModule, AgmMap, LatLngBoundsLiteral, GoogleMapsAPIWrapper, MouseEvent, MarkerManager, LatLngBounds } from '@agm/core';
 import { AgmMarkerCluster } from '@agm/js-marker-clusterer';
 import { StreetlightService } from '../../services/streetlight.service';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { GoogleMap } from '@agm/core/services/google-maps-types';
 import { v } from '@angular/core/src/render3';
 import value from '*.json';
-import {_} from 'underscore';
+import { _ } from 'underscore';
 
 interface FilterEntry {
   prop: string;
@@ -55,6 +55,7 @@ export class MapViewComponent implements OnInit {
   longitudeMinFilter: number;
   selectedLightBulbType: string;
   searchText: string;
+  openedWindow: number = 0;
   @ViewChild('AgmMap') agmMap: AgmMap;
   filters = {};
 
@@ -87,8 +88,8 @@ export class MapViewComponent implements OnInit {
   ngOnInit() {
     this.pageNo = 1;
     this.size = 500;
-    this.service.getWattageOptions().subscribe(data=>{this.wattageOptions = data['wattageOptions']});
-    this.service.getPoleOwner().subscribe(data=>{this.poleOwnerOptions = data['poleOwnerOptions']})
+    this.service.getWattageOptions().subscribe(data => { this.wattageOptions = data['wattageOptions'] });
+    this.service.getPoleOwner().subscribe(data => { this.poleOwnerOptions = data['poleOwnerOptions'] })
     this.clearFilters();
     //this.getStreetlights();
     this.setCurrentLocation();
@@ -97,6 +98,15 @@ export class MapViewComponent implements OnInit {
   }
 
   /* Methods */
+
+  openWindow(id) {
+    
+    this.openedWindow = id; // alternative: push to array of numbers
+  }
+
+  isInfoWindowOpen(id) {
+    return this.openedWindow == id; // alternative: check if id is in array
+  }
 
   // Populate the streetlight map marker data
   getStreetlights() {
@@ -118,7 +128,7 @@ export class MapViewComponent implements OnInit {
       });
     });
   };
-  getStreetlight(){
+  getStreetlight() {
 
   }
 
@@ -131,7 +141,7 @@ export class MapViewComponent implements OnInit {
     //     map.fitBounds(bounds);
     //   });
     //   console.log(this.agmMap);
-   
+
     console.log(this.agmMap);
 
   }
@@ -163,9 +173,9 @@ export class MapViewComponent implements OnInit {
 
     this.filteredStreetlightMarkers = this.filter();
   }
-   // Add or remove property/value keys from filter
+  // Add or remove property/value keys from filter
   updateFilters(prop: string, value: any) {
-    if (value!=null) {
+    if (value != null) {
       this.filters[prop] = `${value}`;
     }
 
@@ -201,7 +211,7 @@ export class MapViewComponent implements OnInit {
     var east = nE.lng();
     var south = sW.lat();
     var north = nE.lat();
-    this.agmMap.idle.subscribe(()=> this.getGeoMarkers(west, east, south, north))
+    this.agmMap.idle.subscribe(() => this.getGeoMarkers(west, east, south, north))
   }
 
   getGeoMarkers(west: number, east: number, south: number, north: number) {
@@ -218,13 +228,13 @@ export class MapViewComponent implements OnInit {
         m.setAttachedTech(streetlight.attachedTech);
         m.setWattage(streetlight.wattage);
         m.setLightBulbType(streetlight.lightbulbType);
-        if (this.streetlightMarkers.indexOf(m)===-1){
+        if (this.streetlightMarkers.indexOf(m) === -1) {
           this.streetlightMarkers.push(m);
         }
       });
     });
     this.filteredStreetlightMarkers = this.streetlightMarkers
-    this.applyFilters();    
+    this.applyFilters();
   }
 
 }
