@@ -20,7 +20,7 @@ export class StreetlightService {
   
 
   //private dataUrl = 'http://localhost:5000/api';
-  private dataUrl = 'http://ec2-52-206-33-109.compute-1.amazonaws.com:5000/api';
+  private dataUrl = 'http://streetlights.codeforkc.org/api';
   private streetlightsUrl = this.dataUrl + '/streetlights';
   //private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
   // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';

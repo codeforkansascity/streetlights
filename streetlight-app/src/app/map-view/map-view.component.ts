@@ -37,7 +37,7 @@ export class MapViewComponent implements OnInit {
   title = 'Streetlights';
   lat: number;
   lng: number;
-  zoom = 15;
+  zoom = 20;
   minZoom = 3;
   maxZoom = 50;
   mapDraggable = true;
@@ -64,22 +64,9 @@ export class MapViewComponent implements OnInit {
     this.filteredStreetlightMarkers = [];
 
     // Set up dropdown listings
-    this.wattageOptions = [
-      // { label: 'Wattage', value: null },
-      // { label: '100', value: 100 },
-      // { label: '150', value: 150 },
-      // { label: '175', value: 175 },
-      // { label: '250', value: 250 },
-      // { label: '400', value: 400 },
-    ];
+    this.wattageOptions = [];
 
-    this.poleOwnerOptions = [
-      // { label: 'Pole Owner', value: null },
-      // { label: 'Lees Summit', value: 'Lees Summit' },
-      // { label: 'MODL', value: 'MODL' },
-      // { label: 'KCPL', value: 'KCPL' },
-      // { label: 'VeVoo', value: 'VeVoo' }
-    ];
+    this.poleOwnerOptions = [];
   }
   pageNo: number;
   size: number;
@@ -91,33 +78,30 @@ export class MapViewComponent implements OnInit {
     this.service.getWattageOptions().subscribe(data => { this.wattageOptions = data['wattageOptions'] });
     this.service.getPoleOwner().subscribe(data => { this.poleOwnerOptions = data['poleOwnerOptions'] })
     this.clearFilters();
-    //this.getStreetlights();
     this.setCurrentLocation();
-    //this.loadMarkersInBounds();
-
   }
 
   /* Methods */
 
-  openWindow(id) {
+  openWindow(poleID: number) {
     
-    this.openedWindow = id; // alternative: push to array of numbers
+    this.openedWindow = poleID; // alternative: push to array of numbers
   }
 
-  isInfoWindowOpen(id) {
-    return this.openedWindow == id; // alternative: check if id is in array
+  isInfoWindowOpen(poleID: number) {
+    return this.openedWindow == poleID; // alternative: check if id is in array
   }
 
   // Populate the streetlight map marker data
   getStreetlights() {
     this.service.getStreetlights(this.pageNo, this.size).subscribe(streetlights => {
-      streetlights['streetlights'].map(streetlight => {
+      streetlights['streetlights'].map((streetlight: { _id: string; poleID: string; longitude: number; latitude: number;
+         fiberWifiEnabled: boolean; poleOwner: string; attachedTech: any; wattage: number; lightbulbType: string; }) => {
         const m = new Marker();
         m.set_id(streetlight._id);
         m.setPoleId(streetlight.poleID);
         m.setLng(streetlight.longitude);
         m.setLat(streetlight.latitude);
-        m.setLabel(streetlight.poleID);
         m.setWireless(streetlight.fiberWifiEnabled);
         m.setPoleOwner(streetlight.poleOwner);
         m.setAttachedTech(streetlight.attachedTech);
@@ -128,9 +112,6 @@ export class MapViewComponent implements OnInit {
       });
     });
   };
-  getStreetlight() {
-
-  }
 
   ngAfterViewInit() {
     //   this.agmMap.mapReady.subscribe(map => {
@@ -149,7 +130,6 @@ export class MapViewComponent implements OnInit {
   // Predicate function for filter
   filter(): Marker[] {
     let filteredMarkers = [];
-
     if (this.poleIdFilter !== null) {
       filteredMarkers = this.filteredStreetlightMarkers.filter((m) => m.poleID.indexOf(this.poleIdFilter) > -1);
     } else {
@@ -168,9 +148,7 @@ export class MapViewComponent implements OnInit {
 
   // Apply the current filters to visible streetlights
   applyFilters(prop?: string, value?: any): void {
-
     this.updateFilters(prop, value);
-
     this.filteredStreetlightMarkers = this.filter();
   }
   // Add or remove property/value keys from filter
@@ -191,7 +169,6 @@ export class MapViewComponent implements OnInit {
     this.poleOwnerFilter = null;
     this.attachedTechFilter = null;
     this.wattageFilter = null;
-
     this.filters = {};
   }
   private setCurrentLocation() {
@@ -199,11 +176,10 @@ export class MapViewComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-        console.log(position);
-        //this.zoom = 15;
       })
     }
   }
+
   loadMarkersInBounds(bounds: LatLngBounds) {
     var nE = bounds.getNorthEast();
     var sW = bounds.getSouthWest();
@@ -211,15 +187,16 @@ export class MapViewComponent implements OnInit {
     var east = nE.lng();
     var south = sW.lat();
     var north = nE.lat();
+    this.streetlightMarkers = [];
     this.agmMap.idle.subscribe(() => this.getGeoMarkers(west, east, south, north))
   }
 
   getGeoMarkers(west: number, east: number, south: number, north: number) {
     this.service.getMapStreetlights(west, east, south, north).subscribe(streetlights => {
-      streetlights['streetlights'].map(streetlight => {
+      streetlights['streetlights'].map((streetlight: { _id: string; poleID: string; longitude: number; 
+        latitude: number; fiberWifiEnabled: boolean; poleOwner: string; attachedTech: any; wattage: number; lightbulbType: string; }) => {
         const m = new Marker();
         m.set_id(streetlight._id);
-        m.setPoleId(streetlight.poleID);
         m.setLng(streetlight.longitude);
         m.setLat(streetlight.latitude);
         m.setLabel(streetlight.poleID);

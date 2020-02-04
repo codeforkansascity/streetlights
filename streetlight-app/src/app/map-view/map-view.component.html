@@ -32,12 +32,11 @@
     <!-- Map Component -->
     <agm-map [latitude]="lat" #AgmMap [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable"
       (boundsChange)="loadMarkersInBounds($event)">
-      <agm-marker-cluster [imagePath]="'../assets/images/m'" minimumClusterSize = 5>
+      <agm-marker-cluster [imagePath]="'../assets/images/m'" minimumClusterSize = 10>
         <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
-          [markerDraggable]="m.draggable" [visible]="m.visible"
-          (markerClick)="openWindow(m.id)" >
-          <agm-info-window [isOpen]="isInfoWindowOpen(m.id)" [latitude]="m.lat" [longitude]="m.lon">
-            InfoWindow #{{m.id}}
+          (markerClick)="openWindow($event._id)" >
+          <agm-info-window [disableAutoPan]="true">
+            <strong>InfoWindow #{{m._id}}</strong>
           </agm-info-window>
         </agm-marker>
       </agm-marker-cluster>
