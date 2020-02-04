@@ -1,9 +1,17 @@
+// Font for the site header
+@import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
 
 header {
     /* background-color: #0f0314; */
     border-bottom: 1px solid var(--color-primary-4);
 }
-  
+
+#site-header {
+  // The "Streetlights" header at the top of the page
+  font-family: 'Poiret One', cursive;
+  font-size: 400%;
+  color: var(--color-primary-0);
+}
 
  #mode-shifter {
      /* text-align: center; */
@@ -17,4 +25,3 @@ header {
  #mode-shifter i:hover {
     color: var(--color-primary-4);
  }
-
