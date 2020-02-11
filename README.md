@@ -55,7 +55,7 @@ The Streetlights project meets every Monday for Hack Nights at Plexpod Crossroad
 
 Team uses Waffle.io for project management
 Project communication on the #streetlights Slack channel
-If you are interested, reach out to Katherine Hambrick at adeacon@kcdigitaldrive.org or join our slack.
+If you are interested, reach out to Aaron Deacon at adeacon@kcdigitaldrive.org or join our slack.
 
 **Developer Notes**
 
