@@ -172,12 +172,14 @@ export class MapViewComponent implements OnInit {
     this.filters = {};
   }
   private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-      })
-    }
+    // if ('geolocation' in navigator) {
+    //   navigator.geolocation.getCurrentPosition((position) => {
+    //     this.lat = position.coords.latitude;
+    //     this.lng = position.coords.longitude;
+    //   })
+    //}
+    this.lat = 39.099728
+    this.lng= -94.578568
   }
 
   loadMarkersInBounds(bounds: LatLngBounds) {
@@ -192,6 +194,7 @@ export class MapViewComponent implements OnInit {
   }
 
   getGeoMarkers(west: number, east: number, south: number, north: number) {
+    //this.clearFilters();
     this.service.getMapStreetlights(west, east, south, north).subscribe(streetlights => {
       streetlights['streetlights'].map((streetlight: { _id: string; poleID: string; longitude: number; 
         latitude: number; fiberWifiEnabled: boolean; poleOwner: string; attachedTech: any; wattage: number; lightbulbType: string; }) => {
