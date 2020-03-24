@@ -1,27 +1,65 @@
 <div id="spreadsheet-main">
-    <p-table #dt [columns]="cols" [value]="streetlights" [paginator]="true" [rows]="20" [lazy]=false (onLazyLoad)="loadStreetlightsLazy($event)" [totalRecords]="totalRecords" >
+    <p-table #dt [columns]="cols" [value]="streetlights" [paginator]="true" [rows]="20" [lazy]="false"
+        (onLazyLoad)="loadStreetlightsLazy($event)" [totalRecords]="totalRecords">
         <ng-template pTemplate="header" let-columns>
             <tr>
+                <th></th>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.field">
                     {{col.header}}
-                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                 </th>
             </tr>
             <tr>
+                <th></th>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                    <input *ngSwitchCase="'poleID'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                    <input *ngSwitchCase="'latitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                    <input *ngSwitchCase="'longitude'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                    <p-dropdown *ngSwitchCase="'wattage'" [options]="wattageOptions" (onChange)="dt.filter($event.value, col.field, col.filterMatchMode)"></p-dropdown>
-                    <p-triStateCheckbox *ngSwitchCase="'attachedTech'" binary="true" (onChange)="onAttachedTechChange($event, dt)"></p-triStateCheckbox>
-                    <p-dropdown *ngSwitchCase="'poleOwner'" [options]="poleOwnerOptions" (onChange)="dt.filter($event.value, col.field, col.filterMatchMode)"></p-dropdown>
-                    <input *ngSwitchCase="'lightAttributes'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    <input *ngSwitchCase="'poleID'" pInputText type="text" (input)="onPoleIDChange($event, dt)">
+                    <input *ngSwitchCase="'latitude'" pInputText type="text" (input)="onLatitudeChange($event, dt)">
+                    <input *ngSwitchCase="'longitude'" pInputText type="text" (input)="onLongitudeChange($event, dt)">
+                    <p-dropdown *ngSwitchCase="'wattage'" [options]="wattageOptions"
+                        (onChange)="onWattageChange($event, dt)"></p-dropdown>
+                    <p-triStateCheckbox *ngSwitchCase="'attachedTech'" binary="true"
+                        (onChange)="onAttachedTechChange($event, dt)"></p-triStateCheckbox>
+                    <p-dropdown *ngSwitchCase="'poleOwner'" [options]="poleOwnerOptions"
+                        (onChange)="onPoleOwnerChange($event, dt)"></p-dropdown>
+                    <input *ngSwitchCase="'lightAttributes'" pInputText type="text"
+                        (input)="onLightAttributesChange($event, dt)">
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-streetlight let-columns="columns">
 
             <tr [pSelectableRow]="streetlight">
+                <td>
+                    <i class="pi pi-search" (mouseenter)="showStreetlightDetails($event, streetlight, dt)"
+                        (mouseout)="hideOverlayPanel(dt)" style="font-size:24px"></i>
+                    <p-overlayPanel #dt [appendTo]="'body'">
+                        <div id="details-section" class="detail-view">
+                            <div class="detail-view-poleId">{{ currentStreetlight.poleID }}</div>
+                            <div class="detail-view-info"><span
+                                    class="detail-view-label">Latitude:</span>{{ currentStreetlight.latitude }}</div>
+                            <div class="detail-view-info"><span
+                                    class="detail-view-label">Longitude:</span>{{ currentStreetlight.longitude }}</div>
+                            <div class="detail-view-info"><span
+                                    class="detail-view-label">Wattage:</span>{{ currentStreetlight.wattage }} W</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Attached
+                                    Tech:</span>{{ currentStreetlight.attachedTech }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Pole
+                                    Owner:</span>{{ currentStreetlight.poleOwner }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Light
+                                    Attributes:</span>{{ currentStreetlight.lightAttributes }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Light Bulb
+                                    Type:</span>{{ currentStreetlight.lightbulbType }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Lumens:
+                                </span>{{ currentStreetlight.lumens }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Data Source:
+                                </span>{{ currentStreetlight.dataSource }}</div>
+                            <div class="detail-view-info"><span class="detail-view-label">Fiber Wifi Enabled:
+                                </span>{{ currentStreetlight.fiberWifiEnabled }}</div>
+                        </div>
+                    </p-overlayPanel>
+                </td>
                 <td *ngFor="let col of columns">
                     {{streetlight[col.field]}}
                 </td>
