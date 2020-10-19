@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { SelectItem } from '../models/select-item';
+import { Streetlight } from '../models/streetlight';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-spreadsheet-view',
@@ -11,18 +13,8 @@ export class SpreadsheetViewComponent implements OnInit {
 
   cols: any[];
   selectedColumns: any[];
-
-  lumenOptions = [
-    { label: '', value: null },
-    { label: '1000', value: '1000' },
-    { label: '1125', value: '1125' },
-    { label: '1300', value: '1300' },
-    { label: '1425', value: '1425' }
-  ];
-
   wattageOptions: SelectItem[];
   poleOwnerOptions: SelectItem[];
-
   wattageTimeout: any;
   currentWattage: number;
   // Table data source
@@ -31,74 +23,158 @@ export class SpreadsheetViewComponent implements OnInit {
   size: number;
   rows: number;
   totalRecords: number;
+  timeout: number = 1500;
+  currentStreetlight: Streetlight = {
+    _id: null,
+    poleID: null,
+    longitude: null,
+    latitude: null,
+    lightbulbType: null,
+    wattage: null,
+    lumens: null,
+    attachedTech: null,
+    poleOwner: null,
+    dataSource: null,
+    fiberWifiEnabled: null,
+    lightAttributes: null,
+    poleType: null
+  };
+  visible: boolean = false;
+  target: any;
+  display: boolean = false;
 
-
-
-  constructor( private service: StreetlightService ) { }
+  constructor(private service: StreetlightService) { }
 
   ngOnInit() {
     this.service.getCount().subscribe((value) => {
-      this.totalRecords = value
+      this.totalRecords = value;
+      this.collectAPIData();
     })
 
     // Set up dropdown listings
-    this.wattageOptions = [
-      { label: '', value: null },
-      { label: '100', value: '100' },
-      { label: '150', value: '150' },
-      { label: '175', value: '175' },
-      { label: '250', value: '250' },
-      { label: '400', value: '400' },
-    ];
-
-    this.poleOwnerOptions = [
-      { label: '', value: null },
-      { label: "Lee's Summit", value: 'Lee Summit'}
-    ];
-
-
-    // Collect Streetlight data through API call
-  
-    const streetlightResults = this.service.getStreetlights(0,100);
-    streetlightResults.subscribe((value) => {
-      this.streetlights = value['streetlights'];
+    const wattagesResults = this.service.getWattageOptions();
+    wattagesResults.subscribe((value) => {
+      this.wattageOptions = value['wattageOptions'];
     }, (error) => {
-      console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
+      console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve wattageOptions.');
+    });
+
+    const poleOwnerResults = this.service.getPoleOwner();
+    poleOwnerResults.subscribe((value) => {
+      this.poleOwnerOptions = value['poleOwnerOptions'];
+    }, (error) => {
+      console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve poleOwnerOptions.');
     });
 
     // Set up table
     this.cols = [
       { field: 'poleID', header: 'Pole ID', filtermatchmode: 'contains' },
-      { field: 'latitude', header: 'Lat', filtermatchmode: 'equals' },
-      { field: 'longitude', header: 'Long', filtermatchmode: 'equals' },
-      { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals'},
+      { field: 'latitude', header: 'Lat', filtermatchmode: 'contains' },
+      { field: 'longitude', header: 'Long', filtermatchmode: 'contains' },
+      { field: 'wattage', header: 'Wattage', filtermatchmode: 'equals' },
       { field: 'attachedTech', header: 'Attached Tech', filtermatchmode: 'equals' },
-      { field: 'poleOwner', header: 'Pole Owner', filtermatchmode: 'contains' },
+      { field: 'poleOwner', header: 'Pole Owner', filtermatchmode: 'equals' },
       { field: 'lightAttributes', header: 'Attributes', filtermatchmode: 'contains' },
     ];
     this.selectedColumns = this.cols;
   }
 
+  // Collect Streetlight data through API call
+  collectAPIData() {
+    const streetlightResults = this.service.getStreetlights(0, 500); //  TODO loading only 500 record for testing
+    // const streetlightResults = this.service.getStreetlights(0, this.totalRecords); 
+    streetlightResults.subscribe((value) => {
+      this.streetlights = value['streetlights'];
+      this.currentStreetlight = this.streetlights[0];
+    }, (error) => {
+      console.error('SpreadsheetViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
+    });
+  }
+
+  onPoleIDChange(event, dt) {
+    if (event.target.value !== null) {
+      setTimeout(() => {
+        dt.filter(event.target.value, 'poleID', 'contains');
+      }, this.timeout);
+    } else {
+      dt.filter(null, 'poleID', null);
+    }
+  }
+
+  onLatitudeChange(event, dt) {
+    if (event.target.value !== null) {
+      setTimeout(() => {
+        dt.filter(event.target.value, 'latitude', 'contains');
+      }, this.timeout);
+    } else {
+      dt.filter(null, 'latitude', null);
+    }
+  }
+
+  onLongitudeChange(event, dt) {
+    if (event.target.value !== null) {
+      setTimeout(() => {
+        dt.filter(event.target.value, 'longitude', 'contains');
+      }, this.timeout);
+    } else {
+      dt.filter(null, 'longitude', null);
+    }
+  }
+
   onWattageChange(event, dt) {
-    console.log(event);
+    if (event.value !== null) {
+      dt.filter(event.value, 'wattage', 'equals');
+    } else {
+      dt.filter(null, 'wattage', null);
+    }
   }
 
   onAttachedTechChange(event, dt) {
-    console.log(event.value);
     if (event.value !== null) {
       dt.filter(event.value, 'attachedTech', 'equals');
     } else {
       dt.filter(null, 'attachedTech', null);
     }
-
   }
-  loadStreetlightsLazy(event) {
 
+  onPoleOwnerChange(event, dt) {
+    if (event.value !== null) {
+      dt.filter(event.value, 'poleOwner', 'equals');
+    } else {
+      dt.filter(null, 'poleOwner', null);
+    }
+  }
+
+  onLightAttributesChange(event, dt) {
+    if (event.target.value !== null) {
+      setTimeout(() => {
+        dt.filter(event.target.value, 'lightAttributes', 'contains');
+      }, this.timeout);
+    } else {
+      dt.filter(null, 'lightAttributes', null);
+    }
+  }
+
+  loadStreetlightsLazy(event) {
     this.pageNo = event.first;
     this.rows = event.rows;
-    this.service.getStreetlights(this.pageNo, this.rows).subscribe(data => {
-      this.streetlights = data['streetlights'];
-    })
+    this.service.getStreetlights(this.pageNo, this.rows)
+      .subscribe(
+        data => {
+          this.streetlights = data['streetlights'];
+        }
+      );
+    this.currentStreetlight = this.streetlights[0];
+  }
+
+  // Overlay panel functions
+  showStreetlightDetails(event, streetlight: Streetlight, overlaypanel: OverlayPanel) {
+    this.currentStreetlight = streetlight;
+    overlaypanel.toggle(event);
+  }
+
+  hideOverlayPanel(overlaypanel: OverlayPanel) {
+    overlaypanel.hide();
   }
 
 }

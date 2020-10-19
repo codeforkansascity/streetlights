@@ -18,11 +18,13 @@ import { SliderModule } from 'primeng/slider';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
-import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 // Custom
 import { LogService } from './shared/log.service';
 import { MapViewComponent } from './map-view/map-view.component';
@@ -34,9 +36,10 @@ import { FilterPipe } from './pipes/filter.pipe';
 
 
 const appRoutes: Routes = [
-  { path: '',
+  {
+    path: '',
     redirectTo: '',
-    component:LandingComponent,
+    component: LandingComponent,
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
@@ -65,12 +68,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
-    )
+    ),
+    OverlayPanelModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [ LogService, StreetlightService ],
-  declarations: [ AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe ],
-  exports: [ MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent ],
-  bootstrap: [ AppComponent ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [LogService, StreetlightService],
+  declarations: [AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe],
+  exports: [MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
