@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var Streetlight = require('../Models/Streetlight');
 
 //Routes
+//This route returns all streetlights unless a filter is passed in
 router.get('/streetlights',(req, res,next)=>{
     var filter = {}
     if (!req.query.filter==='undefined')

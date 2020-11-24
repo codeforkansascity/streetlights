@@ -14,6 +14,7 @@
   "dependencies": {
     "@agm/core": "^1.0.0",
     "@agm/js-marker-clusterer": "^1.0.0",
+    "@agm/snazzy-info-window": "^3.0.0-beta.0",
     "@angular-devkit/core": "^0.4.9",
     "@angular/animations": "^6.1.10",
     "@angular/cdk": "^5.2.5",
@@ -27,6 +28,7 @@
     "@angular/platform-browser": "^6.1.10",
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.1.10",
+    "@types/underscore": "^1.10.24",
     "core-js": "^2.6.10",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
@@ -40,6 +42,7 @@
     "primeng": "^6.1.7",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
+    "snazzy-info-window": "^1.1.0",
     "underscore": "^1.9.2",
     "zone.js": "^0.8.26"
   },

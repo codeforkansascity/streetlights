@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { GoogleMap } from '@agm/core/services/google-maps-types';
 import { v } from '@angular/core/src/render3';
 import value from '*.json';
-import { _ } from 'underscore';
+import {_} from "../../../node_modules/underscore";
 
 interface FilterEntry {
   prop: string;
@@ -102,8 +102,6 @@ export class MapViewComponent implements OnInit {
     }
     this.lastSelectedInfoWindow = infoWindow;
     this.selectedMarker = marker;
-
-
   }
 
     // Populate the streetlight map marker data

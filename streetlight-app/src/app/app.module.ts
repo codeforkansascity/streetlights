@@ -24,6 +24,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 
 // Custom
 import { LogService } from './shared/log.service';
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCFqlFSX0ZkuDrZoRp3Zmdj5P5AKWzlrAY'
     }),
+    AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     RouterModule.forRoot(
       appRoutes,
