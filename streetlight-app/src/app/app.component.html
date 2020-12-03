@@ -1,14 +1,14 @@
 <div id="main">
   <header fxLayout="row" fxLayoutAlign="center center" >
-    <img id="site-logo" src="../assets/streetlight-app-logo.png" alt="">
+    <h1 id="site-header" (click)="onModeShiftClick('landing')">Streetlights</h1>
   </header>
   <content>
     <div id="mode-shifter" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-      <i class="fa fa-map" aria-hidden="true" (click)="onModeShiftClick('map')"></i>
+      <i title="Landing Page" aria-label="Landing Page" tabindex="1" class="fa fa-home" aria-hidden="true" (click)="onModeShiftClick('landing')" (keyup.enter)="onModeShiftClick('landing')"></i>
       <span>|</span>
-      <i class="fa fa-table" aria-hidden="true" (click)="onModeShiftClick('spreadsheet')"></i>
+      <i title="Map View" aria-label="Map View" tabindex="1" class="fa fa-map" aria-hidden="true" (click)="onModeShiftClick('map')" (keyup.enter)="onModeShiftClick('map')"></i>
       <span>|</span>
-      <i class="fa fa-home" aria-hidden="true" (click)="onModeShiftClick('landing')"></i>
+      <i title="Spreadsheet View" aria-label="Spreadsheet View" tabindex="1" class="fa fa-table" aria-hidden="true" (click)="onModeShiftClick('spreadsheet')" (keyup.enter)="onModeShiftClick('spreadsheet')"></i>
     </div>
     <app-spreadsheet-view *ngIf="mode == 'spreadsheet'"></app-spreadsheet-view>
     <app-map-view *ngIf="mode == 'map'"></app-map-view>
