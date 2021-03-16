@@ -73,7 +73,8 @@ const appRoutes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [LogService, StreetlightService],
-  declarations: [AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe],
+  declarations: [AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe, 
+  ],
   exports: [MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent],
   bootstrap: [AppComponent]
 })

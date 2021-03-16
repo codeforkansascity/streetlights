@@ -32,22 +32,25 @@
     <!-- Map Component -->
     <agm-map [latitude]="lat" #AgmMap [longitude]="lng" [zoom]="zoom" [minZoom]="minZoom" [mapDraggable]="mapDraggable"
       (boundsChange)="loadMarkersInBounds($event)">
-      <!-- <agm-marker-cluster [imagePath]="'../assets/images/m'" [minimumClusterSize]="minCluster"> -->
-        <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon" [minimumClusterSize]="minCluster"
-          (markerClick)="openWindow(infoWindow, m)" >
-          <agm-info-window #infoWindow [disableAutoPan]="true">
-            <strong>InfoWindow #{{selectedMarker._id}}</strong>
-            <strong>Pole Id: {{selectedMarker.label}}</strong>
-            <strong>Latitude: {{selectedMarker.lat}},  Longitude: {{selectedMarker.lon}}</strong>
-            <strong>Wattage: {{selectedMarker.wattage}}</strong>
-            <strong>Lightbulb Type: {{selectedMarker.lightbulbType}}</strong>
-            <strong>Has WiFi: {{selectedMarker.fiberWifiEnabled}}</strong>
-            <strong>Attached Sensors: {{selectedMarker.attachedTech}}</strong>
-            <strong>Pole Owner: {{selectedMarker.poleOwner}}</strong>
-          </agm-info-window>
-        </agm-marker>
-      <!-- </agm-marker-cluster> -->
-
+      <agm-marker-cluster [imagePath]="'../assets/images/m'" [minimumClusterSize]="minCluster">
+        <section *ngIf="filteredStreetlightMarkers">
+          <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
+            [minimumClusterSize]="minCluster" (markerClick)="openWindow(infoWindow, m)">
+            <agm-info-window #infoWindow [disableAutoPan]="true">
+              <ng-template>
+                <strong>InfoWindow #{{selectedMarker._id}}</strong>
+                <strong>Pole Id: {{selectedMarker.label}}</strong>
+                <strong>Latitude: {{selectedMarker.lat}}, Longitude: {{selectedMarker.lon}}</strong>
+                <strong>Wattage: {{selectedMarker.wattage}}</strong>
+                <strong>Lightbulb Type: {{selectedMarker.lightbulbType}}</strong>
+                <strong>Has WiFi: {{selectedMarker.fiberWifiEnabled}}</strong>
+                <strong>Attached Sensors: {{selectedMarker.attachedTech}}</strong>
+                <strong>Pole Owner: {{selectedMarker.poleOwner}}</strong>
+              </ng-template>
+            </agm-info-window>
+          </agm-marker>
+        </section>
+      </agm-marker-cluster>
     </agm-map>
   </main>
 </div>

@@ -73,6 +73,7 @@ export class MapViewComponent implements OnInit {
   pageNo: number;
   size: number;
   selectedMarker:Marker;
+  private debounceTimer = null;
 
 
   ngOnInit() {
@@ -157,7 +158,6 @@ export class MapViewComponent implements OnInit {
       subSetMarkers = _.where(filteredMarkers, this.filters);
       filteredMarkers = subSetMarkers;
     }
-    console.log("filteredMarkers= "+filteredMarkers)
     return filteredMarkers;
    
   }
@@ -197,16 +197,23 @@ export class MapViewComponent implements OnInit {
   }
 
   loadMarkersInBounds(bounds: LatLngBounds) {
-    var nE = bounds.getNorthEast();
-    var sW = bounds.getSouthWest();
-    var west = sW.lng();
-    var east = nE.lng();
-    var south = sW.lat();
-    var north = nE.lat();
-    this.filteredStreetlightMarkers = [];
-    //this.agmMap.idle.subscribe(() => this.getGeoMarkers(west, east, south, north))
-    this.getGeoMarkers(west, east, south,north);
+    if (this.debounceTimer!==null){
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer=null;
+    }
+    this.debounceTimer = setTimeout(()=>{
+      var nE = bounds.getNorthEast();
+      var sW = bounds.getSouthWest();
+      var west = sW.lng();
+      var east = nE.lng();
+      var south = sW.lat();
+      var north = nE.lat();
+      this.filteredStreetlightMarkers = [];
+      //this.agmMap.idle.subscribe(() => this.getGeoMarkers(west, east, south, north))
+      this.getGeoMarkers(west, east, south,north);  
+    },200)
   }
+ 
 
   getGeoMarkers(west: number, east: number, south: number, north: number) {
     this.streetlightMarkers = [];
@@ -235,6 +242,6 @@ export class MapViewComponent implements OnInit {
     });    
     this.applyFilters();
   }
-
+  
 }
 
