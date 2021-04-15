@@ -1,44 +1,82 @@
 <div class="ui-g landing-main">
-
-  <div id="list-section" class="ui-lg-7 ui-lg-offset-1 ui-g-12">
-    <p-dataView [value]="streetlights" [paginator]="true" 
-                [rows]="100" filterBy="poleID,wattage,lumens" 
-                [lazy]="true"
-                (onLazyLoad)="loadData($event)"
-                 [totalRecords]="totalRecords">
-        <p-header fxLayoutAlign="center center">
-            <!-- <input type="search" pInputText placeholder="Search" (keyup)="dataView.filter($event.target.value)" fxFlex="25"> -->
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </p-header>
-      <ng-template let-streetlight pTemplate="listItem">
-        <div class="list-item" fxLayoutAlign="start center">
-            <span class="list-item-id" fxFlex="25">{{streetlight.poleID}}</span>
-            <span fxFlex="25">{{streetlight.wattage}} watts</span>
-            <span fxFlex="45">{{streetlight.lumens}} lumens</span>
-            <span fxFlex><button pButton icon="fa fa-search" (click)="onDataViewItemClick(streetlight.poleID)"></button></span>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-8">
+        <div class="jumbotron">
+          <h1>
+            Code For Kansas City
+          </h1>
+          <h1>Streetlights</h1>
+          <h4>
+            This project is intended to make information about how streetlights across the greater Kansas City
+             metro area are used more transparent and accessible.The Streetlight Data project is an effort to
+             create an aggregated database and map of streetlights and information about how they are used.
+          </h4>
+          <h4>
+            <a class="btn btn-primary btn-large" href="#">View Streetlights</a>
+          </h4>
         </div>
-      </ng-template>
-      <ng-template let-streetlight pTemplate="gridItem">
-        <div class="grid-item ui-g-12 ui-md-3">
-          <div class="grid-item-inner-wrapper">
-            <div>{{streetlight.poleID}}</div>
-            <div>{{streetlight.wattage}}</div>
-            <div>{{streetlight.lumens}}</div>
-          </div>
-        </div>
-      </ng-template>
-    </p-dataView>
-  </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <h1>
+          Why Collect Data On Streetlights?
+        </h1>
+        <h4>
+          Smart streetlights are at the front lines of the smart city; the switch from traditional high pressure sodium street lights 
+          to LEDs is a proven cost saver for cities that can help to finance smart infrastructure. During this switch, the new light 
+          poles become part of the Internet of Things: valuable real estate for hanging cameras, sensors, wireless antennas and more. 
+          Streetlights also sit in a public right-of-way, a space that often comes with some precedent of public-private collaboration,
+           meaning that private sector companies and entrepreneurs developing smart city applications can deploy technology on existing infrastructure.
+        </h4>
+        <h4>
+          <a class="btn" href="#">View Mapped Streetlights »</a>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h1>
+          A Regional Solution
+        </h1>
+        <h4>
+          The data about streetlights right now is not easily accessible on a regional scale, to any of these parties: 
+          government, nonprofit, private or resident. Cities don’t know how to value this asset, how to choose which tech goes on which 
+          pole or how to negotiate with the private sector. The private sector doesn’t know which poles are available or
+           how best to pilot and deploy their new tools. Additionally, most citizens are unaware of the negotiations underway about this critical public infrastructure.
+        </h4>
+        <h4>
+          <a class="btn" href="#">View details »</a>
+        </h4>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <h1>
+          Partners and Stakeholders
+        </h1>
+        <h4>
+          The direct stakeholder of the Streetlights project is Code for KC/KC Digital Drive, though all participating cities will become stakeholders. 
+          Eventually local government, entrepreneurs, researchers, private technology companies and engaged citizens will become direct stakeholders as well.
 
-  <div id="details-section" class="ui-lg-3 ui-g-12">
-    <div class="detail-view">
-      <div class="detail-view-poleId">{{currentStreetlight.poleID}}</div>
-      <div class="detail-view-location"><span class="detail-view-label">Location:</span>{{currentStreetlight.longitude}}, {{currentStreetlight.latitude}}</div>
-      <div class="detail-view-info"><span class="detail-view-label">Wattage:</span>{{currentStreetlight.wattage}} watts</div>
-      <div class="detail-view-info"><span class="detail-view-label">Attached Tech:</span>{{currentStreetlight.attachedTech}}</div>
-      <div class="detail-view-info"><span class="detail-view-label">Pole Owner:</span>{{currentStreetlight.poleOwner}}</div>
-      <div class="detail-view-info"><span class="detail-view-label">Light Attributes:</span>{{currentStreetlight.lightAttributes}}</div>
+          A huge thank you to the following organizations that have graciously agreed to share data on poles they own:
+        </h4>
+        <ul>
+          <li><a href="https://kcmo.gov">City of Kansas City MO</a></li>
+          <li><a href="https://cityofls.net/">City of Lee's Summit MO</a></li>
+          <li><a href="https://www.gladstone.mo.us/">City of Gladstone MO</a></li>
+          <li><a href="https://www.evergy.com/about-evergy/company-overview?">Evergy formerly - Kansas City Power and Light</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+      </div>
     </div>
   </div>
-
 </div>

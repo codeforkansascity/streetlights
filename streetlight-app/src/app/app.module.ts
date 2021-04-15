@@ -24,7 +24,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 // Google Map Service
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-//import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
+import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 
 // Custom
 import { LogService } from './shared/log.service';
@@ -34,6 +34,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { StreetlightService } from '../services/streetlight.service';
 import { LandingComponent } from './landing/landing.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 const appRoutes: Routes = [
@@ -75,7 +76,7 @@ const appRoutes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [LogService, StreetlightService],
-  declarations: [AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe, 
+  declarations: [AppComponent, MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent, LandingComponent, FilterPipe, CarouselComponent, 
   ],
   exports: [MapViewComponent, SpreadsheetViewComponent, PageNotFoundComponent],
   bootstrap: [AppComponent]

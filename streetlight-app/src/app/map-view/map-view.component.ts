@@ -83,6 +83,7 @@ export class MapViewComponent implements OnInit {
     this.service.getPoleOwner().subscribe(data => { this.poleOwnerOptions = data['poleOwnerOptions'] })
     this.clearFilters();
     this.setCurrentLocation();
+    console.log(this.service.getCachedStreetlights().subscribe());
   }
 
   /* Methods */
@@ -104,6 +105,7 @@ export class MapViewComponent implements OnInit {
     this.lastSelectedInfoWindow = infoWindow;
     this.selectedMarker = marker;
   }
+  
 
     // Populate the streetlight map marker data
   // getStreetlights() {

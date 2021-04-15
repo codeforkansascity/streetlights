@@ -43,7 +43,7 @@
     "primeng": "^6.1.7",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
-    "snazzy-info-window": "^1.1.0",
+    "snazzy-info-window": "^1.1.1",
     "underscore": "^1.9.2",
     "zone.js": "^0.8.26"
   },

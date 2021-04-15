@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable ,  of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable ,  of, Subscription } from 'rxjs';
+import { catchError, map, publishReplay, refCount, shareReplay, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
-import * as data from './data.json';
+import value, * as data from './data.json';
 import { ReturnStatement } from '@angular/compiler';
 
 
@@ -18,17 +18,18 @@ const httpOptions = {
 
 export class StreetlightService {
   
-
   //private dataUrl = 'http://localhost:5000/api';
   private dataUrl = 'http://streetlights.codeforkc.org/api';
   private streetlightsUrl = this.dataUrl + '/streetlights';
-  //private mapsUrl = 'https://my.api.mockaroo.com/streetlights.json?key=08931ac0';
-  // private mapsUrl = 'https://raw.githubusercontent.com/MatthewScholefield/streetlights/data/combined.json';
 
+  streetlights: Observable<Streetlight[]>;
+  total;
 
   constructor( private http: HttpClient ) {
 
   }
+
+
 //   private extractData(res:Response):Streetlight[]{
 //     let body = res;
 //     return body || {};
@@ -99,7 +100,24 @@ export class StreetlightService {
   getPoleOwner(){
     return this.http.get(this.dataUrl+'/poleOwnerOptions')
   }
+  getCachedStreetlights():Observable<Streetlight[]>{
+    if(!this.streetlights){
+      var tempArray = new Array<Streetlight>()
+      let totalSub:Subscription = this.getCount().subscribe((result:number)=>{this.total = result});
+      var sizeQuery = 1000;
+      var skip = 0;
+      var pageCount = this.total/sizeQuery;
+      while(skip<=pageCount){
+        this.streetlights = this.getStreetlights(skip,sizeQuery).pipe(map(data=>tempArray.concat(data))),
+        publishReplay(1),
+        refCount()
+        skip++;
+      }
+      return this.streetlights;
+    }
+  }
 
+ 
 
 /**
  * Handle Http operation that failed.

@@ -61,6 +61,7 @@ export class LandingComponent implements OnInit {
     }, (error) => {
       console.error('LandingViewComponent::ngOnInit::Error: Failed to retrieve streetlight data.');
     });
+    this.service.getCachedStreetlights();
 
   }
 

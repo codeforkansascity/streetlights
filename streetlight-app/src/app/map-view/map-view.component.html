@@ -36,18 +36,22 @@
         <section *ngIf="filteredStreetlightMarkers">
           <agm-marker *ngFor="let m of filteredStreetlightMarkers" [latitude]="m.lat" [longitude]="m.lon"
             [minimumClusterSize]="minCluster" (markerClick)="openWindow(infoWindow, m)">
-            <agm-info-window #infoWindow [disableAutoPan]="true">
+            <agm-snazzy-info-window #snazzyInfoWindow 
+                [disableAutoPan]="true" [closeWhenOthersOpen]="true"
+                [maxWidth]="350"
+                [borderRadius]="50"
+                [padding]="">
               <ng-template>
-                <strong>InfoWindow #{{selectedMarker._id}}</strong>
-                <strong>Pole Id: {{selectedMarker.label}}</strong>
-                <strong>Latitude: {{selectedMarker.lat}}, Longitude: {{selectedMarker.lon}}</strong>
-                <strong>Wattage: {{selectedMarker.wattage}}</strong>
-                <strong>Lightbulb Type: {{selectedMarker.lightbulbType}}</strong>
-                <strong>Has WiFi: {{selectedMarker.fiberWifiEnabled}}</strong>
-                <strong>Attached Sensors: {{selectedMarker.attachedTech}}</strong>
+                <strong>InfoWindow #{{selectedMarker._id}}</strong><br/>
+                <strong>Pole Id: {{selectedMarker.label}}</strong><br/>
+                <strong>Latitude: {{selectedMarker.lat}}, Longitude: {{selectedMarker.lon}}</strong><br/>
+                <strong>Wattage: {{selectedMarker.wattage}}</strong><br/>
+                <strong>Lightbulb Type: {{selectedMarker.lightbulbType}}</strong><br/>
+                <strong>Has WiFi: {{selectedMarker.fiberWifiEnabled}}</strong><br/>
+                <strong>Attached Sensors: {{selectedMarker.attachedTech}}</strong><br/>
                 <strong>Pole Owner: {{selectedMarker.poleOwner}}</strong>
               </ng-template>
-            </agm-info-window>
+            </agm-snazzy-info-window>
           </agm-marker>
         </section>
       </agm-marker-cluster>
