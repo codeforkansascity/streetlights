@@ -18,6 +18,8 @@ export class LandingComponent implements OnInit {
     { label: '1300', value: 1300 },
     { label: '1425', value: 1425 }
   ];
+  cachedList: Streetlight[];
+
 
   // Data source
   streetlights = [];
@@ -50,6 +52,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false
+    this.service.getList().subscribe(res=>this.cachedList = res);
     this.service.getCount().subscribe((value) => {
       this.totalRecords = value
     })

@@ -1,9 +1,22 @@
-.landing-main {
-    /* padding: 32px; */
+// .landing-main {
+//     /* padding: 32px; */
+// }
+#landing-page {
+    background-image: url("../../assets/images/tianyi-ma-o7f4K13f2eE-unsplash.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
-
-
+.text{
+    background-color: #eee;
+    border-radius: 25px;
+}
+#shoutout{
+    color:chartreuse;
+}
 .list-item {
     padding: 16px;
     border-bottom: 1px solid #DDD;

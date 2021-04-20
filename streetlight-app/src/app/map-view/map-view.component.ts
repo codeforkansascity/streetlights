@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, NgZone, ElementRef, Injector } from '@angular/core';
-import { AgmCoreModule, AgmMap, LatLngBoundsLiteral, GoogleMapsAPIWrapper, MouseEvent, MarkerManager, LatLngBounds } from '@agm/core';
+import { Component, OnInit, ViewChild, NgZone,  } from '@angular/core';
+import {  AgmMap,  GoogleMapsAPIWrapper,  LatLngBounds } from '@agm/core';
 import { AgmMarkerCluster, ClusterManager } from '@agm/js-marker-clusterer';
 import { StreetlightService } from '../../services/streetlight.service';
 import { map } from 'rxjs/operators';
@@ -8,10 +8,10 @@ import { LogService } from '../shared/log.service';
 import { Streetlight } from '../models/streetlight';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { Observable } from 'rxjs';
-import { GoogleMap } from '@agm/core/services/google-maps-types';
 import { v } from '@angular/core/src/render3';
 import value from '*.json';
 import {_} from "../../../node_modules/underscore";
+
 
 interface FilterEntry {
   prop: string;
@@ -43,6 +43,7 @@ export class MapViewComponent implements OnInit {
   minCluster = 5;
   mapDraggable = true;
   streetlightMarkers: Marker[];
+  cachedList: Streetlight[];
   filteredStreetlightMarkers: Marker[];
   wireless: boolean;
   poleOwnerFilter: string;
@@ -83,7 +84,8 @@ export class MapViewComponent implements OnInit {
     this.service.getPoleOwner().subscribe(data => { this.poleOwnerOptions = data['poleOwnerOptions'] })
     this.clearFilters();
     this.setCurrentLocation();
-    console.log(this.service.getCachedStreetlights().subscribe());
+    this.service.getList().subscribe(res=>this.cachedList = res);
+    console.log(this.cachedList);
   }
 
   /* Methods */

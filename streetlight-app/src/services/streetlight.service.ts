@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable ,  of, Subscription } from 'rxjs';
 import { catchError, map, publishReplay, refCount, shareReplay, tap } from 'rxjs/operators';
 import {Streetlight, StreetlightData} from '../app/models/streetlight';
+import {Cacheable} from "./cacheable";
 import value, * as data from './data.json';
 import { ReturnStatement } from '@angular/compiler';
 
@@ -21,12 +22,23 @@ export class StreetlightService {
   //private dataUrl = 'http://localhost:5000/api';
   private dataUrl = 'http://streetlights.codeforkc.org/api';
   private streetlightsUrl = this.dataUrl + '/streetlights';
+  private streetlightsList: Cacheable<Streetlight[]> = new Cacheable<Streetlight[]>();
 
   streetlights: Observable<Streetlight[]>;
   total;
 
   constructor( private http: HttpClient ) {
+    this.streetlightsList.getHandler = () =>{
 
+      return this.http.get(this.streetlightsUrl).pipe(map((response => new Array())))
+    }
+  }
+
+  public getList():Observable<Streetlight[]>{
+    return this.streetlightsList.getData();
+  }
+  public refresh(){
+     this.streetlightsList.refresh();
   }
 
 
