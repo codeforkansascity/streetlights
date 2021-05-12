@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,16 @@ export class AppComponent implements OnInit {
 
   onModeShiftClick(mode: 'spreadsheet' | 'map' | 'landing') {
     this.mode = mode;
+  }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+     if (window.pageYOffset > 71) {
+       let element = document.getElementById('mode-shifter');
+       element.classList.add('sticky');
+     } else {
+      let element = document.getElementById('mode-shifter');
+        element.classList.remove('sticky'); 
+     }
   }
 
 }

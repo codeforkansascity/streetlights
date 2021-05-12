@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { StreetlightService } from '../../services/streetlight.service';
 import { Streetlight } from '../models/streetlight';
 import { Observable } from 'rxjs';
@@ -86,4 +86,5 @@ export class LandingComponent implements OnInit {
       this.currentStreetlight=this.streetlights[0];
     })
   }
+
 }
